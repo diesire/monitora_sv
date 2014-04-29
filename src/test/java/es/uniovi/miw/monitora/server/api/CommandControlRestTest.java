@@ -15,7 +15,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import es.uniovi.miw.monitora.core.model.Ack;
-import es.uniovi.miw.monitora.core.model.Foo;
 import es.uniovi.miw.monitora.server.SetApplication;
 
 /**
@@ -30,17 +29,6 @@ public class CommandControlRestTest extends JerseyTest {
 	protected Application configure() {
 		logger.debug("App configuration");
 		return new SetApplication();
-	}
-
-	@Test
-	public void getSingle() {
-		final String serviceUri = ""; //no servlet mapping, empty URI
-		final String pathToCall = "c2/test";
-		final Response response = target(serviceUri).path(pathToCall)
-				.request(MediaType.TEXT_XML).get();
-		final Foo test2 = new Foo();
-		test2.setBar("OK");
-		checkGetCallResponse(response, test2);
 	}
 	
 	@Test
@@ -57,13 +45,5 @@ public class CommandControlRestTest extends JerseyTest {
 		assertEquals(Response.Status.OK.getStatusCode(),
 				response.getStatus());
 		assertTrue(Calendar.getInstance().after(update));
-	}
-
-	private void checkGetCallResponse(final Response responseWrapper,
-			final Foo expectedResponse) {
-		assertEquals(Response.Status.OK.getStatusCode(),
-				responseWrapper.getStatus());
-		assertEquals(expectedResponse,
-				responseWrapper.readEntity(Foo.class));
 	}
 }

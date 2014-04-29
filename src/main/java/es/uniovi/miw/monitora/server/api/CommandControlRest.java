@@ -16,7 +16,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import es.uniovi.miw.monitora.core.model.Ack;
-import es.uniovi.miw.monitora.core.model.Foo;
 import es.uniovi.miw.monitora.server.SetCallHandler;
 
 /**
@@ -33,18 +32,10 @@ public class CommandControlRest {
 
 	/**
 	 * Method handling HTTP GET requests. The returned object will be sent to
-	 * the client as "text/xml" media type.
+	 * the client as "app/json" media type.
 	 * 
-	 * @return String that will be returned as a text/xml response.
-	 */
-	@GET
-	@Path("/test")
-	@Produces(MediaType.TEXT_XML)
-	public Response simpleXml() {
-		Foo result = callHandler.get();
-		return Response.status(Response.Status.OK).entity(result).build();
-	}
-	
+	 * @return Ack that will be returned as a app/json response.
+	 */	
 	@GET
 	@Path("/ping/{clientId}")
 	@Consumes(MediaType.APPLICATION_JSON)
