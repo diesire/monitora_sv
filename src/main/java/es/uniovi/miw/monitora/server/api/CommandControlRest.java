@@ -1,3 +1,4 @@
+
 package es.uniovi.miw.monitora.server.api;
 
 import javax.inject.Inject;
@@ -7,7 +8,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import es.uniovi.miw.monitora.bean.Foo;
+import es.uniovi.miw.monitora.core.model.Ack;
+import es.uniovi.miw.monitora.core.model.Foo;
 import es.uniovi.miw.monitora.server.SetCallHandler;
 
 /**
@@ -32,6 +34,14 @@ public class CommandControlRest {
 	@Produces(MediaType.TEXT_XML)
 	public Response simpleXml() {
 		Foo result = callHandler.get();
+		return Response.status(Response.Status.OK).entity(result).build();
+	}
+	
+	@GET
+	@Path("/ping")
+	@Produces(MediaType.TEXT_XML)
+	public Response ping() {
+		Ack result = callHandler.ping();
 		return Response.status(Response.Status.OK).entity(result).build();
 	}
 }
