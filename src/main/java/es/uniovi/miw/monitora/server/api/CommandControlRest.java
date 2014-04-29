@@ -2,11 +2,18 @@
 package es.uniovi.miw.monitora.server.api;
 
 import javax.inject.Inject;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import es.uniovi.miw.monitora.core.model.Ack;
 import es.uniovi.miw.monitora.core.model.Foo;
@@ -19,6 +26,7 @@ import es.uniovi.miw.monitora.server.SetCallHandler;
  */
 @Path("c2")
 public class CommandControlRest {
+	static private Logger logger = LoggerFactory.getLogger(CommandControlRest.class);
 	
 	@Inject
 	private SetCallHandler callHandler;
@@ -38,10 +46,12 @@ public class CommandControlRest {
 	}
 	
 	@GET
-	@Path("/ping")
-	@Produces(MediaType.TEXT_XML)
-	public Response ping() {
-		Ack result = callHandler.ping();
+	@Path("/ping/{clientId}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response ping(@Context UriInfo header, @PathParam("clientId") final String clientId) {
+		logger.debug("GET {}", header.getPath());
+		Ack result = callHandler.ping(clientId);
 		return Response.status(Response.Status.OK).entity(result).build();
 	}
 }

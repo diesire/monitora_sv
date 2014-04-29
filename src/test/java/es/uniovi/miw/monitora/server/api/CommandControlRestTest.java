@@ -11,6 +11,8 @@ import javax.ws.rs.core.Response;
 
 import org.glassfish.jersey.test.JerseyTest;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import es.uniovi.miw.monitora.core.model.Ack;
 import es.uniovi.miw.monitora.core.model.Foo;
@@ -22,9 +24,11 @@ import es.uniovi.miw.monitora.server.SetApplication;
  *
  */
 public class CommandControlRestTest extends JerseyTest {
+	static private Logger logger = LoggerFactory.getLogger(CommandControlRestTest.class);
 
 	@Override
 	protected Application configure() {
+		logger.debug("App configuration");
 		return new SetApplication();
 	}
 
@@ -42,9 +46,12 @@ public class CommandControlRestTest extends JerseyTest {
 	@Test
 	public void getPing() {
 		String serviceUri = ""; //no servlet mapping, empty URI
-		String pathToCall = "c2/ping";
+		String clientId = "C2RestTestClient";
+		String pathToCall = "c2/ping/" + clientId;
+		
+		logger.debug("Ping from {}", clientId);
 		Response response = target(serviceUri).path(pathToCall)
-				.request(MediaType.TEXT_XML).get();
+				.request(MediaType.APPLICATION_JSON).get();
 		Calendar update = response.readEntity(Ack.class).getUpdate();
 		
 		assertEquals(Response.Status.OK.getStatusCode(),

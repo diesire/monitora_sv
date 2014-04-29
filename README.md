@@ -10,13 +10,14 @@ Requisites
 *  Jersey 2.6
 *  Jersey testing framework
 *  Maven
+*  monitora_core
 
 
 Installation
 ------------
-1.  Clone repo
-2.  Import in eclipse
-3.  Maven install to get dependencies
+1.  Clone repo and monitora_core
+2.  Import both in eclipse
+3.  Maven `clean install -U` to get dependencies
 4.  Deploy war in Tomcat
 5.  (Optional) Run junit tests in eclipse
 

@@ -1,7 +1,5 @@
 package es.uniovi.miw.monitora.server;
 
-import java.util.GregorianCalendar;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,9 +15,12 @@ public class SetCallHandler {
 		return test;
 	}
 
-	public Ack ping() {
+	public Ack ping(String clientId) {
+		UpdateManager updater = new UpdateManager(clientId);
 		Ack ack = new Ack();
-		ack.setUpdate(new GregorianCalendar(2014, 0, 1));
+		
+		ack.setUpdate(updater.getLastUpdate());
+		logger.trace("Ack to {}", clientId);
 		return ack;
 	}
 }
