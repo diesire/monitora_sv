@@ -1,6 +1,10 @@
 
 package es.uniovi.miw.monitora.server.api;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -16,6 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import es.uniovi.miw.monitora.core.model.Ack;
+import es.uniovi.miw.monitora.core.model.Task;
 import es.uniovi.miw.monitora.server.SetCallHandler;
 
 /**
@@ -44,5 +49,15 @@ public class CommandControlRest {
 		logger.debug("GET {}", header.getPath());
 		Ack result = callHandler.ping(clientId);
 		return Response.status(Response.Status.OK).entity(result).build();
+	}
+	
+	@GET
+	@Path("/tasks/{clientId}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response tasks(@Context UriInfo header, @PathParam("clientId") final String clientId) {
+		logger.debug("GET {}", header.getPath());
+		List<Task> tasks = callHandler.tasks(clientId);
+		return Response.status(Response.Status.OK).entity(tasks).build();
 	}
 }
