@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 
 import es.uniovi.miw.monitora.core.api.Ack;
 import es.uniovi.miw.monitora.core.api.Task;
+import es.uniovi.miw.monitora.core.snapshot.Snapshot;
+import es.uniovi.miw.monitora.server.core.snapshot.SnapshotServer;
 import es.uniovi.miw.monitora.server.core.task.TaskServer;
 import es.uniovi.miw.monitora.server.core.update.UpdateServer;
 
@@ -25,5 +27,10 @@ public class MonitoraServer {
 	public List<Task> tasks(String clientId) {
 		logger.trace("tasks for {}", clientId);
 		return new TaskServer(clientId).getTasks();
+	}
+
+	public void snapshots(String clientId, Snapshot snapshot) {
+		logger.trace("add snapshot {} to {}", snapshot, clientId);
+		new SnapshotServer(clientId).addSnapshot(snapshot);
 	}
 }
