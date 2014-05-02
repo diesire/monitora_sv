@@ -1,15 +1,14 @@
 package es.uniovi.miw.monitora.server.core.task;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import es.uniovi.miw.monitora.core.api.Task;
-import es.uniovi.miw.monitora.server.backend.TaskBackend;
-import es.uniovi.miw.monitora.server.backend.TaskBackendFactory;
+import es.uniovi.miw.monitora.server.backend.task.TaskBackend;
+import es.uniovi.miw.monitora.server.backend.task.TaskBackendFactory;
 
 public class TaskServer {
 	static private Logger logger = LoggerFactory.getLogger(TaskServer.class);
