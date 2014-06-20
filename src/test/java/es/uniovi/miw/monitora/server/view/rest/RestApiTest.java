@@ -55,7 +55,7 @@ public class RestApiTest extends JerseyTest {
 	public void tasksGet() {
 		List<Task> tasks = getTasks();
 		assertNotNull(tasks);
-		assertEquals(2, tasks.size());
+		assertEquals(3, tasks.size());
 	}
 
 	private List<Task> getTasks() {
