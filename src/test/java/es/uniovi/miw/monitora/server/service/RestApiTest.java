@@ -76,25 +76,24 @@ public class RestApiTest extends JerseyTest {
 		logger.trace("Ping from {}", agenteId);
 		Response response = target(serviceUri).path(pathToCall)
 				.request(MediaType.APPLICATION_JSON_TYPE).get();
-		Calendar update = response.readEntity(Ack.class).getUpdate();
 
 		assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
-		assertTrue(Calendar.getInstance().after(update));
+
+		try {
+			Calendar update = response.readEntity(Ack.class).getUpdate();
+			assertTrue(Calendar.getInstance().after(update));
+		} catch (ProcessingException e) {
+			logger.error("Error deserializating object", e);
+			fail(e.getLocalizedMessage());
+		}
 	}
 
 	@Test
 	public void agenteGet() {
 		Agente agenteGet = _getAgente();
+
 		assertNotNull(agenteGet);
-
 		assertEquals(agente, agenteGet);
-
-		assertEquals(agente.getAgenteId(), agenteGet.getAgenteId());
-		assertEquals(agente.getCliente(), agenteGet.getCliente());
-		assertEquals(agente.getComentarios(), agenteGet.getComentarios());
-		assertEquals(agente.getDestinos(), agenteGet.getDestinos());
-		assertEquals(agente.getIpAgente(), agenteGet.getIpAgente());
-
 	}
 
 	private Agente _getAgente() {
@@ -105,14 +104,14 @@ public class RestApiTest extends JerseyTest {
 		Response response = target(serviceUri).path(pathToCall)
 				.request(MediaType.APPLICATION_JSON_TYPE).get();
 
+		assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
+
 		try {
 			Agente agente = response.readEntity(Agente.class);
 		} catch (ProcessingException e) {
 			logger.error("Error deserializating object", e);
 			fail(e.getLocalizedMessage());
 		}
-
-		assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
 		return agente;
 	}
 
