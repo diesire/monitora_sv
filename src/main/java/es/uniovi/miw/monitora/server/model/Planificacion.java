@@ -3,6 +3,10 @@ package es.uniovi.miw.monitora.server.model;
 import java.io.Serializable;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -13,6 +17,8 @@ import java.util.Set;
  * 
  */
 @Entity
+@XmlRootElement
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idPlan", scope = Planificacion.class)
 public class Planificacion implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -27,11 +33,11 @@ public class Planificacion implements Serializable {
 	private Date fUltimaModificacion;
 
 	// bi-directional many-to-one association to InfPlanDest
-	@OneToMany(mappedBy = "planificacion", orphanRemoval = true)
+	@OneToMany(mappedBy = "planificacion", orphanRemoval = true, fetch = FetchType.EAGER)
 	private Set<InfPlanDest> infPlanDests = new HashSet<InfPlanDest>();
 
 	// bi-directional many-to-one association to LineaCron
-	@OneToMany(mappedBy = "planificacion", orphanRemoval = true)
+	@OneToMany(mappedBy = "planificacion", orphanRemoval = true, fetch = FetchType.EAGER)
 	private Set<LineaCron> lineaCrons = new HashSet<LineaCron>();
 
 	public Planificacion() {

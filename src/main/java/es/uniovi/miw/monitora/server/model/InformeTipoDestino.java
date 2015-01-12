@@ -5,9 +5,14 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import es.uniovi.miw.monitora.server.model.keys.InformeTipoDestinoPK;
 
@@ -17,6 +22,8 @@ import es.uniovi.miw.monitora.server.model.keys.InformeTipoDestinoPK;
  */
 @Entity
 @Table(name = "INFORME_TIPO_DESTINO")
+@XmlRootElement
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope=InformeTipoDestino.class)
 public class InformeTipoDestino implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -27,12 +34,12 @@ public class InformeTipoDestino implements Serializable {
 	private String porDefecto;
 
 	// bi-directional many-to-one association to Informe
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_INFORME", insertable = false, updatable = false)
 	private Informe informe;
 
 	// bi-directional many-to-one association to TipoDestino
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_TIPO_DESTINO", insertable = false, updatable = false)
 	private TipoDestino tipoDestino;
 

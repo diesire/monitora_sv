@@ -15,6 +15,9 @@ import javax.ws.rs.core.UriInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import es.uniovi.miw.monitora.core.api.Ack;
 import es.uniovi.miw.monitora.core.snapshot.Snapshot;
 import es.uniovi.miw.monitora.server.model.Agente;
@@ -41,16 +44,17 @@ public class RestApi {
 	 */
 	@GET
 	@Path("/ping/{agenteId}")
-	@Consumes(MediaType.APPLICATION_JSON)
+	// @Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response ping(@Context UriInfo header,
 			@PathParam("agenteId") final int agenteId) {
 
-		logger.debug("GET {}", header.getPath());
+		logger.trace("GET {}", header.getPath());
 
 		try {
 
 			Ack ack = monitora.ping(agenteId);
+			logger.debug(pretty_print(ack));
 			return Response.status(Response.Status.OK).entity(ack).build();
 		} catch (BusinessException e) {
 
@@ -60,9 +64,19 @@ public class RestApi {
 		}
 	}
 
+	private String pretty_print(Object object) {
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(
+					object);
+		} catch (JsonProcessingException e) {
+			return "Can't pretty print JSON object";
+		}
+	}
+
 	@GET
 	@Path("/agente/{agenteId}")
-	@Consumes(MediaType.APPLICATION_JSON)
+	// @Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response agente(@Context UriInfo header,
 			@PathParam("agenteId") final int agenteId) {
@@ -73,6 +87,7 @@ public class RestApi {
 
 			Agente agente;
 			agente = monitora.getAgente(agenteId);
+			logger.debug(pretty_print(agente));
 			return Response.status(Response.Status.OK).entity(agente).build();
 		} catch (BusinessException e) {
 

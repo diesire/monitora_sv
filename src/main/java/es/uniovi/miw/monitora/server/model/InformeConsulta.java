@@ -6,11 +6,16 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import es.uniovi.miw.monitora.server.model.keys.InformeConsultaPK;
 
@@ -20,6 +25,8 @@ import es.uniovi.miw.monitora.server.model.keys.InformeConsultaPK;
  */
 @Entity
 @Table(name = "INFORME_CONSULTA")
+@XmlRootElement
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope=InformeConsulta.class)
 public class InformeConsulta implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -31,12 +38,12 @@ public class InformeConsulta implements Serializable {
 	private Date fUltimaModificacion;
 
 	// bi-directional many-to-one association to Consulta
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_CONSULTA", insertable = false, updatable = false)
 	private Consulta consulta;
 
 	// bi-directional many-to-one association to Informe
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_INFORME", insertable = false, updatable = false)
 	private Informe informe;
 

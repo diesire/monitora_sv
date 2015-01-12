@@ -1,7 +1,12 @@
 package es.uniovi.miw.monitora.server.model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 /**
  * The persistent class for the TCON_1 database table.
@@ -9,6 +14,8 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "TCON_1")
+@XmlRootElement
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "dato1", scope=Tcon1.class)
 public class Tcon1 implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -18,12 +25,12 @@ public class Tcon1 implements Serializable {
 	private int dato2;
 
 	// bi-directional many-to-one association to Consulta
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "CONS_ID")
 	private Consulta consulta;
 
 	// bi-directional many-to-one association to Snapshot
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumns({
 			@JoinColumn(name = "ID_CLIENTE", referencedColumnName = "ID_CLIENTE"),
 			@JoinColumn(name = "ID_DESTINO", referencedColumnName = "ID_DESTINO"),

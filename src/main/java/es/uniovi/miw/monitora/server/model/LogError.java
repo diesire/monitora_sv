@@ -1,7 +1,13 @@
 package es.uniovi.miw.monitora.server.model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import java.util.Date;
 
 /**
@@ -10,6 +16,8 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "LOG_ERROR")
+@XmlRootElement
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "codigo", scope=LogError.class)
 public class LogError implements Serializable {
 	private static final long serialVersionUID = 1L;
 

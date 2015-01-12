@@ -5,6 +5,10 @@ import java.io.Serializable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import es.uniovi.miw.monitora.server.model.keys.InfPlanDestBorradoPK;
 
@@ -14,6 +18,8 @@ import es.uniovi.miw.monitora.server.model.keys.InfPlanDestBorradoPK;
  */
 @Entity
 @Table(name = "INF_PLAN_DEST_BORRADO")
+@XmlRootElement
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = InfPlanDestBorrado.class)
 public class InfPlanDestBorrado implements Serializable {
 	private static final long serialVersionUID = 1L;
 

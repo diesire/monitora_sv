@@ -3,6 +3,11 @@ package es.uniovi.miw.monitora.server.model;
 import java.io.Serializable;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,6 +17,8 @@ import java.util.Set;
  * 
  */
 @Entity
+@XmlRootElement
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idCliente", scope = Cliente.class)
 public class Cliente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -26,11 +33,12 @@ public class Cliente implements Serializable {
 	private String nombre;
 
 	// bi-directional many-to-one association to Agente
-	@OneToMany(mappedBy = "cliente", orphanRemoval = true)
+	@OneToMany(mappedBy = "cliente", orphanRemoval = true, fetch = FetchType.EAGER)
 	private Set<Agente> agentes = new HashSet<Agente>();
 
 	// bi-directional many-to-one association to Destino
 	@OneToMany(mappedBy = "cliente", orphanRemoval = true)
+	@JsonIgnore
 	private Set<Destino> destinos = new HashSet<Destino>();
 
 	public Cliente() {

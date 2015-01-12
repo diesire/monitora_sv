@@ -7,10 +7,15 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import es.uniovi.miw.monitora.server.model.keys.DestinoPK;
 
@@ -19,6 +24,8 @@ import es.uniovi.miw.monitora.server.model.keys.DestinoPK;
  * 
  */
 @Entity
+@XmlRootElement
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Destino.class)
 public class Destino implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -29,7 +36,7 @@ public class Destino implements Serializable {
 	private int idTipoDestino;
 
 	// bi-directional many-to-many association to Agente
-	@ManyToMany(mappedBy = "destinos")
+	@ManyToMany(mappedBy = "destinos", fetch = FetchType.EAGER)
 	private Set<Agente> agentes = new HashSet<Agente>();
 
 	// bi-directional many-to-one association to Cliente
@@ -38,11 +45,11 @@ public class Destino implements Serializable {
 	private Cliente cliente;
 
 	// bi-directional many-to-one association to InfPlanDest
-	@OneToMany(mappedBy = "destino", orphanRemoval = true)
+	@OneToMany(mappedBy = "destino", orphanRemoval = true, fetch = FetchType.EAGER)
 	private Set<InfPlanDest> infPlanDests = new HashSet<InfPlanDest>();
 
 	// bi-directional many-to-one association to Snapshot
-	@OneToMany(mappedBy = "destino", orphanRemoval = true)
+	@OneToMany(mappedBy = "destino", orphanRemoval = true, fetch = FetchType.EAGER)
 	private Set<Snapshot> snapshots = new HashSet<Snapshot>();
 
 	public Destino() {

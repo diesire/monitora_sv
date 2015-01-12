@@ -1,8 +1,6 @@
 package es.uniovi.miw.monitora.server.service;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.sql.Date;
 import java.util.Calendar;
@@ -11,6 +9,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.ws.rs.ProcessingException;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -74,7 +73,7 @@ public class RestApiTest extends JerseyTest {
 		String serviceUri = ""; // no servlet mapping, empty URI
 		String pathToCall = "c2/ping/" + agenteId;
 
-		logger.debug("Ping from {}", agenteId);
+		logger.trace("Ping from {}", agenteId);
 		Response response = target(serviceUri).path(pathToCall)
 				.request(MediaType.APPLICATION_JSON_TYPE).get();
 		Calendar update = response.readEntity(Ack.class).getUpdate();
@@ -84,19 +83,34 @@ public class RestApiTest extends JerseyTest {
 	}
 
 	@Test
-	public void tasksGet() {
-		Agente agente = getAgente();
-		assertNotNull(agente);
+	public void agenteGet() {
+		Agente agenteGet = _getAgente();
+		assertNotNull(agenteGet);
+
+		assertEquals(agente, agenteGet);
+
+		assertEquals(agente.getAgenteId(), agenteGet.getAgenteId());
+		assertEquals(agente.getCliente(), agenteGet.getCliente());
+		assertEquals(agente.getComentarios(), agenteGet.getComentarios());
+		assertEquals(agente.getDestinos(), agenteGet.getDestinos());
+		assertEquals(agente.getIpAgente(), agenteGet.getIpAgente());
+
 	}
 
-	private Agente getAgente() {
+	private Agente _getAgente() {
 		String serviceUri = ""; // no servlet mapping, empty URI
 		String pathToCall = "c2/agente/" + agenteId;
 
-		logger.debug("Tasks from {}", agenteId);
+		logger.trace("Agente[{}]", agenteId);
 		Response response = target(serviceUri).path(pathToCall)
 				.request(MediaType.APPLICATION_JSON_TYPE).get();
-		Agente agente = response.readEntity(Agente.class);
+
+		try {
+			Agente agente = response.readEntity(Agente.class);
+		} catch (ProcessingException e) {
+			logger.error("Error deserializating object", e);
+			fail(e.getLocalizedMessage());
+		}
 
 		assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
 		return agente;
@@ -107,7 +121,7 @@ public class RestApiTest extends JerseyTest {
 		String serviceUri = ""; // no servlet mapping, empty URI
 		String pathToCall = "c2/snapshot/" + agenteId;
 
-		logger.debug("Snapshot from {}", agenteId);
+		logger.trace("Snapshot from {}", agenteId);
 		// Snapshot snapshot = new Snapshot();
 		// snapshot.creationDate = Calendar.getInstance();
 		// snapshot.tasks = getAgente();
@@ -125,7 +139,7 @@ public class RestApiTest extends JerseyTest {
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
-		logger.debug("setUp");
+		// logger.debug("setUp");
 		graph = createGraph();
 		persistGraph(graph);
 	}
@@ -134,19 +148,19 @@ public class RestApiTest extends JerseyTest {
 	@Override
 	public void tearDown() throws Exception {
 		super.tearDown();
-		logger.debug("tearDown");
+		// logger.debug("tearDown");
 		removeGraph();
 	}
 
 	private void persistGraph(List<Object> graph) {
-		logger.debug("persistGraph {}", graph);
+		// logger.debug("persistGraph {}", graph);
 		EntityManager mapper = Jpa.createEntityManager();
 		EntityTransaction trx = mapper.getTransaction();
 		trx.begin();
 
 		for (Object o : graph) {
 			mapper.persist(o);
-			logger.debug("\t + {}", o);
+			// logger.debug("\t + {}", o);
 		}
 
 		trx.commit();
@@ -154,7 +168,7 @@ public class RestApiTest extends JerseyTest {
 	}
 
 	private List<Object> createGraph() {
-		logger.debug("createGraph");
+		// logger.debug("createGraph");
 		List<Object> res = new LinkedList<Object>();
 
 		fecha = new Date(System.currentTimeMillis());
@@ -257,12 +271,12 @@ public class RestApiTest extends JerseyTest {
 		res.add(linea2);
 		res.add(infoPlanDest);
 
-		logger.debug("\t -> {}", res);
+		// logger.debug("\t -> {}", res);
 		return res;
 	}
 
 	private List<Object> mergeGraph(EntityManager mapper) {
-		logger.debug("mergeGraph (from mapper {})", mapper);
+		// logger.debug("mergeGraph (from mapper {})", mapper);
 		List<Object> res = new LinkedList<Object>();
 		Cliente cl = mapper.merge(cliente);
 		Agente ag = mapper.merge(agente);
@@ -290,19 +304,19 @@ public class RestApiTest extends JerseyTest {
 		res.add(l2);
 		res.add(inPD);
 
-		logger.debug("\t -> {}", res);
+		// logger.debug("\t -> {}", res);
 		return res;
 	}
 
 	private void removeGraph() {
-		logger.debug("removeGraph");
+		// logger.debug("removeGraph");
 		EntityManager mapper = Jpa.createEntityManager();
 		EntityTransaction trx = mapper.getTransaction();
 		trx.begin();
 
 		for (Object o : mergeGraph(mapper)) {
 			mapper.remove(o);
-			logger.debug("\t - {}", o);
+			// logger.debug("\t - {}", o);
 		}
 
 		trx.commit();

@@ -7,12 +7,17 @@ import java.util.Set;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import es.uniovi.miw.monitora.server.model.keys.SnapshotPK;
 
@@ -21,6 +26,8 @@ import es.uniovi.miw.monitora.server.model.keys.SnapshotPK;
  * 
  */
 @Entity
+@XmlRootElement
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope=Snapshot.class)
 public class Snapshot implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -31,19 +38,19 @@ public class Snapshot implements Serializable {
 	private Date fecha;
 
 	// bi-directional many-to-one association to Destino
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumns({
 			@JoinColumn(name = "ID_CLIENTE", referencedColumnName = "ID_CLIENTE", insertable = false, updatable = false),
 			@JoinColumn(name = "ID_DESTINO", referencedColumnName = "ID_DESTINO", insertable = false, updatable = false) })
 	private Destino destino;
 
 	// bi-directional many-to-one association to Informe
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_INFORME", insertable = false, updatable = false)
 	private Informe informe;
 
 	// bi-directional many-to-one association to Tcon1
-	@OneToMany(mappedBy = "snapshot")
+	@OneToMany(mappedBy = "snapshot", fetch = FetchType.EAGER)
 	private Set<Tcon1> tcon1s = new HashSet<Tcon1>();
 
 	public Snapshot() {

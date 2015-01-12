@@ -3,6 +3,10 @@ package es.uniovi.miw.monitora.server.model;
 import java.io.Serializable;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -13,6 +17,8 @@ import java.util.Set;
  * 
  */
 @Entity
+@XmlRootElement
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "consId", scope = Consulta.class)
 public class Consulta implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -46,16 +52,16 @@ public class Consulta implements Serializable {
 	private String tipo;
 
 	// bi-directional many-to-many association to TipoDestino
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "CONSULTA_TIPO_DESTINO", joinColumns = { @JoinColumn(name = "ID_CONSULTA") }, inverseJoinColumns = { @JoinColumn(name = "ID_TIPO_DESTINO") })
 	private Set<TipoDestino> tipoDestinos = new HashSet<TipoDestino>();
 
 	// bi-directional many-to-one association to InformeConsulta
-	@OneToMany(mappedBy = "consulta")
+	@OneToMany(mappedBy = "consulta", fetch = FetchType.EAGER)
 	private Set<InformeConsulta> informeConsultas = new HashSet<InformeConsulta>();
 
 	// bi-directional many-to-one association to Tcon1
-	@OneToMany(mappedBy = "consulta")
+	@OneToMany(mappedBy = "consulta", fetch = FetchType.EAGER)
 	private Set<Tcon1> tcon1s;
 
 	public Consulta() {

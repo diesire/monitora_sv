@@ -3,6 +3,11 @@ package es.uniovi.miw.monitora.server.model;
 import java.io.Serializable;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,6 +17,8 @@ import java.util.Set;
  * 
  */
 @Entity
+@XmlRootElement
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "agenteId", scope = Agente.class)
 public class Agente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -31,7 +38,7 @@ public class Agente implements Serializable {
 	private Cliente cliente;
 
 	// bi-directional many-to-many association to Destino
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "AGENTE_DESTINO", joinColumns = { @JoinColumn(name = "ID_AGENTE") }, inverseJoinColumns = {
 			@JoinColumn(name = "ID_CLIENTE", referencedColumnName = "ID_CLIENTE"),
 			@JoinColumn(name = "ID_DESTINO", referencedColumnName = "ID_DESTINO") })
