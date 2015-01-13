@@ -1,8 +1,6 @@
 package es.uniovi.miw.monitora.server.core.impl;
 
 import java.util.Calendar;
-import java.util.GregorianCalendar;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
