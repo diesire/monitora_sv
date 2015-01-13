@@ -20,6 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import es.uniovi.miw.monitora.core.api.Ack;
 import es.uniovi.miw.monitora.core.snapshot.Snapshot;
+import es.uniovi.miw.monitora.server.core.impl.MonitoraServer;
 import es.uniovi.miw.monitora.server.model.Agente;
 import es.uniovi.miw.monitora.server.model.exceptions.BusinessException;
 
@@ -34,7 +35,7 @@ public class RestApi {
 	static private Logger logger = LoggerFactory.getLogger(RestApi.class);
 
 	@Inject
-	private es.uniovi.miw.monitora.server.core.impl.MonitoraServer monitora;
+	private MonitoraServer monitora;
 
 	/**
 	 * Method handling HTTP GET requests. The returned object will be sent to
