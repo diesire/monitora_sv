@@ -1,1 +1,9 @@
 /target
+
+data/serverdb.properties
+
+data/serverdb.lobs
+
+data/serverdb.lck
+
+data/serverdb.log
