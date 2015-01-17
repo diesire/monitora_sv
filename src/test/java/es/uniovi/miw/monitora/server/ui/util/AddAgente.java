@@ -57,6 +57,8 @@ public class AddAgente {
 		agenteId = scan.nextInt();
 		scan.close();
 		new AddAgente(agenteId);
+		System.out.println("Ok");
+		System.exit(0);
 	}
 
 	public AddAgente(int agenteId) {
