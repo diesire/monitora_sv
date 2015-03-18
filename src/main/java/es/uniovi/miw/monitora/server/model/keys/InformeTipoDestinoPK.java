@@ -19,51 +19,28 @@ public class InformeTipoDestinoPK implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Column(name = "ID_INFORME", insertable = false, updatable = false)
-	private int idInforme;
+	private Integer idInforme;
 
 	@Column(name = "ID_TIPO_DESTINO", insertable = false, updatable = false)
-	private int idTipoDestino;
+	private Integer idTipoDestino;
 
 	public InformeTipoDestinoPK() {
 	}
 
-	public int getIdInforme() {
+	public Integer getIdInforme() {
 		return this.idInforme;
 	}
 
-	public void setIdInforme(int idInforme) {
+	public void setIdInforme(Integer idInforme) {
 		this.idInforme = idInforme;
 	}
 
-	public int getIdTipoDestino() {
+	public Integer getIdTipoDestino() {
 		return this.idTipoDestino;
 	}
 
-	public void setIdTipoDestino(int idTipoDestino) {
+	public void setIdTipoDestino(Integer idTipoDestino) {
 		this.idTipoDestino = idTipoDestino;
-	}
-
-	@Override
-	public boolean equals(Object other) {
-		if (this == other) {
-			return true;
-		}
-		if (!(other instanceof InformeTipoDestinoPK)) {
-			return false;
-		}
-		InformeTipoDestinoPK castOther = (InformeTipoDestinoPK) other;
-		return (this.idInforme == castOther.idInforme)
-				&& (this.idTipoDestino == castOther.idTipoDestino);
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int hash = 17;
-		hash = hash * prime + this.idInforme;
-		hash = hash * prime + this.idTipoDestino;
-
-		return hash;
 	}
 
 	@Override
@@ -72,6 +49,39 @@ public class InformeTipoDestinoPK implements Serializable {
 		builder.append("InformeTipoDestinoPK [idInforme=").append(idInforme)
 				.append(", idTipoDestino=").append(idTipoDestino).append("]");
 		return builder.toString();
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((idInforme == null) ? 0 : idInforme.hashCode());
+		result = prime * result
+				+ ((idTipoDestino == null) ? 0 : idTipoDestino.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		InformeTipoDestinoPK other = (InformeTipoDestinoPK) obj;
+		if (idInforme == null) {
+			if (other.idInforme != null)
+				return false;
+		} else if (!idInforme.equals(other.idInforme))
+			return false;
+		if (idTipoDestino == null) {
+			if (other.idTipoDestino != null)
+				return false;
+		} else if (!idTipoDestino.equals(other.idTipoDestino))
+			return false;
+		return true;
 	}
 
 }

@@ -33,7 +33,7 @@ public class Destino implements Serializable {
 	private DestinoPK id = new DestinoPK();
 
 	@Column(name = "ID_TIPO_DESTINO")
-	private int idTipoDestino;
+	private Integer idTipoDestino;
 
 	// bi-directional many-to-many association to Agente
 	@ManyToMany(mappedBy = "destinos", fetch = FetchType.EAGER)
@@ -63,11 +63,11 @@ public class Destino implements Serializable {
 		this.id = id;
 	}
 
-	public int getIdTipoDestino() {
+	public Integer getIdTipoDestino() {
 		return this.idTipoDestino;
 	}
 
-	public void setIdTipoDestino(int idTipoDestino) {
+	public void setIdTipoDestino(Integer idTipoDestino) {
 		this.idTipoDestino = idTipoDestino;
 	}
 

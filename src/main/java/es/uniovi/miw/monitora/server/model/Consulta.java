@@ -23,8 +23,10 @@ public class Consulta implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@SequenceGenerator(name = "CONS_CONS_ID_SEQ",sequenceName = "CONS_CONS_ID_SEQ")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="CONS_CONS_ID_SEQ")
 	@Column(name = "CONS_ID")
-	private int consId;
+	private Integer consId;
 
 	@Column(name = "COMANDO_SO")
 	private String comandoSo;
@@ -67,11 +69,11 @@ public class Consulta implements Serializable {
 	public Consulta() {
 	}
 
-	public int getConsId() {
+	public Integer getConsId() {
 		return this.consId;
 	}
 
-	public void setConsId(int consId) {
+	public void setConsId(Integer consId) {
 		this.consId = consId;
 	}
 
@@ -207,7 +209,7 @@ public class Consulta implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + consId;
+		result = prime * result + ((consId == null) ? 0 : consId.hashCode());
 		return result;
 	}
 
@@ -220,7 +222,10 @@ public class Consulta implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Consulta other = (Consulta) obj;
-		if (consId != other.consId)
+		if (consId == null) {
+			if (other.consId != null)
+				return false;
+		} else if (!consId.equals(other.consId))
 			return false;
 		return true;
 	}

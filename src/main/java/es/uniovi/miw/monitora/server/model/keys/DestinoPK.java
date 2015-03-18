@@ -21,51 +21,28 @@ public class DestinoPK implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Column(name = "ID_CLIENTE", insertable = false, updatable = false)
-	private int idCliente;
+	private Integer idCliente;
 
 	@Column(name = "ID_DESTINO")
-	private int idDestino;
+	private Integer idDestino;
 
 	public DestinoPK() {
 	}
 
-	public int getIdCliente() {
+	public Integer getIdCliente() {
 		return this.idCliente;
 	}
 
-	public void setIdCliente(int idCliente) {
+	public void setIdCliente(Integer idCliente) {
 		this.idCliente = idCliente;
 	}
 
-	public int getIdDestino() {
+	public Integer getIdDestino() {
 		return this.idDestino;
 	}
 
-	public void setIdDestino(int idDestino) {
+	public void setIdDestino(Integer idDestino) {
 		this.idDestino = idDestino;
-	}
-
-	@Override
-	public boolean equals(Object other) {
-		if (this == other) {
-			return true;
-		}
-		if (!(other instanceof DestinoPK)) {
-			return false;
-		}
-		DestinoPK castOther = (DestinoPK) other;
-		return (this.idCliente == castOther.idCliente)
-				&& (this.idDestino == castOther.idDestino);
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int hash = 17;
-		hash = hash * prime + this.idCliente;
-		hash = hash * prime + this.idDestino;
-
-		return hash;
 	}
 
 	@Override
@@ -75,5 +52,40 @@ public class DestinoPK implements Serializable {
 				.append(", idDestino=").append(idDestino).append("]");
 		return builder.toString();
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((idCliente == null) ? 0 : idCliente.hashCode());
+		result = prime * result
+				+ ((idDestino == null) ? 0 : idDestino.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		DestinoPK other = (DestinoPK) obj;
+		if (idCliente == null) {
+			if (other.idCliente != null)
+				return false;
+		} else if (!idCliente.equals(other.idCliente))
+			return false;
+		if (idDestino == null) {
+			if (other.idDestino != null)
+				return false;
+		} else if (!idDestino.equals(other.idDestino))
+			return false;
+		return true;
+	}
+
+	
 
 }

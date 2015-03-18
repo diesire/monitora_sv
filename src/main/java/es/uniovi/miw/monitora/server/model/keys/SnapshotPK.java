@@ -20,77 +20,97 @@ public class SnapshotPK implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Column(name = "ID_SNAPSHOT")
-	private int idSnapshot;
+	private Integer idSnapshot;
 
 	@Column(name = "ID_CLIENTE", insertable = false, updatable = false)
-	private int idCliente;
+	private Integer idCliente;
 
 	@Column(name = "ID_DESTINO", insertable = false, updatable = false)
-	private int idDestino;
+	private Integer idDestino;
 
 	@Column(name = "ID_INFORME", insertable = false, updatable = false)
-	private int idInforme;
+	private Integer idInforme;
 
 	public SnapshotPK() {
 	}
 
-	public int getIdSnapshot() {
+	public Integer getIdSnapshot() {
 		return this.idSnapshot;
 	}
 
-	public void setIdSnapshot(int idSnapshot) {
+	public void setIdSnapshot(Integer idSnapshot) {
 		this.idSnapshot = idSnapshot;
 	}
 
-	public int getIdCliente() {
+	public Integer getIdCliente() {
 		return this.idCliente;
 	}
 
-	public void setIdCliente(int idCliente) {
+	public void setIdCliente(Integer idCliente) {
 		this.idCliente = idCliente;
 	}
 
-	public int getIdDestino() {
+	public Integer getIdDestino() {
 		return this.idDestino;
 	}
 
-	public void setIdDestino(int idDestino) {
+	public void setIdDestino(Integer idDestino) {
 		this.idDestino = idDestino;
 	}
 
-	public int getIdInforme() {
+	public Integer getIdInforme() {
 		return this.idInforme;
 	}
 
-	public void setIdInforme(int idInforme) {
+	public void setIdInforme(Integer idInforme) {
 		this.idInforme = idInforme;
-	}
-
-	@Override
-	public boolean equals(Object other) {
-		if (this == other) {
-			return true;
-		}
-		if (!(other instanceof SnapshotPK)) {
-			return false;
-		}
-		SnapshotPK castOther = (SnapshotPK) other;
-		return (this.idSnapshot == castOther.idSnapshot)
-				&& (this.idCliente == castOther.idCliente)
-				&& (this.idDestino == castOther.idDestino)
-				&& (this.idInforme == castOther.idInforme);
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int hash = 17;
-		hash = hash * prime + this.idSnapshot;
-		hash = hash * prime + this.idCliente;
-		hash = hash * prime + this.idDestino;
-		hash = hash * prime + this.idInforme;
+		int result = 1;
+		result = prime * result
+				+ ((idCliente == null) ? 0 : idCliente.hashCode());
+		result = prime * result
+				+ ((idDestino == null) ? 0 : idDestino.hashCode());
+		result = prime * result
+				+ ((idInforme == null) ? 0 : idInforme.hashCode());
+		result = prime * result
+				+ ((idSnapshot == null) ? 0 : idSnapshot.hashCode());
+		return result;
+	}
 
-		return hash;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		SnapshotPK other = (SnapshotPK) obj;
+		if (idCliente == null) {
+			if (other.idCliente != null)
+				return false;
+		} else if (!idCliente.equals(other.idCliente))
+			return false;
+		if (idDestino == null) {
+			if (other.idDestino != null)
+				return false;
+		} else if (!idDestino.equals(other.idDestino))
+			return false;
+		if (idInforme == null) {
+			if (other.idInforme != null)
+				return false;
+		} else if (!idInforme.equals(other.idInforme))
+			return false;
+		if (idSnapshot == null) {
+			if (other.idSnapshot != null)
+				return false;
+		} else if (!idSnapshot.equals(other.idSnapshot))
+			return false;
+		return true;
 	}
 
 	@Override

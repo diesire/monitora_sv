@@ -23,8 +23,10 @@ public class TipoDestino implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@SequenceGenerator(name = "TIPO_DEST_ID_TI_DEST_SEQ", sequenceName = "TIPO_DEST_ID_TI_DEST_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TIPO_DEST_ID_TI_DEST_SEQ")
 	@Column(name = "ID_TIPO_DESTINO")
-	private int idTipoDestino;
+	private Integer idTipoDestino;
 
 	private String descripcion;
 
@@ -42,11 +44,11 @@ public class TipoDestino implements Serializable {
 	public TipoDestino() {
 	}
 
-	public int getIdTipoDestino() {
+	public Integer getIdTipoDestino() {
 		return this.idTipoDestino;
 	}
 
-	public void setIdTipoDestino(int idTipoDestino) {
+	public void setIdTipoDestino(Integer idTipoDestino) {
 		this.idTipoDestino = idTipoDestino;
 	}
 
@@ -115,7 +117,8 @@ public class TipoDestino implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + idTipoDestino;
+		result = prime * result
+				+ ((idTipoDestino == null) ? 0 : idTipoDestino.hashCode());
 		return result;
 	}
 
@@ -128,7 +131,10 @@ public class TipoDestino implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		TipoDestino other = (TipoDestino) obj;
-		if (idTipoDestino != other.idTipoDestino)
+		if (idTipoDestino == null) {
+			if (other.idTipoDestino != null)
+				return false;
+		} else if (!idTipoDestino.equals(other.idTipoDestino))
 			return false;
 		return true;
 	}

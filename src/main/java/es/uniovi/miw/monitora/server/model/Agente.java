@@ -4,15 +4,21 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.hibernate.engine.internal.Cascade;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -28,8 +34,10 @@ public class Agente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@SequenceGenerator(name = "AGENTE_AGENTE_ID_SEQ",sequenceName = "AGENTE_AGENTE_ID_SEQ")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="AGENTE_AGENTE_ID_SEQ")
 	@Column(name = "AGENTE_ID")
-	private int agenteId;
+	private Integer agenteId;
 
 	@Column(name = "COMENTARIOS")
 	private String comentarios;
@@ -43,7 +51,7 @@ public class Agente implements Serializable {
 	private Cliente cliente;
 
 	// bi-directional many-to-many association to Destino
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "AGENTE_DESTINO", joinColumns = { @JoinColumn(name = "ID_AGENTE") }, inverseJoinColumns = {
 			@JoinColumn(name = "ID_CLIENTE", referencedColumnName = "ID_CLIENTE"),
 			@JoinColumn(name = "ID_DESTINO", referencedColumnName = "ID_DESTINO") })
@@ -52,11 +60,11 @@ public class Agente implements Serializable {
 	public Agente() {
 	}
 
-	public int getAgenteId() {
+	public Integer getAgenteId() {
 		return this.agenteId;
 	}
 
-	public void setAgenteId(int agenteId) {
+	public void setAgenteId(Integer agenteId) {
 		this.agenteId = agenteId;
 	}
 
@@ -108,7 +116,8 @@ public class Agente implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + agenteId;
+		result = prime * result
+				+ ((agenteId == null) ? 0 : agenteId.hashCode());
 		return result;
 	}
 
@@ -121,7 +130,10 @@ public class Agente implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Agente other = (Agente) obj;
-		if (agenteId != other.agenteId)
+		if (agenteId == null) {
+			if (other.agenteId != null)
+				return false;
+		} else if (!agenteId.equals(other.agenteId))
 			return false;
 		return true;
 	}
@@ -131,10 +143,7 @@ public class Agente implements Serializable {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Agente [agenteId=").append(agenteId)
 				.append(", comentarios=").append(comentarios)
-				.append(", clienteId=").append(cliente.getIdCliente()) // TODO
-																		// borrar
 				.append(", ipAgente=").append(ipAgente).append("]");
 		return builder.toString();
 	}
-
 }

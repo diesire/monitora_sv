@@ -23,8 +23,10 @@ public class Planificacion implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@SequenceGenerator(name = "PLAN_ID_PLAN_SEQ", sequenceName = "PLAN_ID_PLAN_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PLAN_ID_PLAN_SEQ")
 	@Column(name = "ID_PLAN")
-	private int idPlan;
+	private Integer idPlan;
 
 	private String descripcion;
 
@@ -43,11 +45,11 @@ public class Planificacion implements Serializable {
 	public Planificacion() {
 	}
 
-	public int getIdPlan() {
+	public Integer getIdPlan() {
 		return this.idPlan;
 	}
 
-	public void setIdPlan(int idPlan) {
+	public void setIdPlan(Integer idPlan) {
 		this.idPlan = idPlan;
 	}
 
@@ -112,10 +114,20 @@ public class Planificacion implements Serializable {
 	}
 
 	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Planificacion [idPlan=").append(idPlan)
+				.append(", descripcion=").append(descripcion)
+				.append(", fUltimaModificacion=").append(fUltimaModificacion)
+				.append("]");
+		return builder.toString();
+	}
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + idPlan;
+		result = prime * result + ((idPlan == null) ? 0 : idPlan.hashCode());
 		return result;
 	}
 
@@ -128,19 +140,12 @@ public class Planificacion implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Planificacion other = (Planificacion) obj;
-		if (idPlan != other.idPlan)
+		if (idPlan == null) {
+			if (other.idPlan != null)
+				return false;
+		} else if (!idPlan.equals(other.idPlan))
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Planificacion [idPlan=").append(idPlan)
-				.append(", descripcion=").append(descripcion)
-				.append(", fUltimaModificacion=").append(fUltimaModificacion)
-				.append("]");
-		return builder.toString();
 	}
 
 }

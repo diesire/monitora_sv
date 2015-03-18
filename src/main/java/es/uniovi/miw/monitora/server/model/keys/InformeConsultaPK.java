@@ -20,51 +20,28 @@ public class InformeConsultaPK implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Column(name = "ID_CONSULTA", insertable = false, updatable = false)
-	private int idConsulta;
+	private Integer idConsulta;
 
 	@Column(name = "ID_INFORME", insertable = false, updatable = false)
-	private int idInforme;
+	private Integer idInforme;
 
 	public InformeConsultaPK() {
 	}
 
-	public int getIdConsulta() {
+	public Integer getIdConsulta() {
 		return this.idConsulta;
 	}
 
-	public void setIdConsulta(int idConsulta) {
+	public void setIdConsulta(Integer idConsulta) {
 		this.idConsulta = idConsulta;
 	}
 
-	public int getIdInforme() {
+	public Integer getIdInforme() {
 		return this.idInforme;
 	}
 
-	public void setIdInforme(int idInforme) {
+	public void setIdInforme(Integer idInforme) {
 		this.idInforme = idInforme;
-	}
-
-	@Override
-	public boolean equals(Object other) {
-		if (this == other) {
-			return true;
-		}
-		if (!(other instanceof InformeConsultaPK)) {
-			return false;
-		}
-		InformeConsultaPK castOther = (InformeConsultaPK) other;
-		return (this.idConsulta == castOther.idConsulta)
-				&& (this.idInforme == castOther.idInforme);
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int hash = 17;
-		hash = hash * prime + this.idConsulta;
-		hash = hash * prime + this.idInforme;
-
-		return hash;
 	}
 
 	@Override
@@ -75,4 +52,38 @@ public class InformeConsultaPK implements Serializable {
 		return builder.toString();
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((idConsulta == null) ? 0 : idConsulta.hashCode());
+		result = prime * result
+				+ ((idInforme == null) ? 0 : idInforme.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		InformeConsultaPK other = (InformeConsultaPK) obj;
+		if (idConsulta == null) {
+			if (other.idConsulta != null)
+				return false;
+		} else if (!idConsulta.equals(other.idConsulta))
+			return false;
+		if (idInforme == null) {
+			if (other.idInforme != null)
+				return false;
+		} else if (!idInforme.equals(other.idInforme))
+			return false;
+		return true;
+	}
+
+	
 }

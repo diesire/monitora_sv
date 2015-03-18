@@ -19,8 +19,10 @@ public class Informe implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@SequenceGenerator(name = "INFO_INFO_ID_SEQ", sequenceName = "INFO_INFO_ID_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "INFO_INFO_ID_SEQ")
 	@Column(name = "INFO_ID")
-	private int infoId;
+	private Integer infoId;
 
 	@Column(name = "DESC_LARGA")
 	private String descLarga;
@@ -29,8 +31,8 @@ public class Informe implements Serializable {
 	@Column(name = "F_ULTIMA_MODIFICACION")
 	private Date fUltimaModificacion;
 
-	@Column(name = "ID_PLAN")
-	private int idPlan;
+	// @Column(name = "ID_PLAN")
+	// private int idPlan;
 
 	private String nombre;
 
@@ -62,11 +64,11 @@ public class Informe implements Serializable {
 	public Informe() {
 	}
 
-	public int getInfoId() {
+	public Integer getInfoId() {
 		return this.infoId;
 	}
 
-	public void setInfoId(int infoId) {
+	public void setInfoId(Integer infoId) {
 		this.infoId = infoId;
 	}
 
@@ -84,14 +86,6 @@ public class Informe implements Serializable {
 
 	public void setFUltimaModificacion(Date fUltimaModificacion) {
 		this.fUltimaModificacion = fUltimaModificacion;
-	}
-
-	public int getIdPlan() {
-		return this.idPlan;
-	}
-
-	public void setIdPlan(int idPlan) {
-		this.idPlan = idPlan;
 	}
 
 	public String getNombre() {
@@ -227,7 +221,7 @@ public class Informe implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + infoId;
+		result = prime * result + ((infoId == null) ? 0 : infoId.hashCode());
 		return result;
 	}
 
@@ -240,7 +234,10 @@ public class Informe implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Informe other = (Informe) obj;
-		if (infoId != other.infoId)
+		if (infoId == null) {
+			if (other.infoId != null)
+				return false;
+		} else if (!infoId.equals(other.infoId))
 			return false;
 		return true;
 	}
@@ -251,8 +248,7 @@ public class Informe implements Serializable {
 		builder.append("Informe [infoId=").append(infoId)
 				.append(", descLarga=").append(descLarga)
 				.append(", fUltimaModificacion=").append(fUltimaModificacion)
-				.append(", idPlan=").append(idPlan).append(", nombre=")
-				.append(nombre).append("]");
+				.append(", nombre=").append(nombre).append("]");
 		return builder.toString();
 	}
 

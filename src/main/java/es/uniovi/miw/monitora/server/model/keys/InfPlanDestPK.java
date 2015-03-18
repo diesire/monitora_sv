@@ -20,64 +20,79 @@ public class InfPlanDestPK implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Column(name = "ID_INFORME", insertable = false, updatable = false)
-	private int idInforme;
+	private Integer idInforme;
 
 	@Column(name = "ID_CLIENTE", insertable = false, updatable = false)
-	private int idCliente;
+	private Integer idCliente;
 
 	@Column(name = "ID_DESTINO", insertable = false, updatable = false)
-	private int idDestino;
+	private Integer idDestino;
 
 	public InfPlanDestPK() {
 	}
 
-	public int getIdInforme() {
+	public Integer getIdInforme() {
 		return this.idInforme;
 	}
 
-	public void setIdInforme(int idInforme) {
+	public void setIdInforme(Integer idInforme) {
 		this.idInforme = idInforme;
 	}
 
-	public int getIdCliente() {
+	public Integer getIdCliente() {
 		return this.idCliente;
 	}
 
-	public void setIdCliente(int idCliente) {
+	public void setIdCliente(Integer idCliente) {
 		this.idCliente = idCliente;
 	}
 
-	public int getIdDestino() {
+	public Integer getIdDestino() {
 		return this.idDestino;
 	}
 
-	public void setIdDestino(int idDestino) {
+	public void setIdDestino(Integer idDestino) {
 		this.idDestino = idDestino;
-	}
-
-	@Override
-	public boolean equals(Object other) {
-		if (this == other) {
-			return true;
-		}
-		if (!(other instanceof InfPlanDestPK)) {
-			return false;
-		}
-		InfPlanDestPK castOther = (InfPlanDestPK) other;
-		return (this.idInforme == castOther.idInforme)
-				&& (this.idCliente == castOther.idCliente)
-				&& (this.idDestino == castOther.idDestino);
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int hash = 17;
-		hash = hash * prime + this.idInforme;
-		hash = hash * prime + this.idCliente;
-		hash = hash * prime + this.idDestino;
+		int result = 1;
+		result = prime * result
+				+ ((idCliente == null) ? 0 : idCliente.hashCode());
+		result = prime * result
+				+ ((idDestino == null) ? 0 : idDestino.hashCode());
+		result = prime * result
+				+ ((idInforme == null) ? 0 : idInforme.hashCode());
+		return result;
+	}
 
-		return hash;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		InfPlanDestPK other = (InfPlanDestPK) obj;
+		if (idCliente == null) {
+			if (other.idCliente != null)
+				return false;
+		} else if (!idCliente.equals(other.idCliente))
+			return false;
+		if (idDestino == null) {
+			if (other.idDestino != null)
+				return false;
+		} else if (!idDestino.equals(other.idDestino))
+			return false;
+		if (idInforme == null) {
+			if (other.idInforme != null)
+				return false;
+		} else if (!idInforme.equals(other.idInforme))
+			return false;
+		return true;
 	}
 
 	@Override

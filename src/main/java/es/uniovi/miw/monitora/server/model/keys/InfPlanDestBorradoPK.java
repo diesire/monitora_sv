@@ -20,76 +20,105 @@ public class InfPlanDestBorradoPK implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Column(name = "ID_INFORME")
-	private int idInforme;
+	private Integer idInforme;
 
 	@Column(name = "ID_CLIENTE")
-	private int idCliente;
+	private Integer idCliente;
 
 	@Column(name = "ID_DESTINO")
-	private int idDestino;
+	private Integer idDestino;
 
 	@Column(name = "ID_PLAN")
-	private int idPlan;
+	private Integer idPlan;
 
 	public InfPlanDestBorradoPK() {
 	}
 
-	public int getIdInforme() {
+	public Integer getIdInforme() {
 		return this.idInforme;
 	}
 
-	public void setIdInforme(int idInforme) {
+	public void setIdInforme(Integer idInforme) {
 		this.idInforme = idInforme;
 	}
 
-	public int getIdCliente() {
+	public Integer getIdCliente() {
 		return this.idCliente;
 	}
 
-	public void setIdCliente(int idCliente) {
+	public void setIdCliente(Integer idCliente) {
 		this.idCliente = idCliente;
 	}
 
-	public int getIdDestino() {
+	public Integer getIdDestino() {
 		return this.idDestino;
 	}
 
-	public void setIdDestino(int idDestino) {
+	public void setIdDestino(Integer idDestino) {
 		this.idDestino = idDestino;
 	}
 
-	public int getIdPlan() {
+	public Integer getIdPlan() {
 		return this.idPlan;
 	}
 
-	public void setIdPlan(int idPlan) {
+	public void setIdPlan(Integer idPlan) {
 		this.idPlan = idPlan;
 	}
 
 	@Override
-	public boolean equals(Object other) {
-		if (this == other) {
-			return true;
-		}
-		if (!(other instanceof InfPlanDestBorradoPK)) {
-			return false;
-		}
-		InfPlanDestBorradoPK castOther = (InfPlanDestBorradoPK) other;
-		return (this.idInforme == castOther.idInforme)
-				&& (this.idCliente == castOther.idCliente)
-				&& (this.idDestino == castOther.idDestino)
-				&& (this.idPlan == castOther.idPlan);
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("InfPlanDestBorradoPK [idInforme=").append(idInforme)
+				.append(", idCliente=").append(idCliente)
+				.append(", idDestino=").append(idDestino).append(", idPlan=")
+				.append(idPlan).append("]");
+		return builder.toString();
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int hash = 17;
-		hash = hash * prime + this.idInforme;
-		hash = hash * prime + this.idCliente;
-		hash = hash * prime + this.idDestino;
-		hash = hash * prime + this.idPlan;
+		int result = 1;
+		result = prime * result
+				+ ((idCliente == null) ? 0 : idCliente.hashCode());
+		result = prime * result
+				+ ((idDestino == null) ? 0 : idDestino.hashCode());
+		result = prime * result
+				+ ((idInforme == null) ? 0 : idInforme.hashCode());
+		result = prime * result + ((idPlan == null) ? 0 : idPlan.hashCode());
+		return result;
+	}
 
-		return hash;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		InfPlanDestBorradoPK other = (InfPlanDestBorradoPK) obj;
+		if (idCliente == null) {
+			if (other.idCliente != null)
+				return false;
+		} else if (!idCliente.equals(other.idCliente))
+			return false;
+		if (idDestino == null) {
+			if (other.idDestino != null)
+				return false;
+		} else if (!idDestino.equals(other.idDestino))
+			return false;
+		if (idInforme == null) {
+			if (other.idInforme != null)
+				return false;
+		} else if (!idInforme.equals(other.idInforme))
+			return false;
+		if (idPlan == null) {
+			if (other.idPlan != null)
+				return false;
+		} else if (!idPlan.equals(other.idPlan))
+			return false;
+		return true;
 	}
 }

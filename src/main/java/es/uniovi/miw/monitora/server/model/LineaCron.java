@@ -22,8 +22,10 @@ public class LineaCron implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@SequenceGenerator(name = "LINEA_CRON_ID_LINEA_CRON_SEQ",sequenceName = "LINEA_CRON_ID_LINEA_CRON_SEQ")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="LINEA_CRON_ID_LINEA_CRON_SEQ")
 	@Column(name = "ID_LINEA_CRON")
-	private int idLineaCron;
+	private Integer idLineaCron;
 
 	private String descripcion;
 
@@ -39,11 +41,11 @@ public class LineaCron implements Serializable {
 	public LineaCron() {
 	}
 
-	public int getIdLineaCron() {
+	public Integer getIdLineaCron() {
 		return this.idLineaCron;
 	}
 
-	public void setIdLineaCron(int idLineaCron) {
+	public void setIdLineaCron(Integer idLineaCron) {
 		this.idLineaCron = idLineaCron;
 	}
 
@@ -69,6 +71,42 @@ public class LineaCron implements Serializable {
 
 	public void setPlanificacion(Planificacion planificacion) {
 		this.planificacion = planificacion;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("LineaCron [idLineaCron=").append(idLineaCron)
+				.append(", descripcion=").append(descripcion)
+				.append(", fUltimaModificacion=").append(fUltimaModificacion)
+				.append("]");
+		return builder.toString();
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((idLineaCron == null) ? 0 : idLineaCron.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		LineaCron other = (LineaCron) obj;
+		if (idLineaCron == null) {
+			if (other.idLineaCron != null)
+				return false;
+		} else if (!idLineaCron.equals(other.idLineaCron))
+			return false;
+		return true;
 	}
 
 }

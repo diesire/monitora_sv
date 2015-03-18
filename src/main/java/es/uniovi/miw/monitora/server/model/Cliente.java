@@ -23,8 +23,10 @@ public class Cliente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@SequenceGenerator(name = "CLI_ID_CLIENTE_SEQ", sequenceName = "CLI_ID_CLIENTE_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CLI_ID_CLIENTE_SEQ")
 	@Column(name = "ID_CLIENTE")
-	private int idCliente;
+	private Integer idCliente;
 
 	@Column(name = "LOGO")
 	private String logo;
@@ -43,12 +45,16 @@ public class Cliente implements Serializable {
 
 	public Cliente() {
 	}
+	
+	public Cliente(String nombre) {
+		setNombre(nombre);
+	}
 
-	public int getIdCliente() {
+	public Integer getIdCliente() {
 		return this.idCliente;
 	}
 
-	public void setIdCliente(int idCliente) {
+	public void setIdCliente(Integer idCliente) {
 		this.idCliente = idCliente;
 	}
 
@@ -116,7 +122,8 @@ public class Cliente implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + idCliente;
+		result = prime * result
+				+ ((idCliente == null) ? 0 : idCliente.hashCode());
 		return result;
 	}
 
@@ -129,7 +136,10 @@ public class Cliente implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Cliente other = (Cliente) obj;
-		if (idCliente != other.idCliente)
+		if (idCliente == null) {
+			if (other.idCliente != null)
+				return false;
+		} else if (!idCliente.equals(other.idCliente))
 			return false;
 		return true;
 	}
