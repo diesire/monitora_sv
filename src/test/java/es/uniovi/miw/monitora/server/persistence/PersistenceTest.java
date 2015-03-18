@@ -311,15 +311,11 @@ public class PersistenceTest {
 		informePadre.setNombre("Nombre");
 		informePadre.setDescLarga("DescLarga");
 		informePadre.setFUltimaModificacion(fecha);
-		informePadre.setIdPlan(0);
-		informePadre.setInfoId(0);
 
 		informeHijo = new Informe();
 		informeHijo.setNombre("Nombre");
 		informeHijo.setDescLarga("DescLarga");
 		informeHijo.setFUltimaModificacion(fecha);
-		informeHijo.setIdPlan(0);
-		informeHijo.setInfoId(1);
 
 		consulta = new Consulta();
 		consulta.setTipo("S");
@@ -358,7 +354,6 @@ public class PersistenceTest {
 		linea2 = new LineaCron();
 		linea2.setDescripcion("Descripcion");
 		linea2.setFUltimaModificacion(fecha);
-		linea2.setIdLineaCron(1); // FIXME: auto id
 
 		infoPlanDest = new InfPlanDest();
 		infoPlanDest.setFUltimaAplicacion(fecha);
