@@ -22,7 +22,7 @@ public class CommandExecutor {
 		} catch (PersistenceException pex) {
 			if (trx.isActive())
 				trx.rollback();
-			throw pex;
+			throw new BusinessException(pex);
 		} catch (BusinessException bex) {
 
 			trx.rollback();

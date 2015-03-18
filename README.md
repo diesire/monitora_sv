@@ -27,6 +27,11 @@ Command & Control component for an Oracle DB monitorization tool.
   *  License clarification
 
 
+## Log
+
+* **[14/03/2015]** - I don't remember current status. DB successfully opens, but integrity restrictions fail.
+	* `ClienteServiceTest` - Update fails when assigning `logo` field (BLOB in BD, String in class)
+
 
 ---
 Thanks to [GitHub Education](https://education.github.com) for support

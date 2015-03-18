@@ -7,16 +7,15 @@ import es.uniovi.miw.monitora.server.persistence.AgenteFinder;
 
 public class FindAgenteById implements Command {
 
-	private int id;
+	private Integer id;
 
-	public FindAgenteById(int id) {
+	public FindAgenteById(Integer id) {
 		this.id = id;
 	}
 
 	@Override
 	public Object execute() throws BusinessException {
-		Agente a = AgenteFinder.findById(id);
-		return a;
+		return AgenteFinder.findById(id);
 	}
 
 }
