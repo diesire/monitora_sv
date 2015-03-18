@@ -4,7 +4,7 @@ import es.uniovi.miw.monitora.server.model.Agente;
 import es.uniovi.miw.monitora.server.persistence.util.Jpa;
 
 public class AgenteFinder {
-	public static Agente findById(int id) {
+	public static Agente findById(Integer id) {
 		return Jpa.getManager().find(Agente.class, id);
 	}
 }

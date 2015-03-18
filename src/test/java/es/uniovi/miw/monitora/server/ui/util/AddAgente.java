@@ -91,15 +91,11 @@ public class AddAgente {
 		informePadre.setNombre("Nombre");
 		informePadre.setDescLarga("DescLarga");
 		informePadre.setFUltimaModificacion(fecha);
-		informePadre.setIdPlan(agenteId);
-		informePadre.setInfoId(agenteId + 1);
 
 		informeHijo = new Informe();
 		informeHijo.setNombre("Nombre");
 		informeHijo.setDescLarga("DescLarga");
 		informeHijo.setFUltimaModificacion(fecha);
-		informeHijo.setIdPlan(0);
-		informeHijo.setInfoId(1);
 
 		consulta = new Consulta();
 		consulta.setTipo("S");
