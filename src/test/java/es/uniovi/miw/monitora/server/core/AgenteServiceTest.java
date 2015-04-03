@@ -28,6 +28,13 @@ public class AgenteServiceTest {
 		service = ServicesFactory.getAgenteService();
 	}
 
+	@Test
+	public void testCreateAgente() throws BusinessException {
+		Agente ag = service.createAgente(new Cliente());
+		assertNotNull(ag);
+		assertNull(ag.getAgenteId());
+	}
+
 	/**
 	 * Add null raise BusinessException
 	 * @throws BusinessException
@@ -46,13 +53,6 @@ public class AgenteServiceTest {
 		service.addAgente(new Agente());
 	}
 	
-	@Test
-	public void testCreateAgente() throws BusinessException {
-		Agente ag = service.createAgente(new Cliente());
-		assertNotNull(ag);
-		assertNull(ag.getAgenteId());
-	}
-
 	/**
 	 * 
 	 * @throws BusinessException

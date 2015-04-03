@@ -21,6 +21,17 @@ public class ClienteServiceTest {
 	}
 
 	/**
+	 * Create a Client filled with mandatory fields
+	 * @throws BusinessException
+	 */
+	@Test
+	public void testCreateCliente() throws BusinessException {
+		Cliente cli = service.createCliente(CLIENTE1);
+		assertNull(cli.getIdCliente());
+		assertEquals(CLIENTE1, cli.getNombre());
+	}
+
+	/**
 	 * Add null raise BusinessException
 	 * @throws BusinessException
 	 */
@@ -37,18 +48,6 @@ public class ClienteServiceTest {
 	public void testAddClienteEmpty() throws BusinessException {
 		service.addCliente(new Cliente());
 	}
-	
-	/**
-	 * Create a Client filled with mandatory fields
-	 * @throws BusinessException
-	 */
-	@Test
-	public void testCreateCliente() throws BusinessException {
-		Cliente cli = service.createCliente(CLIENTE1);
-		assertNull(cli.getIdCliente());
-		assertEquals(CLIENTE1, cli.getNombre());
-	}
-
 	
 	@Test
 	public void testAddCliente() throws BusinessException {
