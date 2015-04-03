@@ -45,10 +45,6 @@ public class Cliente implements Serializable {
 
 	public Cliente() {
 	}
-	
-	public Cliente(String nombre) {
-		setNombre(nombre);
-	}
 
 	public Integer getIdCliente() {
 		return this.idCliente;

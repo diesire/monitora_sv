@@ -2,11 +2,13 @@ package es.uniovi.miw.monitora.server.core.impl;
 
 import es.uniovi.miw.monitora.server.core.AgenteService;
 import es.uniovi.miw.monitora.server.core.impl.CommandExecutor;
+import es.uniovi.miw.monitora.server.core.impl.agente.CreateAgente;
 import es.uniovi.miw.monitora.server.core.impl.agente.DeleteAgente;
 import es.uniovi.miw.monitora.server.core.impl.agente.FindAgenteById;
 import es.uniovi.miw.monitora.server.core.impl.agente.AddAgente;
 import es.uniovi.miw.monitora.server.core.impl.agente.UpdateAgente;
 import es.uniovi.miw.monitora.server.model.Agente;
+import es.uniovi.miw.monitora.server.model.Cliente;
 import es.uniovi.miw.monitora.server.model.exceptions.BusinessException;
 
 public class AgenteServiceImpl implements AgenteService {
@@ -30,6 +32,11 @@ public class AgenteServiceImpl implements AgenteService {
 	@Override
 	public void deleteAgente(Integer agenteId) throws BusinessException {
 		executor.execute(new DeleteAgente(agenteId));		
+	}
+
+	@Override
+	public Agente createAgente(Cliente cliente) throws BusinessException {
+		return (Agente) executor.execute(new CreateAgente(cliente));
 	}
 
 }

@@ -2,25 +2,23 @@ package es.uniovi.miw.monitora.server.core.impl.agente;
 
 import es.uniovi.miw.monitora.server.core.impl.Command;
 import es.uniovi.miw.monitora.server.model.Agente;
+import es.uniovi.miw.monitora.server.model.Cliente;
 import es.uniovi.miw.monitora.server.model.exceptions.BusinessException;
-import es.uniovi.miw.monitora.server.persistence.util.Jpa;
 
-public class AddAgente implements Command {
+public class CreateAgente implements Command {
 
-	private Agente agente;
+	private Cliente cliente;
 
-	public AddAgente(Agente agente) {
-		this.agente = agente;
+	public CreateAgente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
 	@Override
 	public Object execute() throws BusinessException {
-		try {
-			Jpa.getManager().persist(agente);
-		} catch (Exception e) {
-			throw new BusinessException(e);
-		}
-		return null;
+		Agente ag = new Agente();
+		ag.setCliente(cliente);
+		cliente.addAgente(ag);
+		return ag;
 	}
 
 }

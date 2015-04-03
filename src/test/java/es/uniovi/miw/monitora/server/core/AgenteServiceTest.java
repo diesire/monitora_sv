@@ -3,38 +3,63 @@ package es.uniovi.miw.monitora.server.core;
 import static org.junit.Assert.*;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import es.uniovi.miw.monitora.server.conf.ServicesFactory;
 import es.uniovi.miw.monitora.server.model.Agente;
+import es.uniovi.miw.monitora.server.model.Cliente;
 import es.uniovi.miw.monitora.server.model.exceptions.BusinessException;
 
 public class AgenteServiceTest {
 
+	private static Cliente cli;
 	private AgenteService service;
+	
+	@BeforeClass
+	static public void setUpClass() throws Exception {
+		ClienteService cliServ= ServicesFactory.getClienteService();
+		cli = cliServ.createCliente("ClienteAgente");
+		cliServ.addCliente(cli);
+	}
 
 	@Before
 	public void setUp() throws Exception {
 		service = ServicesFactory.getAgenteService();
 	}
 
+	/**
+	 * Add null raise BusinessException
+	 * @throws BusinessException
+	 */
 	@Test(expected = BusinessException.class)
 	public void testAddAgenteNull() throws BusinessException {
 		service.addAgente(null);
-		
 	}
 
+	/**
+	 * Add empty Agente raise BusinessException
+	 * @throws BusinessException
+	 */
 	@Test(expected = BusinessException.class)
 	public void testAddAgenteEmpty() throws BusinessException {
 		service.addAgente(new Agente());
 	}
+	
+	@Test
+	public void testCreateAgente() throws BusinessException {
+		Agente ag = service.createAgente(new Cliente());
+		assertNotNull(ag);
+		assertNull(ag.getAgenteId());
+	}
 
+	/**
+	 * 
+	 * @throws BusinessException
+	 */
 	@Test
 	public void testAddAgente() throws BusinessException {
-		Agente ag = new Agente();
-		assertNull(ag.getAgenteId());
-
-		service.addAgente(ag);
+		Agente ag = createPersistentAgente();
 		assertNotNull(ag.getAgenteId());
 	}
 
@@ -45,11 +70,7 @@ public class AgenteServiceTest {
 
 	@Test
 	public void testDeleteAgente() throws BusinessException {
-		Agente ag = new Agente();
-		assertNull(ag.getAgenteId());
-
-		service.addAgente(ag);
-		assertNotNull(ag.getAgenteId());
+		Agente ag = createPersistentAgente();
 
 		service.deleteAgente(ag.getAgenteId());
 	}
@@ -61,11 +82,7 @@ public class AgenteServiceTest {
 
 	@Test
 	public void testFindAgente() throws BusinessException {
-		Agente ag = new Agente();
-		assertNull(ag.getAgenteId());
-
-		service.addAgente(ag);
-		assertNotNull(ag.getAgenteId());
+		Agente ag = createPersistentAgente();
 
 		Agente found = service.findAgenteById(ag.getAgenteId());
 		assertNotNull(found);
@@ -74,12 +91,7 @@ public class AgenteServiceTest {
 
 	@Test
 	public void testUpdateAgente() throws BusinessException {
-		Agente ag = new Agente();
-		assertNull(ag.getAgenteId());
-
-		service.addAgente(ag);
-		assertNotNull(ag.getAgenteId());
-
+		Agente ag = createPersistentAgente();
 		Agente found = service.findAgenteById(ag.getAgenteId());
 		assertNotNull(found);
 
@@ -90,6 +102,12 @@ public class AgenteServiceTest {
 		found2 = service.findAgenteById(found.getAgenteId());
 		assertNotNull(found2);
 		assertEquals("192.168.0.2", found2.getIpAgente());
+	}
+
+	private Agente createPersistentAgente() throws BusinessException {
+		Agente ag = service.createAgente(cli);
+		service.addAgente(ag);
+		return ag;
 	}
 
 }

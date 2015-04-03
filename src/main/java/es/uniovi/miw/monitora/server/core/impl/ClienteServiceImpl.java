@@ -2,6 +2,7 @@ package es.uniovi.miw.monitora.server.core.impl;
 
 import es.uniovi.miw.monitora.server.core.ClienteService;
 import es.uniovi.miw.monitora.server.core.impl.cliente.AddCliente;
+import es.uniovi.miw.monitora.server.core.impl.cliente.CreateCliente;
 import es.uniovi.miw.monitora.server.core.impl.cliente.DeleteCliente;
 import es.uniovi.miw.monitora.server.core.impl.cliente.FindClienteById;
 import es.uniovi.miw.monitora.server.core.impl.cliente.UpdateCliente;
@@ -29,6 +30,11 @@ public class ClienteServiceImpl implements ClienteService {
 	@Override
 	public void deleteCliente(Integer id) throws BusinessException {
 		executor.execute(new DeleteCliente(id));
+	}
+
+	@Override
+	public Cliente createCliente(String nombreCliente) throws BusinessException {
+		return (Cliente) executor.execute(new CreateCliente(nombreCliente));
 	}
 
 }

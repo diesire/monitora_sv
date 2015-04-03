@@ -1,9 +1,12 @@
 package es.uniovi.miw.monitora.server.core;
 
 import es.uniovi.miw.monitora.server.model.Agente;
+import es.uniovi.miw.monitora.server.model.Cliente;
 import es.uniovi.miw.monitora.server.model.exceptions.BusinessException;
 
 public interface AgenteService {
+	
+	Agente createAgente(Cliente cliente) throws BusinessException;
 	
 	void addAgente(Agente agente) throws BusinessException;
 

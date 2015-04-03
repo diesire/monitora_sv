@@ -20,7 +20,11 @@ public class DeleteAgente implements Command {
 		assertNotNull(ag);
 		// assertCanBeDeleted(m); //TODO: check logic rules
 
-		Jpa.getManager().remove(ag);
+		try {
+			Jpa.getManager().remove(ag);
+		} catch (Exception e) {
+			throw new BusinessException(e);
+		}
 		return null;
 	}
 

@@ -1,3 +1,4 @@
+
 package es.uniovi.miw.monitora.server.core;
 
 import static org.junit.Assert.*;
@@ -11,6 +12,7 @@ import es.uniovi.miw.monitora.server.model.exceptions.BusinessException;
 
 public class ClienteServiceTest {
 
+	private static final String CLIENTE1 = "Cliente1";
 	private ClienteService service;
 
 	@Before
@@ -18,20 +20,39 @@ public class ClienteServiceTest {
 		service = ServicesFactory.getClienteService();
 	}
 
+	/**
+	 * Add null raise BusinessException
+	 * @throws BusinessException
+	 */
 	@Test(expected = BusinessException.class)
 	public void testAddClienteNull() throws BusinessException {
 		service.addCliente(null);
 	}
 
+	/**
+	 * Add empty Cliente raise BusinessException
+	 * @throws BusinessException
+	 */
 	@Test(expected = BusinessException.class)
 	public void testAddClienteEmpty() throws BusinessException {
 		service.addCliente(new Cliente());
 	}
+	
+	/**
+	 * Create a Client filled with mandatory fields
+	 * @throws BusinessException
+	 */
+	@Test
+	public void testCreateCliente() throws BusinessException {
+		Cliente cli = service.createCliente(CLIENTE1);
+		assertNull(cli.getIdCliente());
+		assertEquals(CLIENTE1, cli.getNombre());
+	}
 
+	
 	@Test
 	public void testAddCliente() throws BusinessException {
-		Cliente cli = new Cliente("Cliente1");
-		assertNull(cli.getIdCliente());
+		Cliente cli = service.createCliente(CLIENTE1);
 
 		service.addCliente(cli);
 		assertNotNull(cli.getIdCliente());
@@ -44,11 +65,8 @@ public class ClienteServiceTest {
 
 	@Test
 	public void testDeleteCliente() throws BusinessException {
-		Cliente cli = new Cliente("Cliente1");
-		assertNull(cli.getIdCliente());
-
+		Cliente cli = service.createCliente(CLIENTE1);
 		service.addCliente(cli);
-		assertNotNull(cli.getIdCliente());
 
 		service.deleteCliente(cli.getIdCliente());
 	}
@@ -60,11 +78,8 @@ public class ClienteServiceTest {
 
 	@Test
 	public void testFindCliente() throws BusinessException {
-		Cliente cli = new Cliente("Cliente1");
-		assertNull(cli.getIdCliente());
-
+		Cliente cli = service.createCliente(CLIENTE1);
 		service.addCliente(cli);
-		assertNotNull(cli.getIdCliente());
 
 		Cliente found = service.findClienteById(cli.getIdCliente());
 		assertNotNull(found);
@@ -73,9 +88,7 @@ public class ClienteServiceTest {
 
 	@Test
 	public void testUpdateCliente() throws BusinessException {
-		Cliente cli = new Cliente("Cliente11");
-		assertNull(cli.getIdCliente());
-
+		Cliente cli = service.createCliente(CLIENTE1);
 		service.addCliente(cli);
 		assertNotNull(cli.getIdCliente());
 
