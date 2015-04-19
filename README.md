@@ -23,20 +23,25 @@ Command & Control component for an Oracle DB monitorization tool.
 
 ## TODO
 
-  *  Detailed description
-  *  License clarification
+*  Detailed description
+*  License clarification
 
 
 ## Log
 
+### [19/04/2015]
+
+
 ### [02/04/2015] 
-	* PersistenceTests & AgenteServiceTest fails
-	* Model Layer has empty constructors and get/set/add/delete methods. Service Layer has createXXX with params to fill mandatory fields and link with existent entities
-	* Maybe its necessary create additional cascade creation methods 
+ 
+* PersistenceTests & AgenteServiceTest fails
+* Model Layer has empty constructors and get/set/add/delete methods. Service Layer has createXXX with params to fill mandatory fields and link with existent entities
+* Maybe its necessary create additional cascade creation methods 
 	
 ### [14/03/2015]
-	* I don't remember current status. DB successfully opens, but integrity restrictions fail.
-	* ClienteServiceTest.update fails when assigning logo field (BLOB in BD, String in class)
+
+* I don't remember current status. DB successfully opens, but integrity restrictions fail.
+* ClienteServiceTest.update fails when assigning logo field (BLOB in BD, String in class)
 
 
 ---
