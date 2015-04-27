@@ -22,6 +22,9 @@
 	<named-query name="Destino.findAll">
 		<query>SELECT d FROM Destino d</query>
 	</named-query>
+	<named-query name="Destino.getNextDestinoId">
+		<query>select max(d.id.idDestino) + 1 from Destino d</query>
+	</named-query>
 	<named-query name="InfPlanDestBorrado.findAll">
 		<query>SELECT i FROM InfPlanDestBorrado i</query>
 	</named-query>

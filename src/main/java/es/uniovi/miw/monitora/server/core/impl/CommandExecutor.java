@@ -17,14 +17,12 @@ public class CommandExecutor {
 		Object res = null;
 		try {
 			res = command.execute();
-
 			trx.commit();
 		} catch (PersistenceException pex) {
 			if (trx.isActive())
 				trx.rollback();
 			throw new BusinessException(pex);
 		} catch (BusinessException bex) {
-
 			trx.rollback();
 			throw bex;
 		} finally {

@@ -36,7 +36,7 @@ Command & Control component for an Oracle DB monitorization tool.
  
 * PersistenceTests & AgenteServiceTest fails
 * Model Layer has empty constructors and get/set/add/delete methods. Service Layer has createXXX with params to fill mandatory fields and link with existent entities
-* Maybe its necessary create additional cascade creation methods 
+* Maybe its necessary create additional cascade creation methods_ 
 	
 ### [14/03/2015]
 

@@ -4,6 +4,9 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.SequenceGenerator;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -48,8 +51,8 @@ public class DestinoPK implements Serializable {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("DestinoPK [idCliente=").append(idCliente)
-				.append(", idDestino=").append(idDestino).append("]");
+		builder.append("DestinoPK [idDestino=").append(idDestino)
+				.append(", idCliente=").append(idCliente).append("]");
 		return builder.toString();
 	}
 
@@ -85,7 +88,5 @@ public class DestinoPK implements Serializable {
 			return false;
 		return true;
 	}
-
-	
 
 }

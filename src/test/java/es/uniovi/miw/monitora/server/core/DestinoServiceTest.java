@@ -15,10 +15,10 @@ public class DestinoServiceTest {
 
 	private static Cliente cli;
 	private DestinoService service;
-	
+
 	@BeforeClass
 	static public void setUpClass() throws Exception {
-		ClienteService cliServ= ServicesFactory.getClienteService();
+		ClienteService cliServ = ServicesFactory.getClienteService();
 		cli = cliServ.createCliente("ClienteDestino");
 		cliServ.addCliente(cli);
 	}
@@ -38,6 +38,7 @@ public class DestinoServiceTest {
 
 	/**
 	 * Add null raise BusinessException
+	 * 
 	 * @throws BusinessException
 	 */
 	@Test(expected = BusinessException.class)
@@ -47,13 +48,14 @@ public class DestinoServiceTest {
 
 	/**
 	 * Add empty Destino raise BusinessException
+	 * 
 	 * @throws BusinessException
 	 */
 	@Test(expected = BusinessException.class)
 	public void testAddDestinoEmpty() throws BusinessException {
 		service.addDestino(new Destino());
 	}
-	
+
 	/**
 	 * 
 	 * @throws BusinessException
@@ -62,6 +64,8 @@ public class DestinoServiceTest {
 	public void testAddDestino() throws BusinessException {
 		Destino dest = createPersistentDestino();
 		assertNotNull(dest.getId());
+		assertEquals(cli.getIdCliente(), dest.getId().getIdCliente());
+		assertNotNull(dest.getId().getIdDestino());
 	}
 
 	@Test(expected = BusinessException.class)
@@ -73,7 +77,8 @@ public class DestinoServiceTest {
 	public void testDeleteDestino() throws BusinessException {
 		Destino dest = createPersistentDestino();
 
-		service.deleteDestino(dest.getId().getIdDestino(), dest.getId().getIdCliente());
+		service.deleteDestino(dest.getId().getIdDestino(), dest.getId()
+				.getIdCliente());
 	}
 
 	@Test(expected = BusinessException.class)
@@ -85,7 +90,8 @@ public class DestinoServiceTest {
 	public void testFindDestino() throws BusinessException {
 		Destino dest = createPersistentDestino();
 
-		Destino found = service.findDestinoById(dest.getId().getIdDestino(), dest.getId().getIdCliente());
+		Destino found = service.findDestinoById(dest.getId().getIdDestino(),
+				dest.getId().getIdCliente());
 		assertNotNull(found);
 		assertEquals(dest, found);
 	}
@@ -93,21 +99,24 @@ public class DestinoServiceTest {
 	@Test
 	public void testUpdateDestino() throws BusinessException {
 		Destino dest = createPersistentDestino();
-		Destino found = service.findDestinoById(dest.getId().getIdDestino(), dest.getId().getIdCliente());
+		Destino found = service.findDestinoById(dest.getId().getIdDestino(),
+				dest.getId().getIdCliente());
 		assertNotNull(found);
 
-//		found.setIpDestino("192.168.0.2");
-//		service.updateDestino(found);
-//
-//		Destino found2 = service.findDestinoById(found.getDestinoId());
-//		found2 = service.findDestinoById(found.getDestinoId());
-//		assertNotNull(found2);
-//		assertEquals("192.168.0.2", found2.getIpDestino());
+		 found.setIdTipoDestino(found.getIdTipoDestino()+1);
+		 service.updateDestino(found);
+		
+		 Destino found2 = service.findDestinoById(found.getId().getIdDestino(), found.getId().getIdCliente());
+		 assertNotNull(found2);
+		 assertEquals(found.getIdTipoDestino(), found2.getIdTipoDestino());
 	}
 
 	private Destino createPersistentDestino() throws BusinessException {
 		Destino dest = service.createDestino(cli);
+		dest.setIdTipoDestino(0); // FIXME: TipoDestino not linked with
+									// corresponding table???
 		service.addDestino(dest);
+
 		return dest;
 	}
 
