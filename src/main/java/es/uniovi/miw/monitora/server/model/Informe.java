@@ -61,9 +61,6 @@ public class Informe implements Serializable {
 	@OneToMany(mappedBy = "informe", orphanRemoval = true, fetch = FetchType.EAGER)
 	private Set<Snapshot> snapshots = new HashSet<Snapshot>();
 
-	public Informe() {
-	}
-
 	public Integer getInfoId() {
 		return this.infoId;
 	}
