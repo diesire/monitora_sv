@@ -2,22 +2,29 @@ package es.uniovi.miw.monitora.server.core;
 
 import static org.junit.Assert.*;
 
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import es.uniovi.miw.monitora.server.conf.PersistenceFactory;
 import es.uniovi.miw.monitora.server.conf.ServicesFactory;
 import es.uniovi.miw.monitora.server.model.Agente;
 import es.uniovi.miw.monitora.server.model.Cliente;
 import es.uniovi.miw.monitora.server.model.exceptions.BusinessException;
+import es.uniovi.miw.monitora.server.persistence.util.PersistenceService;
 
 public class AgenteServiceTest {
 
 	private static Cliente cli;
+	private static PersistenceService db;
 	private AgenteService service;
 	
 	@BeforeClass
 	static public void setUpClass() throws Exception {
+		db = PersistenceFactory.getPersistenceService();
+		db.start();
+		
 		ClienteService cliServ= ServicesFactory.getClienteService();
 		cli = cliServ.createCliente("ClienteAgente");
 		cliServ.addCliente(cli);
@@ -26,6 +33,11 @@ public class AgenteServiceTest {
 	@Before
 	public void setUp() throws Exception {
 		service = ServicesFactory.getAgenteService();
+	}
+	
+	@AfterClass
+	public static void tearDownClass() throws BusinessException {
+		db.stop();
 	}
 
 	@Test

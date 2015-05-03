@@ -3,17 +3,33 @@ package es.uniovi.miw.monitora.server.core;
 
 import static org.junit.Assert.*;
 
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
+import es.uniovi.miw.monitora.server.conf.PersistenceFactory;
 import es.uniovi.miw.monitora.server.conf.ServicesFactory;
 import es.uniovi.miw.monitora.server.model.Cliente;
 import es.uniovi.miw.monitora.server.model.exceptions.BusinessException;
+import es.uniovi.miw.monitora.server.persistence.util.PersistenceService;
 
 public class ClienteServiceTest {
 
 	private static final String CLIENTE1 = "Cliente1";
+	private static PersistenceService db;
 	private ClienteService service;
+	
+	@BeforeClass
+	public static void setUpClass() throws BusinessException {
+		db = PersistenceFactory.getPersistenceService();
+		db.start();
+	}
+
+	@AfterClass
+	public static void tearDownClass() throws BusinessException {
+		db.stop();
+	}
 
 	@Before
 	public void setUp() throws Exception {

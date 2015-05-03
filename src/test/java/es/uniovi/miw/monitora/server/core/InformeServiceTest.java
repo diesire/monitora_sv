@@ -4,14 +4,16 @@ import static org.junit.Assert.*;
 
 import java.util.Date;
 
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import es.uniovi.miw.monitora.server.conf.PersistenceFactory;
 import es.uniovi.miw.monitora.server.conf.ServicesFactory;
 import es.uniovi.miw.monitora.server.model.Informe;
-import es.uniovi.miw.monitora.server.model.Cliente;
 import es.uniovi.miw.monitora.server.model.exceptions.BusinessException;
+import es.uniovi.miw.monitora.server.persistence.util.PersistenceService;
 
 public class InformeServiceTest {
 
@@ -19,10 +21,22 @@ public class InformeServiceTest {
 	private static final String INFORME = "Informe";
 	private static final Date NOW = new Date(System.currentTimeMillis());
 	private InformeService service;
+	private static PersistenceService db;
 
 	@Before
 	public void setUp() throws Exception {
 		service = ServicesFactory.getInformeService();
+	}
+
+	@BeforeClass
+	public static void setUpClass() throws BusinessException {
+		db = PersistenceFactory.getPersistenceService();
+		db.start();
+	}
+
+	@AfterClass
+	public static void tearDownClass() throws BusinessException {
+		db.stop();
 	}
 
 	@Test
@@ -74,20 +88,19 @@ public class InformeServiceTest {
 		service.deleteInforme(ag.getInfoId());
 	}
 
-	
-	 @Test(expected = BusinessException.class)
-	 public void testFindNullInforme() throws BusinessException {
-	 service.findInformeById(null);
-	 }
-	
-	 @Test
-	 public void testFindInforme() throws BusinessException {
-	 Informe inf = createPersistentInforme();
-	
-	 Informe found = service.findInformeById(inf.getInfoId());
-	 assertNotNull(found);
-	 assertEquals(inf, found);
-	 }
+	@Test(expected = BusinessException.class)
+	public void testFindNullInforme() throws BusinessException {
+		service.findInformeById(null);
+	}
+
+	@Test
+	public void testFindInforme() throws BusinessException {
+		Informe inf = createPersistentInforme();
+
+		Informe found = service.findInformeById(inf.getInfoId());
+		assertNotNull(found);
+		assertEquals(inf, found);
+	}
 
 	@SuppressWarnings("deprecation")
 	@Test
