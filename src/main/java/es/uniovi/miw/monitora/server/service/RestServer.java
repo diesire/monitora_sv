@@ -5,16 +5,16 @@ import org.glassfish.jersey.server.ResourceConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import es.uniovi.miw.monitora.server.core.impl.MonitoraServer;
+import es.uniovi.miw.monitora.server.core.impl.MonitoraServerImpl;
 
 public class RestServer extends ResourceConfig {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	public RestServer() {
-		this(new MonitoraServer());
+		this(new MonitoraServerImpl());
 	}
 
-	public RestServer(final MonitoraServer monitoraServer) {
+	public RestServer(final MonitoraServerImpl monitoraServer) {
 		/*
 		 * Register the mapping between internal exceptions and their outward
 		 * facing messages.
@@ -25,7 +25,7 @@ public class RestServer extends ResourceConfig {
 		register(new AbstractBinder() {
 			@Override
 			protected void configure() {
-				bind(monitoraServer).to(MonitoraServer.class);
+				bind(monitoraServer).to(MonitoraServerImpl.class);
 			}
 		});
 

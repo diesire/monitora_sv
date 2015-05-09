@@ -5,7 +5,7 @@ import es.uniovi.miw.monitora.core.snapshot.Snapshot;
 import es.uniovi.miw.monitora.server.model.Agente;
 import es.uniovi.miw.monitora.server.model.exceptions.BusinessException;
 
-public interface IMonitoraServer {
+public interface MonitoraServerService {
 
 	Ack ping(int agenteId) throws BusinessException;
 
