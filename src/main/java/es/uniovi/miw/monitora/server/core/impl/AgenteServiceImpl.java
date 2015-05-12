@@ -1,11 +1,15 @@
 package es.uniovi.miw.monitora.server.core.impl;
 
+import java.util.List;
+import java.util.Set;
+
 import es.uniovi.miw.monitora.server.core.AgenteService;
 import es.uniovi.miw.monitora.server.core.impl.CommandExecutor;
 import es.uniovi.miw.monitora.server.core.impl.agente.CreateAgente;
 import es.uniovi.miw.monitora.server.core.impl.agente.DeleteAgente;
 import es.uniovi.miw.monitora.server.core.impl.agente.FindAgenteById;
 import es.uniovi.miw.monitora.server.core.impl.agente.AddAgente;
+import es.uniovi.miw.monitora.server.core.impl.agente.FindAllAgentes;
 import es.uniovi.miw.monitora.server.core.impl.agente.UpdateAgente;
 import es.uniovi.miw.monitora.server.model.Agente;
 import es.uniovi.miw.monitora.server.model.Cliente;
@@ -37,6 +41,12 @@ public class AgenteServiceImpl implements AgenteService {
 	@Override
 	public Agente createAgente(Cliente cliente) throws BusinessException {
 		return (Agente) executor.execute(new CreateAgente(cliente));
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Agente> findAll() throws BusinessException {
+		return (List<Agente>) executor.execute(new FindAllAgentes());
 	}
 
 }

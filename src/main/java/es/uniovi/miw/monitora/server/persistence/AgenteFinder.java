@@ -12,4 +12,12 @@ public class AgenteFinder {
 			throw new BusinessException(e);
 		}
 	}
+
+	public static Object findAll() throws BusinessException {
+		try {
+		return Jpa.getManager().createNamedQuery("Agente.findAll").getResultList();
+		} catch (Exception e) {
+			throw new BusinessException(e);
+		}
+	}
 }
