@@ -34,6 +34,7 @@ import es.uniovi.miw.monitora.server.model.LineaCron;
 import es.uniovi.miw.monitora.server.model.Planificacion;
 import es.uniovi.miw.monitora.server.model.Snapshot;
 import es.uniovi.miw.monitora.server.model.TipoDestino;
+import es.uniovi.miw.monitora.server.model.exceptions.BusinessException;
 import es.uniovi.miw.monitora.server.persistence.util.Jpa;
 
 /**
@@ -65,7 +66,13 @@ public class RestApiTest extends JerseyTest {
 	@Override
 	protected Application configure() {
 		logger.debug("App configuration");
-		return new RestServer();
+		try {
+			return new RestServer();
+		} catch (BusinessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Test
