@@ -67,10 +67,7 @@ public class ClienteServiceTest {
 	
 	@Test
 	public void testAddCliente() throws BusinessException {
-		Cliente cli = service.createCliente(CLIENTE1);
-
-		service.addCliente(cli);
-		assertNotNull(cli.getIdCliente());
+		createPersistentCliente();
 	}
 
 	@Test(expected = BusinessException.class)
@@ -103,9 +100,7 @@ public class ClienteServiceTest {
 
 	@Test
 	public void testUpdateCliente() throws BusinessException {
-		Cliente cli = service.createCliente(CLIENTE1);
-		service.addCliente(cli);
-		assertNotNull(cli.getIdCliente());
+		Cliente cli = createPersistentCliente();
 
 		Cliente found = service.findClienteById(cli.getIdCliente());
 		assertNotNull(found);
@@ -117,6 +112,15 @@ public class ClienteServiceTest {
 		found2 = service.findClienteById(found.getIdCliente());
 		assertNotNull(found2);
 		assertEquals("Cliente2", found2.getNombre());
+	}
+
+	private Cliente createPersistentCliente() throws BusinessException {
+		Cliente cli = service.createCliente(CLIENTE1);
+		//TODO add more properties
+		service.addCliente(cli);
+		
+		assertNotNull(cli.getIdCliente());
+		return cli;
 	}
 
 }
