@@ -2,6 +2,13 @@ package es.uniovi.miw.monitora.server.core;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import org.apache.catalina.tribes.util.Arrays;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -11,30 +18,38 @@ import es.uniovi.miw.monitora.server.conf.PersistenceFactory;
 import es.uniovi.miw.monitora.server.conf.ServicesFactory;
 import es.uniovi.miw.monitora.server.model.Agente;
 import es.uniovi.miw.monitora.server.model.Cliente;
+import es.uniovi.miw.monitora.server.model.Destino;
 import es.uniovi.miw.monitora.server.model.exceptions.BusinessException;
 import es.uniovi.miw.monitora.server.persistence.util.PersistenceService;
 
 public class AgenteServiceTest {
 
 	private static Cliente cli;
+	private static Destino des;
 	private static PersistenceService db;
 	private AgenteService service;
-	
+
 	@BeforeClass
 	static public void setUpClass() throws Exception {
 		db = PersistenceFactory.getPersistenceService();
 		db.start();
-		
-		ClienteService cliServ= ServicesFactory.getClienteService();
+
+		ClienteService cliServ = ServicesFactory.getClienteService();
 		cli = cliServ.createCliente("ClienteAgente");
 		cliServ.addCliente(cli);
+
+		DestinoService desServ = ServicesFactory.getDestinoService();
+		des = desServ.createDestino(cli);
+		des.setIdTipoDestino(0); // FIXME: TipoDestino not linked with
+		// corresponding table???);
+		desServ.addDestino(des);
 	}
 
 	@Before
 	public void setUp() throws Exception {
 		service = ServicesFactory.getAgenteService();
 	}
-	
+
 	@AfterClass
 	public static void tearDownClass() throws BusinessException {
 		db.stop();
@@ -45,10 +60,12 @@ public class AgenteServiceTest {
 		Agente ag = service.createAgente(new Cliente());
 		assertNotNull(ag);
 		assertNull(ag.getAgenteId());
+
 	}
 
 	/**
 	 * Add null raise BusinessException
+	 * 
 	 * @throws BusinessException
 	 */
 	@Test(expected = BusinessException.class)
@@ -58,21 +75,21 @@ public class AgenteServiceTest {
 
 	/**
 	 * Add empty Agente raise BusinessException
+	 * 
 	 * @throws BusinessException
 	 */
 	@Test(expected = BusinessException.class)
 	public void testAddAgenteEmpty() throws BusinessException {
 		service.addAgente(new Agente());
 	}
-	
+
 	/**
 	 * 
 	 * @throws BusinessException
 	 */
 	@Test
 	public void testAddAgente() throws BusinessException {
-		Agente ag = createPersistentAgente();
-		assertNotNull(ag.getAgenteId());
+		createPersistentAgente(cli);
 	}
 
 	@Test(expected = BusinessException.class)
@@ -82,7 +99,7 @@ public class AgenteServiceTest {
 
 	@Test
 	public void testDeleteAgente() throws BusinessException {
-		Agente ag = createPersistentAgente();
+		Agente ag = createPersistentAgente(cli);
 
 		service.deleteAgente(ag.getAgenteId());
 	}
@@ -94,7 +111,7 @@ public class AgenteServiceTest {
 
 	@Test
 	public void testFindAgente() throws BusinessException {
-		Agente ag = createPersistentAgente();
+		Agente ag = createPersistentAgente(cli);
 
 		Agente found = service.findAgenteById(ag.getAgenteId());
 		assertNotNull(found);
@@ -103,7 +120,7 @@ public class AgenteServiceTest {
 
 	@Test
 	public void testUpdateAgente() throws BusinessException {
-		Agente ag = createPersistentAgente();
+		Agente ag = createPersistentAgente(cli);
 		Agente found = service.findAgenteById(ag.getAgenteId());
 		assertNotNull(found);
 
@@ -116,9 +133,30 @@ public class AgenteServiceTest {
 		assertEquals("192.168.0.2", found2.getIpAgente());
 	}
 
-	private Agente createPersistentAgente() throws BusinessException {
+	private Agente createPersistentAgente(Cliente cli) throws BusinessException {
 		Agente ag = service.createAgente(cli);
+		ag.setComentarios("Comentario");
+		ag.setIpAgente("127.0.0.1");
+		ag.addDestino(des);
+		des.addAgente(ag);
+
 		service.addAgente(ag);
+
+		assertNotNull(ag.getAgenteId());
+		assertEquals("Comentario", ag.getComentarios());
+		assertEquals("127.0.0.1", ag.getIpAgente());
+		
+		//agente <-> cliente
+		assertEquals(cli, ag.getCliente());
+		// PersistentSet.contains fails
+		assertTrue(new HashSet<Agente>(ag.getCliente().getAgentes())
+				.contains(ag));
+		
+		
+		//agente <-> destino
+		assertTrue(new HashSet<Destino>(ag.getDestinos()).contains(des));
+		assertTrue(new HashSet<Agente>(des.getAgentes()).contains(ag));
+
 		return ag;
 	}
 

@@ -51,7 +51,7 @@ public class Agente implements Serializable {
 	private Cliente cliente;
 
 	// bi-directional many-to-many association to Destino
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "AGENTE_DESTINO", joinColumns = { @JoinColumn(name = "ID_AGENTE") }, inverseJoinColumns = {
 			@JoinColumn(name = "ID_CLIENTE", referencedColumnName = "ID_CLIENTE"),
 			@JoinColumn(name = "ID_DESTINO", referencedColumnName = "ID_DESTINO") })
