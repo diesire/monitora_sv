@@ -31,7 +31,7 @@ public class InformeConsulta implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
-	private InformeConsultaPK id;
+	private InformeConsultaPK id = new InformeConsultaPK();
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "F_ULTIMA_MODIFICACION")
@@ -72,6 +72,7 @@ public class InformeConsulta implements Serializable {
 
 	public void setConsulta(Consulta consulta) {
 		this.consulta = consulta;
+		getId().setIdConsulta(consulta.getConsId());
 	}
 
 	public Informe getInforme() {
@@ -80,6 +81,7 @@ public class InformeConsulta implements Serializable {
 
 	public void setInforme(Informe informe) {
 		this.informe = informe;
+		getId().setIdInforme(informe.getInfoId());
 	}
 
 	@Override
