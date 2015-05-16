@@ -11,5 +11,7 @@ public class Utils {
 	
 	public static final String TIPO_B = "B"; // TODO solo B o S
 	public static final String DESC_L = "Descripción larga";
+	
+	public static final Integer TIPO_DESTINO_0 = 0;
 
 }

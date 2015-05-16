@@ -1,6 +1,7 @@
 package es.uniovi.miw.monitora.server.core;
 
 import static org.junit.Assert.*;
+import static es.uniovi.miw.monitora.server.ui.util.Utils.*;
 
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -127,7 +128,7 @@ public class DestinoServiceTest {
 
 	private Destino createPersistentDestino() throws BusinessException {
 		Destino dest = service.createDestino(cli);
-		dest.setIdTipoDestino(0); // FIXME: TipoDestino not linked with
+		dest.setIdTipoDestino(TIPO_DESTINO_0); // FIXME: TipoDestino not linked with
 									// corresponding table???
 		service.addDestino(dest);
 

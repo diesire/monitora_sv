@@ -1,14 +1,13 @@
 package es.uniovi.miw.monitora.server.core;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static es.uniovi.miw.monitora.server.ui.util.Utils.*;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
-import org.apache.catalina.tribes.util.Arrays;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -141,6 +140,7 @@ public class AgenteServiceTest {
 		des.addAgente(ag);
 
 		service.addAgente(ag);
+		// FIXME compare against persisted instance
 
 		assertNotNull(ag.getAgenteId());
 		assertEquals("Comentario", ag.getComentarios());
