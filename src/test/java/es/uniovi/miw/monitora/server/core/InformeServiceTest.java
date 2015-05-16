@@ -15,11 +15,10 @@ import es.uniovi.miw.monitora.server.model.Informe;
 import es.uniovi.miw.monitora.server.model.exceptions.BusinessException;
 import es.uniovi.miw.monitora.server.persistence.util.PersistenceService;
 
+import static es.uniovi.miw.monitora.server.ui.util.Utils.*;
+
 public class InformeServiceTest {
 
-	private static final String DESCRIPCION = "Descripción";
-	private static final String INFORME = "Informe";
-	private static final Date NOW = new Date(System.currentTimeMillis());
 	private InformeService service;
 	private static PersistenceService db;
 
@@ -41,7 +40,7 @@ public class InformeServiceTest {
 
 	@Test
 	public void testCreateInforme() throws BusinessException {
-		Informe inf = service.createInforme(INFORME, DESCRIPCION, NOW);
+		Informe inf = service.createInforme(INFORME1, DESC_C, NOW);
 		assertNotNull(inf);
 		assertNull(inf.getInfoId());
 	}
@@ -119,7 +118,7 @@ public class InformeServiceTest {
 	}
 
 	private Informe createPersistentInforme() throws BusinessException {
-		Informe inf = service.createInforme(INFORME, DESCRIPCION, NOW);
+		Informe inf = service.createInforme(INFORME1, DESC_C, NOW);
 
 		service.addInforme(inf);
 		return inf;

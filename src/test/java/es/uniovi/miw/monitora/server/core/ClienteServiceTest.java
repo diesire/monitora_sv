@@ -2,6 +2,7 @@
 package es.uniovi.miw.monitora.server.core;
 
 import static org.junit.Assert.*;
+import static es.uniovi.miw.monitora.server.ui.util.Utils.*;
 
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -16,7 +17,6 @@ import es.uniovi.miw.monitora.server.persistence.util.PersistenceService;
 
 public class ClienteServiceTest {
 
-	private static final String CLIENTE1 = "Cliente1";
 	private static PersistenceService db;
 	private ClienteService service;
 	
