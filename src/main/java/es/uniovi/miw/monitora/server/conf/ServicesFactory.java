@@ -8,6 +8,7 @@ import es.uniovi.miw.monitora.server.core.InformeConsultaService;
 import es.uniovi.miw.monitora.server.core.InformeService;
 import es.uniovi.miw.monitora.server.core.MonitoraServerService;
 import es.uniovi.miw.monitora.server.core.SnapshotService;
+import es.uniovi.miw.monitora.server.core.TipoDestinoService;
 import es.uniovi.miw.monitora.server.core.impl.AgenteServiceImpl;
 import es.uniovi.miw.monitora.server.core.impl.ClienteServiceImpl;
 import es.uniovi.miw.monitora.server.core.impl.ConsultaServiceImpl;
@@ -16,6 +17,7 @@ import es.uniovi.miw.monitora.server.core.impl.InformeConsultaServiceImpl;
 import es.uniovi.miw.monitora.server.core.impl.InformeServiceImpl;
 import es.uniovi.miw.monitora.server.core.impl.MonitoraServer;
 import es.uniovi.miw.monitora.server.core.impl.SnapshotServiceImpl;
+import es.uniovi.miw.monitora.server.core.impl.TipoDestinoServiceImpl;
 import es.uniovi.miw.monitora.server.model.exceptions.BusinessException;
 
 public class ServicesFactory {
@@ -50,5 +52,9 @@ public class ServicesFactory {
 
 	public static SnapshotService getSnapshotService() {
 		return new SnapshotServiceImpl();
+	}
+
+	public static TipoDestinoService getTipoDestinoService() {
+		return new TipoDestinoServiceImpl();
 	}
 }
