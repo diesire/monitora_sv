@@ -16,6 +16,9 @@
 	<named-query name="Snapshot.findAll">
 		<query>SELECT s FROM Snapshot s</query>
 	</named-query>
+	<named-query name="Snapshot.getNextSnapshotId">
+		<query>select max(s.id.idSnapshot) + 1 from Snapshot s</query>
+	</named-query>
 	<named-query name="InformeTipoDestino.findAll">
 		<query>SELECT i FROM InformeTipoDestino i</query>
 	</named-query>

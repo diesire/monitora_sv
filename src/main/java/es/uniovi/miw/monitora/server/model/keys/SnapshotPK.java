@@ -28,8 +28,8 @@ public class SnapshotPK implements Serializable {
 	@Column(name = "ID_DESTINO", insertable = false, updatable = false)
 	private Integer idDestino;
 
-	@Column(name = "ID_INFORME", insertable = false, updatable = false)
-	private Integer idInforme;
+//	@Column(name = "ID_INFORME", insertable = false, updatable = false)
+//	private Integer idInforme;
 
 	public SnapshotPK() {
 	}
@@ -58,13 +58,13 @@ public class SnapshotPK implements Serializable {
 		this.idDestino = idDestino;
 	}
 
-	public Integer getIdInforme() {
-		return this.idInforme;
-	}
-
-	public void setIdInforme(Integer idInforme) {
-		this.idInforme = idInforme;
-	}
+//	public Integer getIdInforme() {
+//		return this.idInforme;
+//	}
+//
+//	public void setIdInforme(Integer idInforme) {
+//		this.idInforme = idInforme;
+//	}
 
 	@Override
 	public int hashCode() {
@@ -74,8 +74,8 @@ public class SnapshotPK implements Serializable {
 				+ ((idCliente == null) ? 0 : idCliente.hashCode());
 		result = prime * result
 				+ ((idDestino == null) ? 0 : idDestino.hashCode());
-		result = prime * result
-				+ ((idInforme == null) ? 0 : idInforme.hashCode());
+//		result = prime * result
+//				+ ((idInforme == null) ? 0 : idInforme.hashCode());
 		result = prime * result
 				+ ((idSnapshot == null) ? 0 : idSnapshot.hashCode());
 		return result;
@@ -100,11 +100,11 @@ public class SnapshotPK implements Serializable {
 				return false;
 		} else if (!idDestino.equals(other.idDestino))
 			return false;
-		if (idInforme == null) {
-			if (other.idInforme != null)
-				return false;
-		} else if (!idInforme.equals(other.idInforme))
-			return false;
+//		if (idInforme == null) {
+//			if (other.idInforme != null)
+//				return false;
+//		} else if (!idInforme.equals(other.idInforme))
+//			return false;
 		if (idSnapshot == null) {
 			if (other.idSnapshot != null)
 				return false;
@@ -119,7 +119,8 @@ public class SnapshotPK implements Serializable {
 		builder.append("SnapshotPK [idSnapshot=").append(idSnapshot)
 				.append(", idCliente=").append(idCliente)
 				.append(", idDestino=").append(idDestino)
-				.append(", idInforme=").append(idInforme).append("]");
+//				.append(", idInforme=").append(idInforme)
+				.append("]");
 		return builder.toString();
 	}
 }

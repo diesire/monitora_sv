@@ -36,7 +36,7 @@ public class Tcon1 implements Serializable {
 	@JoinColumns({
 			@JoinColumn(name = "ID_CLIENTE", referencedColumnName = "ID_CLIENTE"),
 			@JoinColumn(name = "ID_DESTINO", referencedColumnName = "ID_DESTINO"),
-			@JoinColumn(name = "ID_INFORME", referencedColumnName = "ID_INFORME"),
+//			@JoinColumn(name = "ID_INFORME", referencedColumnName = "ID_INFORME"),
 			@JoinColumn(name = "ID_SNAPSHOT", referencedColumnName = "ID_SNAPSHOT") })
 	private Snapshot snapshot;
 

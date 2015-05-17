@@ -46,7 +46,7 @@ public class Snapshot implements Serializable {
 
 	// bi-directional many-to-one association to Informe
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "ID_INFORME", insertable = false, updatable = false)
+	@JoinColumn(name = "ID_INFORME")
 	private Informe informe;
 
 	// bi-directional many-to-one association to Tcon1
@@ -88,7 +88,7 @@ public class Snapshot implements Serializable {
 
 	public void setInforme(Informe informe) {
 		this.informe = informe;
-		getId().setIdInforme(informe.getInfoId());
+//		getId().setIdInforme(informe.getInfoId());
 	}
 
 	public Set<Tcon1> getTcon1s() {
