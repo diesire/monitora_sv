@@ -23,12 +23,12 @@ import es.uniovi.miw.monitora.server.model.keys.InformeTipoDestinoPK;
 @Entity
 @Table(name = "INFORME_TIPO_DESTINO")
 @XmlRootElement
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope=InformeTipoDestino.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = InformeTipoDestino.class)
 public class InformeTipoDestino implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
-	private InformeTipoDestinoPK id;
+	private InformeTipoDestinoPK id = new InformeTipoDestinoPK();
 
 	@Column(name = "POR_DEFECTO")
 	private String porDefecto;
@@ -68,6 +68,7 @@ public class InformeTipoDestino implements Serializable {
 
 	public void setInforme(Informe informe) {
 		this.informe = informe;
+		id.setIdInforme(informe.getInfoId());
 	}
 
 	public TipoDestino getTipoDestino() {
@@ -76,6 +77,7 @@ public class InformeTipoDestino implements Serializable {
 
 	public void setTipoDestino(TipoDestino tipoDestino) {
 		this.tipoDestino = tipoDestino;
+		id.setIdTipoDestino(tipoDestino.getIdTipoDestino());
 	}
 
 	@Override
