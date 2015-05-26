@@ -136,8 +136,7 @@ public class AgenteServiceTest {
 		Agente ag = service.createAgente(cli);
 		ag.setComentarios("Comentario");
 		ag.setIpAgente("127.0.0.1");
-		ag.addDestino(des);
-		des.addAgente(ag);
+		ag.linkDestino(des);
 
 		service.addAgente(ag);
 		// FIXME compare against persisted instance

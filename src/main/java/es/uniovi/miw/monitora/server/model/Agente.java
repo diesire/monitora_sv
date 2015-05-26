@@ -34,8 +34,8 @@ public class Agente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name = "AGENTE_AGENTE_ID_SEQ",sequenceName = "AGENTE_AGENTE_ID_SEQ")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="AGENTE_AGENTE_ID_SEQ")
+	@SequenceGenerator(name = "AGENTE_AGENTE_ID_SEQ", sequenceName = "AGENTE_AGENTE_ID_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "AGENTE_AGENTE_ID_SEQ")
 	@Column(name = "AGENTE_ID")
 	private Integer agenteId;
 
@@ -64,7 +64,7 @@ public class Agente implements Serializable {
 		return this.agenteId;
 	}
 
-	public void setAgenteId(Integer agenteId) {
+	protected void setAgenteId(Integer agenteId) {
 		this.agenteId = agenteId;
 	}
 
@@ -88,7 +88,7 @@ public class Agente implements Serializable {
 		return this.cliente;
 	}
 
-	public void setCliente(Cliente cliente) {
+	protected void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
 
@@ -96,11 +96,11 @@ public class Agente implements Serializable {
 		return this.destinos;
 	}
 
-	public void setDestinos(Set<Destino> destinos) {
+	protected void setDestinos(Set<Destino> destinos) {
 		this.destinos = destinos;
 	}
 
-	public Destino addDestino(Destino destino) {
+	protected Destino addDestino(Destino destino) {
 		destinos.add(destino);
 
 		return destino;
@@ -145,5 +145,15 @@ public class Agente implements Serializable {
 				.append(", comentarios=").append(comentarios)
 				.append(", ipAgente=").append(ipAgente).append("]");
 		return builder.toString();
+	}
+
+	public void linkCliente(Cliente cli) {
+		setCliente(cli);
+		cli.addAgente(this);
+	}
+
+	public void linkDestino(Destino des) {
+		addDestino(des);
+		des.addAgente(this);
 	}
 }

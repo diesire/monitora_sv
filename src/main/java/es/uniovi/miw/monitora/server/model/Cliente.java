@@ -50,7 +50,7 @@ public class Cliente implements Serializable {
 		return this.idCliente;
 	}
 
-	public void setIdCliente(Integer idCliente) {
+	protected void setIdCliente(Integer idCliente) {
 		this.idCliente = idCliente;
 	}
 
@@ -74,11 +74,11 @@ public class Cliente implements Serializable {
 		return this.agentes;
 	}
 
-	public void setAgentes(Set<Agente> agentes) {
+	protected void setAgentes(Set<Agente> agentes) {
 		this.agentes = agentes;
 	}
 
-	public Agente addAgente(Agente agente) {
+	protected Agente addAgente(Agente agente) {
 		agente.setCliente(this);
 		getAgentes().add(agente);
 
@@ -96,11 +96,11 @@ public class Cliente implements Serializable {
 		return this.destinos;
 	}
 
-	public void setDestinos(Set<Destino> destinos) {
+	protected void setDestinos(Set<Destino> destinos) {
 		this.destinos = destinos;
 	}
 
-	public Destino addDestino(Destino destino) {
+	protected Destino addDestino(Destino destino) {
 		getDestinos().add(destino);
 		destino.setCliente(this);
 

@@ -36,5 +36,4 @@ public class ClienteServiceImpl implements ClienteService {
 	public Cliente createCliente(String nombreCliente) throws BusinessException {
 		return (Cliente) executor.execute(new CreateCliente(nombreCliente));
 	}
-
 }

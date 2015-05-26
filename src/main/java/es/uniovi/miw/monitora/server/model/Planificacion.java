@@ -49,7 +49,7 @@ public class Planificacion implements Serializable {
 		return this.idPlan;
 	}
 
-	public void setIdPlan(Integer idPlan) {
+	protected void setIdPlan(Integer idPlan) {
 		this.idPlan = idPlan;
 	}
 
@@ -73,11 +73,11 @@ public class Planificacion implements Serializable {
 		return this.infPlanDests;
 	}
 
-	public void setInfPlanDests(Set<InfPlanDest> infPlanDests) {
+	protected void setInfPlanDests(Set<InfPlanDest> infPlanDests) {
 		this.infPlanDests = infPlanDests;
 	}
 
-	public InfPlanDest addInfPlanDest(InfPlanDest infPlanDest) {
+	protected InfPlanDest addInfPlanDest(InfPlanDest infPlanDest) {
 		getInfPlanDests().add(infPlanDest);
 		infPlanDest.setPlanificacion(this);
 

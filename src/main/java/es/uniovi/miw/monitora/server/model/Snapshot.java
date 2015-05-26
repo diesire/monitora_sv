@@ -27,7 +27,7 @@ import es.uniovi.miw.monitora.server.model.keys.SnapshotPK;
  */
 @Entity
 @XmlRootElement
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope=Snapshot.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Snapshot.class)
 public class Snapshot implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -60,7 +60,7 @@ public class Snapshot implements Serializable {
 		return this.id;
 	}
 
-	public void setId(SnapshotPK id) {
+	protected void setId(SnapshotPK id) {
 		this.id = id;
 	}
 
@@ -76,7 +76,7 @@ public class Snapshot implements Serializable {
 		return this.destino;
 	}
 
-	public void setDestino(Destino destino) {
+	protected void setDestino(Destino destino) {
 		this.destino = destino;
 		getId().setIdDestino(destino.getId().getIdDestino());
 		getId().setIdCliente(destino.getId().getIdCliente());
@@ -86,16 +86,16 @@ public class Snapshot implements Serializable {
 		return this.informe;
 	}
 
-	public void setInforme(Informe informe) {
+	protected void setInforme(Informe informe) {
 		this.informe = informe;
-//		getId().setIdInforme(informe.getInfoId());
+		// getId().setIdInforme(informe.getInfoId());
 	}
 
 	public Set<Tcon1> getTcon1s() {
 		return this.tcon1s;
 	}
 
-	public void setTcon1s(Set<Tcon1> tcon1s) {
+	protected void setTcon1s(Set<Tcon1> tcon1s) {
 		this.tcon1s = tcon1s;
 	}
 
@@ -144,6 +144,16 @@ public class Snapshot implements Serializable {
 		builder.append("Snapshot [id=").append(id).append(", fecha=")
 				.append(fecha).append("]");
 		return builder.toString();
+	}
+
+	public void linkDestino(Destino des) {
+		setDestino(des);
+		des.addSnapshot(this);
+	}
+
+	public void linkInforme(Informe info) {
+		setInforme(info);
+		info.addSnapshot(this);
 	}
 
 }

@@ -65,7 +65,7 @@ public class Informe implements Serializable {
 		return this.infoId;
 	}
 
-	public void setInfoId(Integer infoId) {
+	protected void setInfoId(Integer infoId) {
 		this.infoId = infoId;
 	}
 
@@ -149,7 +149,7 @@ public class Informe implements Serializable {
 		return this.informeTipoDestinos;
 	}
 
-	public void setInformeTipoDestinos(
+	protected void setInformeTipoDestinos(
 			Set<InformeTipoDestino> informeTipoDestinos) {
 		this.informeTipoDestinos = informeTipoDestinos;
 	}
@@ -174,11 +174,11 @@ public class Informe implements Serializable {
 		return this.infPlanDests;
 	}
 
-	public void setInfPlanDests(Set<InfPlanDest> infPlanDests) {
+	protected void setInfPlanDests(Set<InfPlanDest> infPlanDests) {
 		this.infPlanDests = infPlanDests;
 	}
 
-	public InfPlanDest addInfPlanDest(InfPlanDest infPlanDest) {
+	protected InfPlanDest addInfPlanDest(InfPlanDest infPlanDest) {
 		getInfPlanDests().add(infPlanDest);
 		infPlanDest.setInforme(this);
 
@@ -196,11 +196,11 @@ public class Informe implements Serializable {
 		return this.snapshots;
 	}
 
-	public void setSnapshots(Set<Snapshot> snapshots) {
+	protected void setSnapshots(Set<Snapshot> snapshots) {
 		this.snapshots = snapshots;
 	}
 
-	public Snapshot addSnapshot(Snapshot snapshot) {
+	protected Snapshot addSnapshot(Snapshot snapshot) {
 		getSnapshots().add(snapshot);
 		snapshot.setInforme(this);
 

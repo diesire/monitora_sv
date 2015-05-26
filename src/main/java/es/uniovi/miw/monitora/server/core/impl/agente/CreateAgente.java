@@ -16,8 +16,7 @@ public class CreateAgente implements Command {
 	@Override
 	public Object execute() throws BusinessException {
 		Agente ag = new Agente();
-		ag.setCliente(cliente);
-		cliente.addAgente(ag);
+		ag.linkCliente(cliente);
 		return ag;
 	}
 

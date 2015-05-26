@@ -32,14 +32,11 @@ public class CreateInfPlanDest implements Command {
 	public Object execute() throws BusinessException {
 		InfPlanDest infoPlanDes = new InfPlanDest();
 
-		infoPlanDes.setDestino(des);
-		des.addInfPlanDest(infoPlanDes);
+		infoPlanDes.linkDestino(des);
 
-		infoPlanDes.setPlanificacion(plan);
-		plan.addInfPlanDest(infoPlanDes);
+		infoPlanDes.linkPlanificacion(plan);
 
-		infoPlanDes.setInforme(info);
-		info.addInfPlanDest(infoPlanDes);
+		infoPlanDes.linkInforme(info);
 
 		infoPlanDes.setFUltimaModificacion(fModif);
 		infoPlanDes.setFUltimaAplicacion(fApli);

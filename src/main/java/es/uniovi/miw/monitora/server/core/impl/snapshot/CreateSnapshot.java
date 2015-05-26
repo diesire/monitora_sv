@@ -26,11 +26,8 @@ public class CreateSnapshot implements Command {
 	public Object execute() throws BusinessException {
 		Snapshot snap = new Snapshot();
 
-		snap.setDestino(des);
-		des.addSnapshot(snap);
-
-		snap.setInforme(info);
-		info.addSnapshot(snap);
+		snap.linkDestino(des);
+		snap.linkInforme(info);
 
 		snap.setFecha(fecha);
 		return snap;
