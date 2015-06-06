@@ -39,7 +39,7 @@ public class Cliente implements Serializable {
 	private Set<Agente> agentes = new HashSet<Agente>();
 
 	// bi-directional many-to-one association to Destino
-	@OneToMany(mappedBy = "cliente", orphanRemoval = true)
+	@OneToMany(mappedBy = "cliente", orphanRemoval = true, fetch = FetchType.EAGER)
 	@JsonIgnore
 	private Set<Destino> destinos = new HashSet<Destino>();
 
