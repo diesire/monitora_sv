@@ -26,7 +26,7 @@ import es.uniovi.miw.monitora.server.model.keys.InformeConsultaPK;
 @Entity
 @Table(name = "INFORME_CONSULTA")
 @XmlRootElement
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope=InformeConsulta.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = InformeConsulta.class)
 public class InformeConsulta implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -50,11 +50,17 @@ public class InformeConsulta implements Serializable {
 	public InformeConsulta() {
 	}
 
+	public InformeConsulta(Informe info, Consulta con) {
+		this();
+		setInforme(info);
+		setConsulta(con);
+	}
+
 	public InformeConsultaPK getId() {
 		return this.id;
 	}
 
-	public void setId(InformeConsultaPK id) {
+	protected void setId(InformeConsultaPK id) {
 		this.id = id;
 	}
 
@@ -70,18 +76,20 @@ public class InformeConsulta implements Serializable {
 		return this.consulta;
 	}
 
-	public void setConsulta(Consulta consulta) {
+	protected void setConsulta(Consulta consulta) {
 		this.consulta = consulta;
 		getId().setIdConsulta(consulta.getConsId());
+		consulta.addInformeConsulta(this);
 	}
 
 	public Informe getInforme() {
 		return this.informe;
 	}
 
-	public void setInforme(Informe informe) {
+	protected void setInforme(Informe informe) {
 		this.informe = informe;
 		getId().setIdInforme(informe.getInfoId());
+		informe.addInformeConsulta(this);
 	}
 
 	@Override

@@ -97,13 +97,12 @@ public class Informe implements Serializable {
 		return this.informeConsultas;
 	}
 
-	public void setInformeConsultas(Set<InformeConsulta> informeConsultas) {
+	protected void setInformeConsultas(Set<InformeConsulta> informeConsultas) {
 		this.informeConsultas = informeConsultas;
 	}
 
-	public InformeConsulta addInformeConsulta(InformeConsulta informeConsulta) {
+	protected InformeConsulta addInformeConsulta(InformeConsulta informeConsulta) {
 		getInformeConsultas().add(informeConsulta);
-		informeConsulta.setInforme(this);
 
 		return informeConsulta;
 	}
@@ -154,10 +153,9 @@ public class Informe implements Serializable {
 		this.informeTipoDestinos = informeTipoDestinos;
 	}
 
-	public InformeTipoDestino addInformeTipoDestino(
+	protected InformeTipoDestino addInformeTipoDestino(
 			InformeTipoDestino informeTipoDestino) {
 		getInformeTipoDestinos().add(informeTipoDestino);
-		informeTipoDestino.setInforme(this);
 
 		return informeTipoDestino;
 	}

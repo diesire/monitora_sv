@@ -19,11 +19,7 @@ public class CreateInformeTipoDestino implements Command {
 
 	@Override
 	public Object execute() throws BusinessException {
-		InformeTipoDestino infoTDes = new InformeTipoDestino();
-		infoTDes.setInforme(info);
-		info.addInformeTipoDestino(infoTDes);
-		infoTDes.setTipoDestino(tDes);
-		tDes.addInformeTipoDestino(infoTDes);
+		InformeTipoDestino infoTDes = new InformeTipoDestino(info, tDes);
 		return infoTDes;
 	}
 

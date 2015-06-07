@@ -48,7 +48,7 @@ public class TipoDestino implements Serializable {
 		return this.idTipoDestino;
 	}
 
-	public void setIdTipoDestino(Integer idTipoDestino) {
+	protected void setIdTipoDestino(Integer idTipoDestino) {
 		this.idTipoDestino = idTipoDestino;
 	}
 
@@ -72,13 +72,14 @@ public class TipoDestino implements Serializable {
 		return this.consultas;
 	}
 
-	public void setConsultas(Set<Consulta> consultas) {
+	protected void setConsultas(Set<Consulta> consultas) {
 		this.consultas = consultas;
 	}
 
-	public Consulta addConsulta(Consulta consulta) {
+	protected Consulta addConsulta(Consulta consulta) {
 		getConsultas().add(consulta);
 
+		consulta.addTipoDestino(this);
 		return consulta;
 	}
 
@@ -92,15 +93,14 @@ public class TipoDestino implements Serializable {
 		return this.informeTipoDestinos;
 	}
 
-	public void setInformeTipoDestinos(
+	protected void setInformeTipoDestinos(
 			Set<InformeTipoDestino> informeTipoDestinos) {
 		this.informeTipoDestinos = informeTipoDestinos;
 	}
 
-	public InformeTipoDestino addInformeTipoDestino(
+	protected InformeTipoDestino addInformeTipoDestino(
 			InformeTipoDestino informeTipoDestino) {
 		getInformeTipoDestinos().add(informeTipoDestino);
-		informeTipoDestino.setTipoDestino(this);
 
 		return informeTipoDestino;
 	}

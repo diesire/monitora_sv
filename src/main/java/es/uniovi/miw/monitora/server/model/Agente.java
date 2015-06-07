@@ -96,7 +96,7 @@ public class Agente implements Serializable {
 		return this.destinos;
 	}
 
-	protected void setDestinos(Set<Destino> destinos) {
+	public void setDestinos(Set<Destino> destinos) {
 		this.destinos = destinos;
 	}
 

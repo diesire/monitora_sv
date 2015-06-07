@@ -46,11 +46,17 @@ public class InformeTipoDestino implements Serializable {
 	public InformeTipoDestino() {
 	}
 
+	public InformeTipoDestino(Informe info, TipoDestino tDes) {
+		this();
+		setInforme(info);
+		setTipoDestino(tDes);
+	}
+
 	public InformeTipoDestinoPK getId() {
 		return this.id;
 	}
 
-	public void setId(InformeTipoDestinoPK id) {
+	protected void setId(InformeTipoDestinoPK id) {
 		this.id = id;
 	}
 
@@ -66,18 +72,20 @@ public class InformeTipoDestino implements Serializable {
 		return this.informe;
 	}
 
-	public void setInforme(Informe informe) {
+	protected void setInforme(Informe informe) {
 		this.informe = informe;
 		id.setIdInforme(informe.getInfoId());
+		informe.addInformeTipoDestino(this);
 	}
 
 	public TipoDestino getTipoDestino() {
 		return this.tipoDestino;
 	}
 
-	public void setTipoDestino(TipoDestino tipoDestino) {
+	protected void setTipoDestino(TipoDestino tipoDestino) {
 		this.tipoDestino = tipoDestino;
 		id.setIdTipoDestino(tipoDestino.getIdTipoDestino());
+		tipoDestino.addInformeTipoDestino(this);
 	}
 
 	@Override

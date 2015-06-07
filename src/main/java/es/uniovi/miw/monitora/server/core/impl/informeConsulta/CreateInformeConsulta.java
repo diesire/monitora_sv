@@ -23,9 +23,7 @@ public class CreateInformeConsulta implements Command {
 
 	@Override
 	public Object execute() throws BusinessException {
-		InformeConsulta infoCon = new InformeConsulta();
-		infoCon.setInforme(info);
-		infoCon.setConsulta(con);
+		InformeConsulta infoCon = new InformeConsulta(info, con);
 		infoCon.setFUltimaModificacion(fechaModif);
 
 		return infoCon;

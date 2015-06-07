@@ -23,8 +23,8 @@ public class Consulta implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name = "CONS_CONS_ID_SEQ",sequenceName = "CONS_CONS_ID_SEQ")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="CONS_CONS_ID_SEQ")
+	@SequenceGenerator(name = "CONS_CONS_ID_SEQ", sequenceName = "CONS_CONS_ID_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CONS_CONS_ID_SEQ")
 	@Column(name = "CONS_ID")
 	private Integer consId;
 
@@ -73,7 +73,7 @@ public class Consulta implements Serializable {
 		return this.consId;
 	}
 
-	public void setConsId(Integer consId) {
+	protected void setConsId(Integer consId) {
 		this.consId = consId;
 	}
 
@@ -145,11 +145,11 @@ public class Consulta implements Serializable {
 		return this.tipoDestinos;
 	}
 
-	public void setTipoDestinos(Set<TipoDestino> tipoDestinos) {
+	protected void setTipoDestinos(Set<TipoDestino> tipoDestinos) {
 		this.tipoDestinos = tipoDestinos;
 	}
 
-	public TipoDestino addTipoDestino(TipoDestino tipoDestino) {
+	protected TipoDestino addTipoDestino(TipoDestino tipoDestino) {
 		getTipoDestinos().add(tipoDestino);
 
 		return tipoDestino;
@@ -165,13 +165,12 @@ public class Consulta implements Serializable {
 		return this.informeConsultas;
 	}
 
-	public void setInformeConsultas(Set<InformeConsulta> informeConsultas) {
+	protected void setInformeConsultas(Set<InformeConsulta> informeConsultas) {
 		this.informeConsultas = informeConsultas;
 	}
 
-	public InformeConsulta addInformeConsulta(InformeConsulta informeConsulta) {
+	protected InformeConsulta addInformeConsulta(InformeConsulta informeConsulta) {
 		getInformeConsultas().add(informeConsulta);
-		informeConsulta.setConsulta(this);
 
 		return informeConsulta;
 	}
@@ -242,6 +241,11 @@ public class Consulta implements Serializable {
 				.append(", sqlSelect=").append(sqlSelect).append(", tabla=")
 				.append(tabla).append(", tipo=").append(tipo).append("]");
 		return builder.toString();
+	}
+
+	public void linkTipoDestino(TipoDestino tDes) {
+		addTipoDestino(tDes);
+		tDes.addConsulta(this);
 	}
 
 }
