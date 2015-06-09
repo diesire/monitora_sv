@@ -27,7 +27,7 @@ import es.uniovi.miw.monitora.server.model.exceptions.BusinessException;
 /**
  * Root resource (exposed at "c2" path)
  * 
- * Open http://localhost:8080/monitora_sv/rest/<ROOT_PATH>
+ * Open http://localhost:8080/monitora_sv/rest/c2
  */
 @Path(RestApi.ROOT_PATH)
 public class RestApi {

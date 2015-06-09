@@ -1,10 +1,8 @@
 package es.uniovi.miw.monitora.server.persistence.util.impl;
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import org.hsqldb.Server;
 import org.hsqldb.persist.HsqlProperties;
@@ -33,8 +31,9 @@ public class HsqldbService implements PersistenceService {
 			server2.setRestartOnShutdown(false);
 			server2.start();
 
-			DriverManager.getConnection("jdbc:hsqldb:" + TEST
-					+ ";shutdown=true;ifexists=true", "sa", "");
+			DriverManager.registerDriver(new org.hsqldb.jdbcDriver());
+			DriverManager.getConnection("jdbc:hsqldb:hsql://localhost:9001/"
+					+ MONITORASV + ";shutdown=true;ifexists=true", "sa", "");
 
 			// Statement stat = c.createStatement();
 			// Boolean result = stat
