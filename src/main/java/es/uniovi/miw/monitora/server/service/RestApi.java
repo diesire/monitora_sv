@@ -1,5 +1,7 @@
 package es.uniovi.miw.monitora.server.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -8,6 +10,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
@@ -90,6 +93,30 @@ public class RestApi {
 			agente = monitora.getAgente(agenteId);
 			logger.debug(pretty_print(agente));
 			return Response.status(Response.Status.OK).entity(agente).build();
+		} catch (BusinessException e) {
+
+			logger.error(e.getLocalizedMessage());
+			return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+					.build();
+		}
+	}
+
+	@GET
+	@Path("/agentes")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response agentes(@Context UriInfo header) {
+
+		logger.debug("GET {}", header.getPath());
+
+		try {
+
+			List<Agente> agentes = monitora.getAgentes();
+			GenericEntity<List<Agente>> agentesWrapper = new GenericEntity<List<Agente>>(
+					agentes) {
+			};
+			logger.debug(pretty_print(agentes));
+			return Response.status(Response.Status.OK).entity(agentesWrapper)
+					.build();
 		} catch (BusinessException e) {
 
 			logger.error(e.getLocalizedMessage());

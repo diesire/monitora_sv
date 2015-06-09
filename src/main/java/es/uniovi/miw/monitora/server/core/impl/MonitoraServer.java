@@ -38,6 +38,7 @@ public class MonitoraServer implements MonitoraServerService {
 	public Agente getAgente(int agenteId) throws BusinessException {
 		logger.trace("Agent from", agenteId);
 		return (Agente) executor.execute(new FindAgenteById(agenteId));
+		//FIXME call service layer
 	}
 	
 	@Override
