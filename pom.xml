@@ -17,6 +17,10 @@
 		</repository>
 	</repositories>
 
+	<properties>
+		<jersey.version>2.6</jersey.version>
+	</properties>
+
 	<dependencies>
 		<!-- Monitora core -->
 		<dependency>
@@ -29,14 +33,14 @@
 			<groupId>org.glassfish.jersey.containers</groupId>
 			<!-- if your container implements Servlet API older than 3.0, use "jersey-container-servlet-core" -->
 			<artifactId>jersey-container-servlet</artifactId>
-			<version>2.6</version>
+			<version>${jersey.version}</version>
 		</dependency>
 
 		<!-- Required only when you are using JAX-RS Client -->
 		<dependency>
 			<groupId>org.glassfish.jersey.core</groupId>
 			<artifactId>jersey-client</artifactId>
-			<version>2.6</version>
+			<version>${jersey.version}</version>
 		</dependency>
 
 		<dependency>
@@ -97,7 +101,7 @@
 		<dependency>
 			<groupId>org.glassfish.jersey.test-framework.providers</groupId>
 			<artifactId>jersey-test-framework-provider-jetty</artifactId>
-			<version>2.6</version>
+			<version>${jersey.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

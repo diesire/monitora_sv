@@ -45,8 +45,9 @@ public class TestUtils {
 		if (ag == null) {
 			ag = ServicesFactory.getAgenteService().findAgenteById(
 					createHierarchy().getAgenteId());
-			assertNotNull(ag);
 		}
+
+		assertNotNull(ag);
 
 		// agente
 		Destino des1 = ag.getDestinos().iterator().next();

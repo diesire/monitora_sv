@@ -99,7 +99,7 @@ public class RestApiTest extends JerseyTest {
 	}
 
 	@Test
-	public void agenteGet() {
+	public void agenteGet() throws BusinessException {
 		Agente remoteAgente = null;
 		String serviceUri = ""; // no servlet mapping, empty URI
 		String pathToCall = "c2/agente/" + agente.getAgenteId();
@@ -119,6 +119,7 @@ public class RestApiTest extends JerseyTest {
 
 		assertNotNull(remoteAgente);
 		assertEquals(agente, remoteAgente);
+		new TestUtils().testHierarchy(remoteAgente);
 	}
 
 	@Test
