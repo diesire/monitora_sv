@@ -13,7 +13,9 @@ import es.uniovi.miw.monitora.server.persistence.util.PersistenceService;
 
 public class HsqldbService implements PersistenceService {
 	private static final String MONITORASV = "monitorasv";
-	private static final String TEST = "file:./data/serverdb";
+	private static final String RELATIVE = "file:./data/serverdb";
+	private static final String FULL = "file:/Users/diesire/Documents/workspace/monitora_sv/data/serverdb";
+	private static final String TEST = FULL;
 	private Server server2;
 
 	public void start() throws BusinessException {
