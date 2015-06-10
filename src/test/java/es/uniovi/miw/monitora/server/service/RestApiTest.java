@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.sql.Date;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -48,6 +49,8 @@ public class RestApiTest extends JerseyTest {
 	static private Logger logger = LoggerFactory.getLogger(RestApiTest.class);
 
 	private Agente agente;
+
+	private TestUtils testUtils = new TestUtils();;
 
 	@Override
 	protected Application configure() {
@@ -103,7 +106,7 @@ public class RestApiTest extends JerseyTest {
 
 		assertNotNull(remoteAgente);
 		assertEquals(agente, remoteAgente);
-		new TestUtils().testHierarchy(remoteAgente);
+		testUtils.testHierarchy(remoteAgente);
 	}
 
 	@Test
@@ -127,7 +130,9 @@ public class RestApiTest extends JerseyTest {
 		}
 
 		assertNotNull(readEntity);
-		new TestUtils().testHierarchy(readEntity.iterator().next());
+		for (Agente agente : readEntity) {
+			testUtils.testHierarchy(agente);
+		}
 	}
 
 	@Test
