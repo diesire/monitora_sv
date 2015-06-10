@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class Utils {
 
+	public static final Integer AGENTE_ID_INVALID = -1;
 	public static final String INFORME1 = "Informe1";
 	public static final String CLIENTE1 = "Cliente1";
 	public static final String TIPO_DESTINO1 = "TipoDestino1";

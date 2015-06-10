@@ -55,6 +55,7 @@ public class MonitoraServer implements MonitoraServerService {
 
 	private Ack createAck(int agenteId) {
 		Ack ack = new Ack();
+		//TODO check if agente exists
 		ack.setUpdate(Calendar.getInstance());
 		return ack;
 	}

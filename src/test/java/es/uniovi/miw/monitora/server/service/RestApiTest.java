@@ -50,7 +50,7 @@ public class RestApiTest extends JerseyTest {
 
 	private Agente agente;
 
-	private TestUtils testUtils = new TestUtils();;
+	private TestUtils testUtils = new TestUtils();
 
 	@Override
 	protected Application configure() {
