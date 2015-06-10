@@ -61,7 +61,6 @@ public class RestApi {
 			logger.debug(pretty_print(ack));
 			return Response.status(Response.Status.OK).entity(ack).build();
 		} catch (BusinessException e) {
-
 			logger.error(e.getLocalizedMessage());
 			return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
 					.build();

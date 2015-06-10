@@ -158,7 +158,7 @@ public class RestApiTest extends JerseyTest {
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
-		agente = new TestUtils().createHierarchy();
+		agente = testUtils.createHierarchy();
 	}
 
 	@After
