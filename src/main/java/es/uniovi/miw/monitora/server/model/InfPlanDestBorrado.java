@@ -19,7 +19,7 @@ import es.uniovi.miw.monitora.server.model.keys.InfPlanDestBorradoPK;
 @Entity
 @Table(name = "INF_PLAN_DEST_BORRADO")
 @XmlRootElement
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = InfPlanDestBorrado.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator.class, property = "@UUID")
 public class InfPlanDestBorrado implements Serializable {
 	private static final long serialVersionUID = 1L;
 

@@ -49,22 +49,6 @@ public class RestApiTest extends JerseyTest {
 
 	private Agente agente;
 
-	// private Cliente cliente;
-	// private Informe informePadre;
-	// private Informe informeHijo;
-	// private List<Object> graph;
-	// private Consulta consulta;
-	// private InformeConsulta informeConsulta;
-	// private TipoDestino tipoDestino;
-	// private InformeTipoDestino informeTipoDestino;
-	// private Destino destino;
-	// private Snapshot snapshot;
-	// private Date fecha;
-	// private Planificacion planificacion;
-	// private LineaCron linea1;
-	// private LineaCron linea2;
-	// private InfPlanDest infoPlanDest;
-
 	@Override
 	protected Application configure() {
 		logger.debug("App configuration");
@@ -141,7 +125,7 @@ public class RestApiTest extends JerseyTest {
 			logger.error("Error deserializating object", e);
 			fail(e.getLocalizedMessage());
 		}
-		
+
 		assertNotNull(readEntity);
 		new TestUtils().testHierarchy(readEntity.iterator().next());
 	}

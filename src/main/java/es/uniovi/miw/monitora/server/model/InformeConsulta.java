@@ -26,7 +26,7 @@ import es.uniovi.miw.monitora.server.model.keys.InformeConsultaPK;
 @Entity
 @Table(name = "INFORME_CONSULTA")
 @XmlRootElement
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = InformeConsulta.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator.class, property = "@UUID")
 public class InformeConsulta implements Serializable {
 	private static final long serialVersionUID = 1L;
 

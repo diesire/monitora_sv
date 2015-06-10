@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
  */
 @Embeddable
 @XmlRootElement
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id", scope = InformeTipoDestinoPK.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator.class, property = "@UUID")
 public class InformeTipoDestinoPK implements Serializable {
 	private static final long serialVersionUID = 1L;
 

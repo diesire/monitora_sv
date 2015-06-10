@@ -27,7 +27,7 @@ import es.uniovi.miw.monitora.server.model.keys.InfPlanDestPK;
 @Entity
 @Table(name = "INF_PLAN_DEST")
 @XmlRootElement
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = InfPlanDest.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator.class, property = "@UUID")
 public class InfPlanDest implements Serializable {
 	private static final long serialVersionUID = 1L;
 

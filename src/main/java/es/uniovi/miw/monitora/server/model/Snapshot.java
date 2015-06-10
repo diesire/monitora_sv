@@ -27,7 +27,7 @@ import es.uniovi.miw.monitora.server.model.keys.SnapshotPK;
  */
 @Entity
 @XmlRootElement
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Snapshot.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator.class, property = "@UUID")
 public class Snapshot implements Serializable {
 	private static final long serialVersionUID = 1L;
 

@@ -23,7 +23,7 @@ import es.uniovi.miw.monitora.server.model.keys.InformeTipoDestinoPK;
 @Entity
 @Table(name = "INFORME_TIPO_DESTINO")
 @XmlRootElement
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = InformeTipoDestino.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator.class, property = "@UUID")
 public class InformeTipoDestino implements Serializable {
 	private static final long serialVersionUID = 1L;
 

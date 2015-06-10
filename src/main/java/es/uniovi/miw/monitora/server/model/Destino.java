@@ -25,7 +25,7 @@ import es.uniovi.miw.monitora.server.model.keys.DestinoPK;
  */
 @Entity
 @XmlRootElement
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Destino.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator.class, property = "@UUID")
 public class Destino implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -181,5 +181,4 @@ public class Destino implements Serializable {
 		setCliente(cli);
 		cli.addDestino(this);
 	}
-
 }
