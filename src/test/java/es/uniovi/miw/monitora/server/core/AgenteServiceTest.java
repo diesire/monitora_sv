@@ -20,7 +20,6 @@ import es.uniovi.miw.monitora.server.model.Cliente;
 import es.uniovi.miw.monitora.server.model.Destino;
 import es.uniovi.miw.monitora.server.model.exceptions.BusinessException;
 import es.uniovi.miw.monitora.server.persistence.util.PersistenceService;
-import es.uniovi.miw.monitora.server.ui.util.TestUtils;
 
 public class AgenteServiceTest {
 
@@ -28,7 +27,6 @@ public class AgenteServiceTest {
 	private static Destino des;
 	private static PersistenceService db;
 	private AgenteService service;
-	TestUtils testUtils = new TestUtils();
 
 	@BeforeClass
 	static public void setUpClass() throws Exception {
@@ -134,39 +132,6 @@ public class AgenteServiceTest {
 		assertEquals("192.168.0.2", found2.getIpAgente());
 	}
 
-	@Test
-	public void testCreateAgenteCascade() throws BusinessException {
-		ClienteService cliServ = ServicesFactory.getClienteService();
-		Cliente _cli = cliServ.createCliente("ClienteAgente");
-
-		DestinoService desServ = ServicesFactory.getDestinoService();
-		Destino _des = desServ.createDestino(_cli);
-		_des.setIdTipoDestino(0); // FIXME: TipoDestino not linked with
-									// corresponding table???);
-
-		Agente ag = service.createAgente(cli);
-		ag.setComentarios("Comentario");
-		ag.setIpAgente("127.0.0.1");
-		ag.linkDestino(des);
-
-		service.addAgente(ag);
-
-		assertNotNull(ag.getAgenteId());
-		Agente agFound = service.findAgenteById(ag.getAgenteId());
-		assertNotNull(agFound);
-
-		Cliente cliFound = cliServ.findClienteById(agFound.getCliente()
-				.getIdCliente());
-		testUtils.testLink(cliFound, agFound);
-
-		Destino desFound = desServ.findDestinoById(agFound.getDestinos()
-				.iterator().next().getId().getIdDestino(), agFound.getCliente()
-				.getIdCliente());
-		
-		testUtils.testLink(desFound, agFound);
-		testUtils.testLink(cliFound, desFound);
-	}
-
 	private Agente createPersistentAgente(Cliente cli) throws BusinessException {
 		Agente ag = service.createAgente(cli);
 		ag.setComentarios("Comentario");
@@ -179,14 +144,15 @@ public class AgenteServiceTest {
 		assertNotNull(ag.getAgenteId());
 		assertEquals("Comentario", ag.getComentarios());
 		assertEquals("127.0.0.1", ag.getIpAgente());
-
-		// agente <-> cliente
+		
+		//agente <-> cliente
 		assertEquals(cli, ag.getCliente());
 		// PersistentSet.contains fails
 		assertTrue(new HashSet<Agente>(ag.getCliente().getAgentes())
 				.contains(ag));
-
-		// agente <-> destino
+		
+		
+		//agente <-> destino
 		assertTrue(new HashSet<Destino>(ag.getDestinos()).contains(des));
 		assertTrue(new HashSet<Agente>(des.getAgentes()).contains(ag));
 
