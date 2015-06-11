@@ -310,7 +310,7 @@ public class TestUtils {
 		DestinoService desSrv = ServicesFactory.getDestinoService();
 
 		Destino des = desSrv.createDestino(cli);
-		des.setIdTipoDestino(TIPO_DESTINO_0);
+		des.setIdTipoDestino(TIPO_DESTINO_0); // FIXME TipoDestino
 
 		des.linkCliente(cli);
 		testLink(cli, des);

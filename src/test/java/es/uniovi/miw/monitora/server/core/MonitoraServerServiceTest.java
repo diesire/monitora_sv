@@ -1,14 +1,12 @@
 package es.uniovi.miw.monitora.server.core;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static es.uniovi.miw.monitora.server.ui.util.Utils.*;
 
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
-import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -17,30 +15,21 @@ import org.junit.Test;
 import es.uniovi.miw.monitora.core.api.Ack;
 import es.uniovi.miw.monitora.server.conf.ServicesFactory;
 import es.uniovi.miw.monitora.server.model.Agente;
-import es.uniovi.miw.monitora.server.model.Cliente;
-import es.uniovi.miw.monitora.server.model.Consulta;
-import es.uniovi.miw.monitora.server.model.Destino;
-import es.uniovi.miw.monitora.server.model.InfPlanDest;
-import es.uniovi.miw.monitora.server.model.Informe;
-import es.uniovi.miw.monitora.server.model.InformeConsulta;
-import es.uniovi.miw.monitora.server.model.InformeTipoDestino;
-import es.uniovi.miw.monitora.server.model.Planificacion;
-import es.uniovi.miw.monitora.server.model.Snapshot;
-import es.uniovi.miw.monitora.server.model.TipoDestino;
 import es.uniovi.miw.monitora.server.model.exceptions.BusinessException;
 import es.uniovi.miw.monitora.server.ui.util.TestUtils;
 
 public class MonitoraServerServiceTest {
 
-	private static final int TEST = 0;
 	private static MonitoraServerService service;
 	private Calendar now;
-	private Agente agente;
+	private static TestUtils testUtils = new TestUtils();
+	private static Agente agente;
 
 	@BeforeClass
 	public static void setUpClass() throws BusinessException {
 		service = ServicesFactory.getMonitoraServerService();
 		service.start();
+		agente = testUtils.createHierarchy();
 	}
 
 	@Before
@@ -55,8 +44,8 @@ public class MonitoraServerServiceTest {
 
 	@Test
 	public void testPing() throws BusinessException {
-		Ack ack = service.ping(TEST);
-
+		Ack ack = service.ping(AGENTE_ID_INVALID);
+		// TODO check agent exists
 		assertNotNull(ack);
 		assertTrue(now.compareTo(ack.getUpdate()) <= 0);
 	}
@@ -66,10 +55,15 @@ public class MonitoraServerServiceTest {
 		List<Agente> agentes = service.getAgentes();
 
 		assertNotNull(agentes);
+		assertTrue("Should be at least one Agente", !agentes.isEmpty());
+		for (Agente agente : agentes) {
+			testUtils.testHierarchy(agente);
+		}
 	}
 
 	@Test
 	public void testGetAgente() throws BusinessException {
-		new TestUtils().testHierarchy(null);
+		assertNotNull(agente);
+		testUtils.testHierarchy(agente);
 	}
 }

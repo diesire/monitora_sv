@@ -1,15 +1,13 @@
 package es.uniovi.miw.monitora.server.service;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
-import java.sql.Date;
 import java.util.Calendar;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.ws.rs.ProcessingException;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.GenericType;
@@ -25,19 +23,7 @@ import org.slf4j.LoggerFactory;
 
 import es.uniovi.miw.monitora.core.api.Ack;
 import es.uniovi.miw.monitora.server.model.Agente;
-import es.uniovi.miw.monitora.server.model.Cliente;
-import es.uniovi.miw.monitora.server.model.Consulta;
-import es.uniovi.miw.monitora.server.model.Destino;
-import es.uniovi.miw.monitora.server.model.InfPlanDest;
-import es.uniovi.miw.monitora.server.model.Informe;
-import es.uniovi.miw.monitora.server.model.InformeConsulta;
-import es.uniovi.miw.monitora.server.model.InformeTipoDestino;
-import es.uniovi.miw.monitora.server.model.LineaCron;
-import es.uniovi.miw.monitora.server.model.Planificacion;
-import es.uniovi.miw.monitora.server.model.Snapshot;
-import es.uniovi.miw.monitora.server.model.TipoDestino;
 import es.uniovi.miw.monitora.server.model.exceptions.BusinessException;
-import es.uniovi.miw.monitora.server.persistence.util.Jpa;
 import es.uniovi.miw.monitora.server.ui.util.TestUtils;
 
 /**
