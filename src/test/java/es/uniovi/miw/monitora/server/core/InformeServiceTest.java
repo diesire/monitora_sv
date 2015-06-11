@@ -15,7 +15,7 @@ import es.uniovi.miw.monitora.server.model.Informe;
 import es.uniovi.miw.monitora.server.model.exceptions.BusinessException;
 import es.uniovi.miw.monitora.server.persistence.util.PersistenceService;
 
-import static es.uniovi.miw.monitora.server.ui.util.Utils.*;
+import static es.uniovi.miw.monitora.server.ui.util.TestUtils.*;
 
 public class InformeServiceTest {
 

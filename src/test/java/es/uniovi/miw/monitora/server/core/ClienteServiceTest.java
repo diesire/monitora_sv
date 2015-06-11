@@ -2,7 +2,7 @@
 package es.uniovi.miw.monitora.server.core;
 
 import static org.junit.Assert.*;
-import static es.uniovi.miw.monitora.server.ui.util.Utils.*;
+import static es.uniovi.miw.monitora.server.ui.util.TestUtils.*;
 
 import org.junit.AfterClass;
 import org.junit.Before;

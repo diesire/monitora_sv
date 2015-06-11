@@ -1,9 +1,9 @@
 package es.uniovi.miw.monitora.server.core;
 
-import static es.uniovi.miw.monitora.server.ui.util.Utils.DESC_C;
-import static es.uniovi.miw.monitora.server.ui.util.Utils.INFORME1;
-import static es.uniovi.miw.monitora.server.ui.util.Utils.NOW;
-import static es.uniovi.miw.monitora.server.ui.util.Utils.TIPO_DESTINO1;
+import static es.uniovi.miw.monitora.server.ui.util.TestUtils.DESC_C;
+import static es.uniovi.miw.monitora.server.ui.util.TestUtils.INFORME1;
+import static es.uniovi.miw.monitora.server.ui.util.TestUtils.NOW;
+import static es.uniovi.miw.monitora.server.ui.util.TestUtils.TIPO_DESTINO1;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
