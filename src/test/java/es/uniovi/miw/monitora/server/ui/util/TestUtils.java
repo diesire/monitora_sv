@@ -149,7 +149,7 @@ public class TestUtils {
 		return agente;
 	}
 
-	private InformeTipoDestino createInformeTipoDestino(Informe info,
+	public InformeTipoDestino createInformeTipoDestino(Informe info,
 			TipoDestino tDes) throws BusinessException {
 
 		InformeTipoDestinoService infoTDesSrv = ServicesFactory
@@ -166,7 +166,7 @@ public class TestUtils {
 
 	}
 
-	private void testLink(Informe info, TipoDestino tDes,
+	public void testLink(Informe info, TipoDestino tDes,
 			InformeTipoDestino infoTDes) {
 		assertTrue(new HashSet<InformeTipoDestino>(
 				info.getInformeTipoDestinos()).contains(infoTDes));
@@ -176,7 +176,7 @@ public class TestUtils {
 		assertEquals(tDes, infoTDes.getTipoDestino());
 	}
 
-	private InformeConsulta createInformeConsulta(Informe info, Consulta con)
+	public InformeConsulta createInformeConsulta(Informe info, Consulta con)
 			throws BusinessException {
 		InformeConsultaService infoConSrv = ServicesFactory
 				.getInformeConsultaService();
@@ -190,7 +190,7 @@ public class TestUtils {
 		return infoCon;
 	}
 
-	private void testLink(Informe info, Consulta con, InformeConsulta infoCon) {
+	public void testLink(Informe info, Consulta con, InformeConsulta infoCon) {
 		assertEquals(info, infoCon.getInforme());
 		assertTrue(new HashSet<InformeConsulta>(info.getInformeConsultas())
 				.contains(infoCon));
@@ -199,7 +199,7 @@ public class TestUtils {
 				.contains(infoCon));
 	}
 
-	private Consulta createConsulta(TipoDestino tDes) throws BusinessException {
+	public Consulta createConsulta(TipoDestino tDes) throws BusinessException {
 		ConsultaService conSrv = ServicesFactory.getConsultaService();
 
 		Consulta con = conSrv.createConsulta(TIPO_B, DESC_L, DESC_L, NOW);
@@ -217,13 +217,13 @@ public class TestUtils {
 		return con;
 	}
 
-	private void testLink(Consulta con, TipoDestino tDes) {
+	public void testLink(Consulta con, TipoDestino tDes) {
 		assertTrue(new HashSet<TipoDestino>(con.getTipoDestinos())
 				.contains(tDes));
 		assertTrue(new HashSet<Consulta>(tDes.getConsultas()).contains(con));
 	}
 
-	private Snapshot createSnapshot(Destino des, Informe info)
+	public Snapshot createSnapshot(Destino des, Informe info)
 			throws BusinessException {
 		SnapshotService snapSrv = ServicesFactory.getSnapshotService();
 
@@ -236,14 +236,14 @@ public class TestUtils {
 		return snap;
 	}
 
-	private void testLink(Snapshot snap, Destino des, Informe info) {
+	public void testLink(Snapshot snap, Destino des, Informe info) {
 		assertEquals(des, snap.getDestino());
 		assertTrue(new HashSet<Snapshot>(des.getSnapshots()).contains(snap));
 		assertEquals(info, snap.getInforme());
 		assertTrue(new HashSet<Snapshot>(info.getSnapshots()).contains(snap));
 	}
 
-	private InfPlanDest createInfoPlanDestino(Destino des, Informe info,
+	public InfPlanDest createInfoPlanDestino(Destino des, Informe info,
 			Planificacion plan) throws BusinessException {
 		InformePlanDestinoService infoPlanDesSrv = ServicesFactory
 				.getInfPlanDestService();
@@ -257,7 +257,7 @@ public class TestUtils {
 		return infoPlanDes;
 	}
 
-	private void testLink(InfPlanDest infoPlanDes, Destino des, Informe info,
+	public void testLink(InfPlanDest infoPlanDes, Destino des, Informe info,
 			Planificacion plan) {
 		assertEquals(info, infoPlanDes.getInforme());
 		assertTrue(new HashSet<InfPlanDest>(info.getInfPlanDests())
@@ -270,7 +270,7 @@ public class TestUtils {
 				.contains(infoPlanDes));
 	}
 
-	private Planificacion createPlanificación() throws BusinessException {
+	public Planificacion createPlanificación() throws BusinessException {
 		PlanificacionService planSrv = ServicesFactory
 				.getPlanificacionService();
 
@@ -283,7 +283,7 @@ public class TestUtils {
 		return plan;
 	}
 
-	private Informe createInforme() throws BusinessException {
+	public Informe createInforme() throws BusinessException {
 		InformeService infoSrv = ServicesFactory.getInformeService();
 
 		Informe info = infoSrv.createInforme(NOMBRE, DESC_C, NOW);
@@ -299,7 +299,7 @@ public class TestUtils {
 		return info;
 	}
 
-	private TipoDestino createTipoDestino() throws BusinessException {
+	public TipoDestino createTipoDestino() throws BusinessException {
 		TipoDestinoService tDEsSrv = ServicesFactory.getTipoDestinoService();
 
 		TipoDestino tDes = tDEsSrv.createTipoDestino(NOMBRE);
@@ -309,7 +309,7 @@ public class TestUtils {
 		return tDes;
 	}
 
-	private Cliente createCliente() throws BusinessException {
+	public Cliente createCliente() throws BusinessException {
 		ClienteService cliSrv = ServicesFactory.getClienteService();
 
 		Cliente cli = cliSrv.createCliente(CLIENTE1);
@@ -320,7 +320,7 @@ public class TestUtils {
 		return cli;
 	}
 
-	private Destino createDestino(Cliente cli) throws BusinessException {
+	public Destino createDestino(Cliente cli) throws BusinessException {
 		DestinoService desSrv = ServicesFactory.getDestinoService();
 
 		Destino des = desSrv.createDestino(cli);
@@ -333,12 +333,12 @@ public class TestUtils {
 		return des;
 	}
 
-	private void testLink(Cliente cli, Destino des) {
+	public void testLink(Cliente cli, Destino des) {
 		assertEquals(cli, des.getCliente());
 		assertTrue(new HashSet<Destino>(cli.getDestinos()).contains(des));
 	}
 
-	private Agente createAgente(Cliente cli, Destino des)
+	public Agente createAgente(Cliente cli, Destino des)
 			throws BusinessException {
 		AgenteService agSrv = ServicesFactory.getAgenteService();
 
@@ -357,12 +357,12 @@ public class TestUtils {
 		return ag;
 	}
 
-	private void testLink(Destino des, Agente ag) {
+	public void testLink(Destino des, Agente ag) {
 		assertTrue(new HashSet<Agente>(des.getAgentes()).contains(ag));
 		assertTrue(new HashSet<Destino>(ag.getDestinos()).contains(des));
 	}
 
-	private void testLink(Cliente cli, Agente ag) {
+	public void testLink(Cliente cli, Agente ag) {
 		assertEquals(cli, ag.getCliente());
 		assertTrue(new HashSet<Agente>(cli.getAgentes()).contains(ag));
 	}
