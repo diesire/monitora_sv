@@ -78,8 +78,8 @@ public class InformeConsulta implements Serializable {
 
 	protected void setConsulta(Consulta consulta) {
 		this.consulta = consulta;
+		consulta.getInformeConsultas().add(this);
 		getId().setIdConsulta(consulta.getConsId());
-		consulta.addInformeConsulta(this);
 	}
 
 	public Informe getInforme() {
@@ -88,8 +88,8 @@ public class InformeConsulta implements Serializable {
 
 	protected void setInforme(Informe informe) {
 		this.informe = informe;
+		informe.getInformeConsultas().add(this);
 		getId().setIdInforme(informe.getInfoId());
-		informe.addInformeConsulta(this);
 	}
 
 	@Override

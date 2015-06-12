@@ -49,7 +49,7 @@ public class Agente implements Serializable {
 
 	// bi-directional many-to-many association to Destino
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "AGENTE_DESTINO", joinColumns = { @JoinColumn(name = "ID_AGENTE") }, inverseJoinColumns = {
+	@JoinTable(name = "AGENTE_DESTINO", joinColumns = { @JoinColumn(name = "ID_AGENTE", referencedColumnName = "AGENTE_ID") }, inverseJoinColumns = {
 			@JoinColumn(name = "ID_CLIENTE", referencedColumnName = "ID_CLIENTE"),
 			@JoinColumn(name = "ID_DESTINO", referencedColumnName = "ID_DESTINO") })
 	private Set<Destino> destinos = new HashSet<Destino>();
@@ -93,20 +93,18 @@ public class Agente implements Serializable {
 		return this.destinos;
 	}
 
-	public void setDestinos(Set<Destino> destinos) {
+	protected void setDestinos(Set<Destino> destinos) {
 		this.destinos = destinos;
 	}
 
-	protected Destino addDestino(Destino destino) {
+	public void addDestino(Destino destino) {
+		destino.getAgentes().add(this);
 		destinos.add(destino);
-
-		return destino;
 	}
 
-	public Destino removeDestino(Destino destino) {
+	public void removeDestino(Destino destino) {
 		destinos.remove(destino);
-
-		return destino;
+		destino.getAgentes().remove(this);
 	}
 
 	@Override
@@ -142,15 +140,5 @@ public class Agente implements Serializable {
 				.append(", comentarios=").append(comentarios)
 				.append(", ipAgente=").append(ipAgente).append("]");
 		return builder.toString();
-	}
-
-	public void linkCliente(Cliente cli) {
-		setCliente(cli);
-		cli.addAgente(this);
-	}
-
-	public void linkDestino(Destino des) {
-		addDestino(des);
-		des.addAgente(this);
 	}
 }

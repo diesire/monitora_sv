@@ -69,7 +69,7 @@ public class LineaCron implements Serializable {
 		return this.planificacion;
 	}
 
-	public void setPlanificacion(Planificacion planificacion) {
+	protected void setPlanificacion(Planificacion planificacion) {
 		this.planificacion = planificacion;
 	}
 

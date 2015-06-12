@@ -61,6 +61,11 @@ public class InfPlanDest implements Serializable {
 
 	public InfPlanDest() {
 	}
+	
+	public InfPlanDest(Informe informe, Destino destino) {
+		setInforme(informe);
+		setDestino(destino);
+	}
 
 	public InfPlanDestPK getId() {
 		return this.id;
@@ -92,6 +97,7 @@ public class InfPlanDest implements Serializable {
 
 	protected void setDestino(Destino destino) {
 		this.destino = destino;
+		destino.getInfPlanDests().add(this);
 		getId().setIdDestino(destino.getId().getIdDestino());
 		getId().setIdCliente(destino.getId().getIdCliente());
 	}
@@ -102,6 +108,7 @@ public class InfPlanDest implements Serializable {
 
 	protected void setInforme(Informe informe) {
 		this.informe = informe;
+		informe.getInfPlanDests().add(this);
 		getId().setIdInforme(informe.getInfoId());
 	}
 
@@ -146,20 +153,5 @@ public class InfPlanDest implements Serializable {
 				.append(", fUltimaModificacion=").append(fUltimaModificacion)
 				.append("]");
 		return builder.toString();
-	}
-
-	public void linkDestino(Destino des) {
-		setDestino(des);
-		des.addInfPlanDest(this);
-	}
-
-	public void linkPlanificacion(Planificacion plan) {
-		setPlanificacion(plan);
-		plan.addInfPlanDest(this);
-	}
-
-	public void linkInforme(Informe info) {
-		setInforme(info);
-		info.addInfPlanDest(this);
 	}
 }

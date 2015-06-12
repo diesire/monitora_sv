@@ -76,17 +76,14 @@ public class TipoDestino implements Serializable {
 		this.consultas = consultas;
 	}
 
-	protected Consulta addConsulta(Consulta consulta) {
-		getConsultas().add(consulta);
-
-		consulta.addTipoDestino(this);
-		return consulta;
+	public void addConsulta(Consulta consulta) {
+		consulta.getTipoDestinos().add(this);
+		this.consultas.add(consulta);
 	}
 
-	public Consulta removeConsulta(Consulta consulta) {
-		getConsultas().remove(consulta);
-
-		return consulta;
+	public void removeConsulta(Consulta consulta) {
+		this.consultas.remove(consulta);
+		consulta.getTipoDestinos().remove(this);
 	}
 
 	public Set<InformeTipoDestino> getInformeTipoDestinos() {
@@ -96,21 +93,6 @@ public class TipoDestino implements Serializable {
 	protected void setInformeTipoDestinos(
 			Set<InformeTipoDestino> informeTipoDestinos) {
 		this.informeTipoDestinos = informeTipoDestinos;
-	}
-
-	protected InformeTipoDestino addInformeTipoDestino(
-			InformeTipoDestino informeTipoDestino) {
-		getInformeTipoDestinos().add(informeTipoDestino);
-
-		return informeTipoDestino;
-	}
-
-	public InformeTipoDestino removeInformeTipoDestino(
-			InformeTipoDestino informeTipoDestino) {
-		getInformeTipoDestinos().remove(informeTipoDestino);
-		informeTipoDestino.setTipoDestino(null);
-
-		return informeTipoDestino;
 	}
 
 	@Override

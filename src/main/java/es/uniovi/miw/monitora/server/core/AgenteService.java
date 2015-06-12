@@ -5,11 +5,12 @@ import java.util.Set;
 
 import es.uniovi.miw.monitora.server.model.Agente;
 import es.uniovi.miw.monitora.server.model.Cliente;
+import es.uniovi.miw.monitora.server.model.Destino;
 import es.uniovi.miw.monitora.server.model.exceptions.BusinessException;
 
 public interface AgenteService {
 	
-	Agente createAgente(Cliente cliente) throws BusinessException;
+	Agente createAgente(Destino des) throws BusinessException;
 	
 	void addAgente(Agente agente) throws BusinessException;
 

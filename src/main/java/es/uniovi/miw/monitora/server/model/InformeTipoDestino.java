@@ -74,8 +74,8 @@ public class InformeTipoDestino implements Serializable {
 
 	protected void setInforme(Informe informe) {
 		this.informe = informe;
+		informe.getInformeTipoDestinos().add(this);
 		id.setIdInforme(informe.getInfoId());
-		informe.addInformeTipoDestino(this);
 	}
 
 	public TipoDestino getTipoDestino() {
@@ -84,8 +84,8 @@ public class InformeTipoDestino implements Serializable {
 
 	protected void setTipoDestino(TipoDestino tipoDestino) {
 		this.tipoDestino = tipoDestino;
+		tipoDestino.getInformeTipoDestinos().add(this);
 		id.setIdTipoDestino(tipoDestino.getIdTipoDestino());
-		tipoDestino.addInformeTipoDestino(this);
 	}
 
 	@Override

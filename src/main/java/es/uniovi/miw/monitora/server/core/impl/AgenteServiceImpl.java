@@ -13,6 +13,7 @@ import es.uniovi.miw.monitora.server.core.impl.agente.FindAllAgentes;
 import es.uniovi.miw.monitora.server.core.impl.agente.UpdateAgente;
 import es.uniovi.miw.monitora.server.model.Agente;
 import es.uniovi.miw.monitora.server.model.Cliente;
+import es.uniovi.miw.monitora.server.model.Destino;
 import es.uniovi.miw.monitora.server.model.exceptions.BusinessException;
 
 public class AgenteServiceImpl implements AgenteService {
@@ -39,8 +40,8 @@ public class AgenteServiceImpl implements AgenteService {
 	}
 
 	@Override
-	public Agente createAgente(Cliente cliente) throws BusinessException {
-		return (Agente) executor.execute(new CreateAgente(cliente));
+	public Agente createAgente(Destino destino) throws BusinessException {
+		return (Agente) executor.execute(new CreateAgente(destino));
 	}
 
 	@SuppressWarnings("unchecked")

@@ -22,6 +22,7 @@ public class AddDestino implements Command {
 			//Autogenerate idDestino
 			//TODO delete sequence generator in SQL script
 			Integer idDestino = (Integer) Jpa.getManager().createNamedQuery("Destino.getNextDestinoId").getSingleResult();
+			idDestino = idDestino != null ? idDestino : 1;
 			assert idDestino != null;
 			
 			dest.getId().setIdDestino(idDestino);

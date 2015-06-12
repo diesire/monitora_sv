@@ -30,13 +30,8 @@ public class CreateInfPlanDest implements Command {
 
 	@Override
 	public Object execute() throws BusinessException {
-		InfPlanDest infoPlanDes = new InfPlanDest();
-
-		infoPlanDes.linkDestino(des);
-
-		infoPlanDes.linkPlanificacion(plan);
-
-		infoPlanDes.linkInforme(info);
+		InfPlanDest infoPlanDes = new InfPlanDest(info, des);
+		plan.addInfPlanDest(infoPlanDes);
 
 		infoPlanDes.setFUltimaModificacion(fModif);
 		infoPlanDes.setFUltimaAplicacion(fApli);

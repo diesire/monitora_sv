@@ -101,24 +101,11 @@ public class Informe implements Serializable {
 		this.informeConsultas = informeConsultas;
 	}
 
-	protected InformeConsulta addInformeConsulta(InformeConsulta informeConsulta) {
-		getInformeConsultas().add(informeConsulta);
-
-		return informeConsulta;
-	}
-
-	public InformeConsulta removeInformeConsulta(InformeConsulta informeConsulta) {
-		getInformeConsultas().remove(informeConsulta);
-		informeConsulta.setInforme(null);
-
-		return informeConsulta;
-	}
-
 	public Set<Informe> getContenidos() {
 		return this.contenidos;
 	}
 
-	public void setContenidos(Set<Informe> contenidos) {
+	protected void setContenidos(Set<Informe> contenidos) {
 		this.contenidos = contenidos;
 	}
 
@@ -126,22 +113,18 @@ public class Informe implements Serializable {
 		return this.contenedores;
 	}
 
-	public void setContenedores(Set<Informe> contenedores) {
+	protected void setContenedores(Set<Informe> contenedores) {
 		this.contenedores = contenedores;
 	}
 
-	public Informe addContenido(Informe informe) {
-		getContenidos().add(informe);
+	public void addContenido(Informe informe) {
 		informe.getContenedores().add(this);
-
-		return informe;
+		contenidos.add(informe);
 	}
 
-	public Informe removeContenido(Informe informe) {
+	public void removeContenido(Informe informe) {
+		contenidos.remove(informe);
 		informe.getContenedores().remove(this);
-		getContenidos().remove(informe);
-
-		return informe;
 	}
 
 	public Set<InformeTipoDestino> getInformeTipoDestinos() {
@@ -153,41 +136,12 @@ public class Informe implements Serializable {
 		this.informeTipoDestinos = informeTipoDestinos;
 	}
 
-	protected InformeTipoDestino addInformeTipoDestino(
-			InformeTipoDestino informeTipoDestino) {
-		getInformeTipoDestinos().add(informeTipoDestino);
-
-		return informeTipoDestino;
-	}
-
-	public InformeTipoDestino removeInformeTipoDestino(
-			InformeTipoDestino informeTipoDestino) {
-		getInformeTipoDestinos().remove(informeTipoDestino);
-		informeTipoDestino.setInforme(null);
-
-		return informeTipoDestino;
-	}
-
 	public Set<InfPlanDest> getInfPlanDests() {
 		return this.infPlanDests;
 	}
 
 	protected void setInfPlanDests(Set<InfPlanDest> infPlanDests) {
 		this.infPlanDests = infPlanDests;
-	}
-
-	protected InfPlanDest addInfPlanDest(InfPlanDest infPlanDest) {
-		getInfPlanDests().add(infPlanDest);
-		infPlanDest.setInforme(this);
-
-		return infPlanDest;
-	}
-
-	public InfPlanDest removeInfPlanDest(InfPlanDest infPlanDest) {
-		getInfPlanDests().remove(infPlanDest);
-		infPlanDest.setInforme(null);
-
-		return infPlanDest;
 	}
 
 	public Set<Snapshot> getSnapshots() {
@@ -198,18 +152,14 @@ public class Informe implements Serializable {
 		this.snapshots = snapshots;
 	}
 
-	protected Snapshot addSnapshot(Snapshot snapshot) {
-		getSnapshots().add(snapshot);
+	public void addSnapshot(Snapshot snapshot) {
 		snapshot.setInforme(this);
-
-		return snapshot;
+		this.snapshots.add(snapshot);
 	}
 
-	public Snapshot removeSnapshot(Snapshot snapshot) {
-		getSnapshots().remove(snapshot);
+	public void removeSnapshot(Snapshot snapshot) {
+		this.snapshots.remove(snapshot);
 		snapshot.setInforme(null);
-
-		return snapshot;
 	}
 
 	@Override
