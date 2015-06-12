@@ -25,10 +25,8 @@ public class CreateSnapshot implements Command {
 	@Override
 	public Object execute() throws BusinessException {
 		Snapshot snap = new Snapshot();
-
-		snap.linkDestino(des);
-		snap.linkInforme(info);
-
+		des.addSnapshot(snap);
+		info.addSnapshot(snap);
 		snap.setFecha(fecha);
 		return snap;
 	}

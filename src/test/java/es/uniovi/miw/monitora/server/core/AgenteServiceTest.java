@@ -56,7 +56,7 @@ public class AgenteServiceTest {
 
 	@Test
 	public void testCreateAgente() throws BusinessException {
-		Agente ag = service.createAgente(new Cliente());
+		Agente ag = service.createAgente(new Destino());
 		assertNotNull(ag);
 		assertNull(ag.getAgenteId());
 
@@ -88,7 +88,7 @@ public class AgenteServiceTest {
 	 */
 	@Test
 	public void testAddAgente() throws BusinessException {
-		createPersistentAgente(cli);
+		createPersistentAgente(des);
 	}
 
 	@Test(expected = BusinessException.class)
@@ -98,7 +98,7 @@ public class AgenteServiceTest {
 
 	@Test
 	public void testDeleteAgente() throws BusinessException {
-		Agente ag = createPersistentAgente(cli);
+		Agente ag = createPersistentAgente(des);
 
 		service.deleteAgente(ag.getAgenteId());
 	}
@@ -110,7 +110,7 @@ public class AgenteServiceTest {
 
 	@Test
 	public void testFindAgente() throws BusinessException {
-		Agente ag = createPersistentAgente(cli);
+		Agente ag = createPersistentAgente(des);
 
 		Agente found = service.findAgenteById(ag.getAgenteId());
 		assertNotNull(found);
@@ -119,7 +119,7 @@ public class AgenteServiceTest {
 
 	@Test
 	public void testUpdateAgente() throws BusinessException {
-		Agente ag = createPersistentAgente(cli);
+		Agente ag = createPersistentAgente(des);
 		Agente found = service.findAgenteById(ag.getAgenteId());
 		assertNotNull(found);
 
@@ -132,11 +132,11 @@ public class AgenteServiceTest {
 		assertEquals("192.168.0.2", found2.getIpAgente());
 	}
 
-	private Agente createPersistentAgente(Cliente cli) throws BusinessException {
-		Agente ag = service.createAgente(cli);
+	private Agente createPersistentAgente(Destino des) throws BusinessException {
+		Agente ag = service.createAgente(des);
 		ag.setComentarios("Comentario");
 		ag.setIpAgente("127.0.0.1");
-		ag.linkDestino(des);
+		ag.addDestino(des);
 
 		service.addAgente(ag);
 		// FIXME compare against persisted instance
@@ -144,15 +144,14 @@ public class AgenteServiceTest {
 		assertNotNull(ag.getAgenteId());
 		assertEquals("Comentario", ag.getComentarios());
 		assertEquals("127.0.0.1", ag.getIpAgente());
-		
-		//agente <-> cliente
+
+		// agente <-> cliente
 		assertEquals(cli, ag.getCliente());
 		// PersistentSet.contains fails
 		assertTrue(new HashSet<Agente>(ag.getCliente().getAgentes())
 				.contains(ag));
-		
-		
-		//agente <-> destino
+
+		// agente <-> destino
 		assertTrue(new HashSet<Destino>(ag.getDestinos()).contains(des));
 		assertTrue(new HashSet<Agente>(des.getAgentes()).contains(ag));
 

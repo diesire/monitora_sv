@@ -79,18 +79,6 @@ public class Destino implements Serializable {
 		this.agentes = agentes;
 	}
 
-	protected Agente addAgente(Agente agente) {
-		agentes.add(agente);
-
-		return agente;
-	}
-
-	public Agente removeAgente(Agente agente) {
-		agentes.remove(agente);
-
-		return agente;
-	}
-
 	public Cliente getCliente() {
 		return this.cliente;
 	}
@@ -108,20 +96,6 @@ public class Destino implements Serializable {
 		this.infPlanDests = infPlanDests;
 	}
 
-	protected InfPlanDest addInfPlanDest(InfPlanDest infPlanDest) {
-		getInfPlanDests().add(infPlanDest);
-		infPlanDest.setDestino(this);
-
-		return infPlanDest;
-	}
-
-	public InfPlanDest removeInfPlanDest(InfPlanDest infPlanDest) {
-		getInfPlanDests().remove(infPlanDest);
-		infPlanDest.setDestino(null);
-
-		return infPlanDest;
-	}
-
 	public Set<Snapshot> getSnapshots() {
 		return this.snapshots;
 	}
@@ -130,18 +104,14 @@ public class Destino implements Serializable {
 		this.snapshots = snapshots;
 	}
 
-	protected Snapshot addSnapshot(Snapshot snapshot) {
-		getSnapshots().add(snapshot);
+	public void addSnapshot(Snapshot snapshot) {
 		snapshot.setDestino(this);
-
-		return snapshot;
+		snapshots.add(snapshot);
 	}
 
-	public Snapshot removeSnapshot(Snapshot snapshot) {
-		getSnapshots().remove(snapshot);
+	public void removeSnapshot(Snapshot snapshot) {
+		snapshots.remove(snapshot);
 		snapshot.setDestino(null);
-
-		return snapshot;
 	}
 
 	@Override
@@ -175,10 +145,5 @@ public class Destino implements Serializable {
 		builder.append("Destino [id=").append(id).append(", idTipoDestino=")
 				.append(idTipoDestino).append("]");
 		return builder.toString();
-	}
-
-	public void linkCliente(Cliente cli) {
-		setCliente(cli);
-		cli.addDestino(this);
 	}
 }

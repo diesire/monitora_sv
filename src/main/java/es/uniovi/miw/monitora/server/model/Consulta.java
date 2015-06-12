@@ -149,18 +149,6 @@ public class Consulta implements Serializable {
 		this.tipoDestinos = tipoDestinos;
 	}
 
-	protected TipoDestino addTipoDestino(TipoDestino tipoDestino) {
-		getTipoDestinos().add(tipoDestino);
-
-		return tipoDestino;
-	}
-
-	public TipoDestino removeTipoDestino(TipoDestino tipoDestino) {
-		getTipoDestinos().remove(tipoDestino);
-
-		return tipoDestino;
-	}
-
 	public Set<InformeConsulta> getInformeConsultas() {
 		return this.informeConsultas;
 	}
@@ -169,39 +157,22 @@ public class Consulta implements Serializable {
 		this.informeConsultas = informeConsultas;
 	}
 
-	protected InformeConsulta addInformeConsulta(InformeConsulta informeConsulta) {
-		getInformeConsultas().add(informeConsulta);
-
-		return informeConsulta;
-	}
-
-	public InformeConsulta removeInformeConsulta(InformeConsulta informeConsulta) {
-		getInformeConsultas().remove(informeConsulta);
-		informeConsulta.setConsulta(null);
-
-		return informeConsulta;
-	}
-
 	public Set<Tcon1> getTcon1s() {
 		return this.tcon1s;
 	}
 
-	public void setTcon1s(Set<Tcon1> tcon1s) {
+	protected void setTcon1s(Set<Tcon1> tcon1s) {
 		this.tcon1s = tcon1s;
 	}
 
-	public Tcon1 addTcon1(Tcon1 tcon1) {
-		getTcon1s().add(tcon1);
+	public void addTcon1(Tcon1 tcon1) {
 		tcon1.setConsulta(this);
-
-		return tcon1;
+		this.tcon1s.add(tcon1);
 	}
 
-	public Tcon1 removeTcon1(Tcon1 tcon1) {
-		getTcon1s().remove(tcon1);
+	public void removeTcon1(Tcon1 tcon1) {
+		this.tcon1s.remove(tcon1);
 		tcon1.setConsulta(null);
-
-		return tcon1;
 	}
 
 	@Override
@@ -242,10 +213,4 @@ public class Consulta implements Serializable {
 				.append(tabla).append(", tipo=").append(tipo).append("]");
 		return builder.toString();
 	}
-
-	public void linkTipoDestino(TipoDestino tDes) {
-		addTipoDestino(tDes);
-		tDes.addConsulta(this);
-	}
-
 }

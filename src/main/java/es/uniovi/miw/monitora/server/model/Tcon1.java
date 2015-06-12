@@ -63,7 +63,7 @@ public class Tcon1 implements Serializable {
 		return this.consulta;
 	}
 
-	public void setConsulta(Consulta consulta) {
+	protected void setConsulta(Consulta consulta) {
 		this.consulta = consulta;
 	}
 
@@ -71,7 +71,7 @@ public class Tcon1 implements Serializable {
 		return this.snapshot;
 	}
 
-	public void setSnapshot(Snapshot snapshot) {
+	protected void setSnapshot(Snapshot snapshot) {
 		this.snapshot = snapshot;
 	}
 

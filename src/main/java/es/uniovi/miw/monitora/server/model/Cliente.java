@@ -76,18 +76,14 @@ public class Cliente implements Serializable {
 		this.agentes = agentes;
 	}
 
-	protected Agente addAgente(Agente agente) {
+	public void addAgente(Agente agente) {
 		agente.setCliente(this);
-		getAgentes().add(agente);
-
-		return agente;
+		agentes.add(agente);
 	}
 
-	public Agente removeAgente(Agente agente) {
-		getAgentes().remove(agente);
+	public void removeAgente(Agente agente) {
+		agentes.remove(agente);
 		agente.setCliente(null);
-
-		return agente;
 	}
 
 	public Set<Destino> getDestinos() {
@@ -98,18 +94,14 @@ public class Cliente implements Serializable {
 		this.destinos = destinos;
 	}
 
-	protected Destino addDestino(Destino destino) {
-		getDestinos().add(destino);
+	public void addDestino(Destino destino) {
 		destino.setCliente(this);
-
-		return destino;
+		destinos.add(destino);
 	}
 
-	public Destino removeDestino(Destino destino) {
+	public void removeDestino(Destino destino) {
+		destinos.remove(destino);
 		destino.setCliente(null);
-		getDestinos().remove(destino);
-
-		return destino;
 	}
 
 	@Override

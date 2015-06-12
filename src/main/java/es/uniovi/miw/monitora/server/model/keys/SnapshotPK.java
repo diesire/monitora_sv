@@ -28,9 +28,6 @@ public class SnapshotPK implements Serializable {
 	@Column(name = "ID_DESTINO", insertable = false, updatable = false)
 	private Integer idDestino;
 
-//	@Column(name = "ID_INFORME", insertable = false, updatable = false)
-//	private Integer idInforme;
-
 	public SnapshotPK() {
 	}
 

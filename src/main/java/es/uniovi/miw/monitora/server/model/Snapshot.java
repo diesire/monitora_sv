@@ -88,7 +88,6 @@ public class Snapshot implements Serializable {
 
 	protected void setInforme(Informe informe) {
 		this.informe = informe;
-		// getId().setIdInforme(informe.getInfoId());
 	}
 
 	public Set<Tcon1> getTcon1s() {
@@ -99,18 +98,14 @@ public class Snapshot implements Serializable {
 		this.tcon1s = tcon1s;
 	}
 
-	public Tcon1 addTcon1(Tcon1 tcon1) {
-		getTcon1s().add(tcon1);
+	public void addTcon1(Tcon1 tcon1) {
 		tcon1.setSnapshot(this);
-
-		return tcon1;
+		tcon1s.add(tcon1);
 	}
 
-	public Tcon1 removeTcon1(Tcon1 tcon1) {
-		getTcon1s().remove(tcon1);
+	public void removeTcon1(Tcon1 tcon1) {
+		tcon1s.remove(tcon1);
 		tcon1.setSnapshot(null);
-
-		return tcon1;
 	}
 
 	@Override
@@ -144,16 +139,6 @@ public class Snapshot implements Serializable {
 		builder.append("Snapshot [id=").append(id).append(", fecha=")
 				.append(fecha).append("]");
 		return builder.toString();
-	}
-
-	public void linkDestino(Destino des) {
-		setDestino(des);
-		des.addSnapshot(this);
-	}
-
-	public void linkInforme(Informe info) {
-		setInforme(info);
-		info.addSnapshot(this);
 	}
 
 }

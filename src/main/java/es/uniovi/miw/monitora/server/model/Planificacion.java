@@ -77,15 +77,13 @@ public class Planificacion implements Serializable {
 		this.infPlanDests = infPlanDests;
 	}
 
-	protected InfPlanDest addInfPlanDest(InfPlanDest infPlanDest) {
-		getInfPlanDests().add(infPlanDest);
+	public void addInfPlanDest(InfPlanDest infPlanDest) {
 		infPlanDest.setPlanificacion(this);
-
-		return infPlanDest;
+		infPlanDests.add(infPlanDest);
 	}
 
 	public InfPlanDest removeInfPlanDest(InfPlanDest infPlanDest) {
-		getInfPlanDests().remove(infPlanDest);
+		infPlanDests.remove(infPlanDest);
 		infPlanDest.setPlanificacion(null);
 
 		return infPlanDest;
@@ -95,22 +93,18 @@ public class Planificacion implements Serializable {
 		return this.lineaCrons;
 	}
 
-	public void setLineaCrons(Set<LineaCron> lineaCrons) {
+	protected void setLineaCrons(Set<LineaCron> lineaCrons) {
 		this.lineaCrons = lineaCrons;
 	}
 
-	public LineaCron addLineaCron(LineaCron lineaCron) {
-		getLineaCrons().add(lineaCron);
+	public void addLineaCron(LineaCron lineaCron) {
 		lineaCron.setPlanificacion(this);
-
-		return lineaCron;
+		lineaCrons.add(lineaCron);
 	}
 
-	public LineaCron removeLineaCron(LineaCron lineaCron) {
-		getLineaCrons().remove(lineaCron);
+	public void removeLineaCron(LineaCron lineaCron) {
+		lineaCrons.remove(lineaCron);
 		lineaCron.setPlanificacion(null);
-
-		return lineaCron;
 	}
 
 	@Override

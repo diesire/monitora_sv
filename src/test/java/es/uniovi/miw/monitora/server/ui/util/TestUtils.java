@@ -136,7 +136,7 @@ public class TestUtils {
 	public Agente createHierarchy() throws BusinessException {
 		Cliente cli = createCliente();
 		Destino des = createDestino(cli);
-		Agente agente = createAgente(cli, des);
+		Agente agente = createAgente(des);
 		TipoDestino tDes = createTipoDestino();
 		Informe info = createInforme();
 		Planificacion plan = createPlanificación();
@@ -207,11 +207,10 @@ public class TestUtils {
 		con.setSqlCreate("Create");
 		con.setSqlSelect("Select");
 		con.setTabla("Tabla");
-		// con.setTcon1s(tcon1s);
+		
 		conSrv.addConsulta(con);
 
-		// con.addTcon1(tcon1); //FIXME delete entity
-		con.linkTipoDestino(tDes);
+		tDes.addConsulta(con);
 		testLink(con, tDes);
 
 		return con;
@@ -325,10 +324,9 @@ public class TestUtils {
 
 		Destino des = desSrv.createDestino(cli);
 		des.setIdTipoDestino(TIPO_DESTINO_0); // FIXME TipoDestino
-
-		des.linkCliente(cli);
 		testLink(cli, des);
 		desSrv.addDestino(des);
+		testLink(cli, des);
 
 		return des;
 	}
@@ -338,21 +336,21 @@ public class TestUtils {
 		assertTrue(new HashSet<Destino>(cli.getDestinos()).contains(des));
 	}
 
-	public Agente createAgente(Cliente cli, Destino des)
+	public Agente createAgente(Destino des)
 			throws BusinessException {
 		AgenteService agSrv = ServicesFactory.getAgenteService();
 
-		Agente ag = agSrv.createAgente(cli);
+		Agente ag = agSrv.createAgente(des);
+		testLink(des.getCliente(), ag);
+
 		ag.setComentarios(COMENTARIOS);
 		ag.setIpAgente(IP_LOCAL);
 
-		ag.linkCliente(cli);
-		testLink(cli, ag);
-
-		ag.linkDestino(des);
 		testLink(des, ag);
 
 		agSrv.addAgente(ag);
+		testLink(des.getCliente(), ag);
+		testLink(des, ag);
 
 		return ag;
 	}

@@ -16,7 +16,7 @@ public class CreateDestino implements Command {
 	@Override
 	public Object execute() throws BusinessException {
 		Destino dest = new Destino();
-		dest.linkCliente(cli);
+		cli.addDestino(dest);
 		return dest;
 	}
 
