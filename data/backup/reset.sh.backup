@@ -1,0 +1,11 @@
+#!/bin/sh
+rm -R serverdb.*
+rm startup.sh
+rm reset.sh.backup
+
+rm server.properties
+
+cp -a backup/. ./
+
+echo 'to rename reset.sh.backup to reset.sh'
+echo 'mv reset.sh.backup reset.sh'

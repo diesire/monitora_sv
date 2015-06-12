@@ -23,9 +23,33 @@ Command & Control component for an Oracle DB monitorization tool.
 
 ## TODO
 
-  *  Detailed description
-  *  License clarification
+*  Detailed description
+*  License clarification
 
+
+## Log
+
+### [02/05/2015]
+
+* external DB start scripts not necessary anymore
+
+
+### [19/04/2015]
+
+* core test running OK
+
+
+### [02/04/2015] 
+ 
+* PersistenceTests & AgenteServiceTest fails
+* Model Layer has empty constructors and get/set/add/delete methods. Service Layer has createXXX with params to fill mandatory fields and link with existent entities
+* Maybe its necessary create additional cascade creation methods_ 
+
+
+### [14/03/2015]
+
+* I don't remember current status. DB successfully opens, but integrity restrictions fail.
+* ClienteServiceTest.update fails when assigning logo field (BLOB in BD, String in class)
 
 
 ---
