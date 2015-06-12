@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -43,12 +44,12 @@ public class Agente implements Serializable {
 	private String ipAgente;
 
 	// bi-directional many-to-one association to Cliente
-	@ManyToOne
+	@ManyToOne(cascade={CascadeType.MERGE})
 	@JoinColumn(name = "ID_CLIENTE")
 	private Cliente cliente;
 
 	// bi-directional many-to-many association to Destino
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(cascade={CascadeType.MERGE}, fetch = FetchType.EAGER)
 	@JoinTable(name = "AGENTE_DESTINO", joinColumns = { @JoinColumn(name = "ID_AGENTE", referencedColumnName = "AGENTE_ID") }, inverseJoinColumns = {
 			@JoinColumn(name = "ID_CLIENTE", referencedColumnName = "ID_CLIENTE"),
 			@JoinColumn(name = "ID_DESTINO", referencedColumnName = "ID_DESTINO") })

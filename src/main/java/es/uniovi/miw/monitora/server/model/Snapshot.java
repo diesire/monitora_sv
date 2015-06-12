@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -38,14 +39,14 @@ public class Snapshot implements Serializable {
 	private Date fecha;
 
 	// bi-directional many-to-one association to Destino
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(cascade={CascadeType.MERGE}, fetch = FetchType.EAGER)
 	@JoinColumns({
 			@JoinColumn(name = "ID_CLIENTE", referencedColumnName = "ID_CLIENTE", insertable = false, updatable = false),
 			@JoinColumn(name = "ID_DESTINO", referencedColumnName = "ID_DESTINO", insertable = false, updatable = false) })
 	private Destino destino;
 
 	// bi-directional many-to-one association to Informe
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(cascade={CascadeType.MERGE}, fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_INFORME")
 	private Informe informe;
 

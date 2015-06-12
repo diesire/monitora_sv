@@ -34,7 +34,7 @@ public class LineaCron implements Serializable {
 	private Date fUltimaModificacion;
 
 	// bi-directional many-to-one association to Planificacion
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(cascade={CascadeType.MERGE}, fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_PLAN")
 	private Planificacion planificacion;
 

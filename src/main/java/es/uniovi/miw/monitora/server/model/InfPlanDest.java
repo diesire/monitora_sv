@@ -3,6 +3,7 @@ package es.uniovi.miw.monitora.server.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -43,19 +44,19 @@ public class InfPlanDest implements Serializable {
 	private Date fUltimaModificacion;
 
 	// bi-directional many-to-one association to Destino
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(cascade={CascadeType.MERGE}, fetch = FetchType.EAGER)
 	@JoinColumns({
 			@JoinColumn(name = "ID_CLIENTE", referencedColumnName = "ID_CLIENTE", insertable = false, updatable = false),
 			@JoinColumn(name = "ID_DESTINO", referencedColumnName = "ID_DESTINO", insertable = false, updatable = false) })
 	private Destino destino;
 
 	// bi-directional many-to-one association to Informe
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(cascade={CascadeType.MERGE}, fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_INFORME", insertable = false, updatable = false)
 	private Informe informe;
 
 	// bi-directional many-to-one association to Planificacion
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(cascade={CascadeType.MERGE}, fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_PLAN")
 	private Planificacion planificacion;
 

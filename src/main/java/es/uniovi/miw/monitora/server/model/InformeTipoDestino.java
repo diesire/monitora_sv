@@ -2,6 +2,7 @@ package es.uniovi.miw.monitora.server.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -34,12 +35,12 @@ public class InformeTipoDestino implements Serializable {
 	private String porDefecto;
 
 	// bi-directional many-to-one association to Informe
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(cascade={CascadeType.MERGE}, fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_INFORME", insertable = false, updatable = false)
 	private Informe informe;
 
 	// bi-directional many-to-one association to TipoDestino
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(cascade={CascadeType.MERGE}, fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_TIPO_DESTINO", insertable = false, updatable = false)
 	private TipoDestino tipoDestino;
 

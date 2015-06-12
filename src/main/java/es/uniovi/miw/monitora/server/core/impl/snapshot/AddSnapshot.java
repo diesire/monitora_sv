@@ -20,13 +20,14 @@ public class AddSnapshot implements Command {
 		try {
 
 			// Autogenerate idSnapshot
-			Integer idSnapshot = (Integer) Jpa.getManager()
-					.createNamedQuery("Snapshot.getNextSnapshotId")
-					.getSingleResult();
-			idSnapshot = idSnapshot != null ? idSnapshot : 1;
-			assert idSnapshot != null;
+			if (snap.getId().getIdSnapshot() == null) {
+				Integer idSnapshot = (Integer) Jpa.getManager()
+						.createNamedQuery("Snapshot.getNextSnapshotId")
+						.getSingleResult();
+				idSnapshot = idSnapshot != null ? idSnapshot : 1;
 
-			snap.getId().setIdSnapshot(idSnapshot);
+				snap.getId().setIdSnapshot(idSnapshot);
+			}
 			Jpa.getManager().persist(snap);
 		} catch (Exception e) {
 			throw new BusinessException(e);

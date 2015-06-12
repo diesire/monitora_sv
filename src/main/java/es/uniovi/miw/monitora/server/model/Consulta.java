@@ -54,12 +54,12 @@ public class Consulta implements Serializable {
 	private String tipo;
 
 	// bi-directional many-to-many association to TipoDestino
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(cascade = { CascadeType.MERGE }, fetch = FetchType.EAGER)
 	@JoinTable(name = "CONSULTA_TIPO_DESTINO", joinColumns = { @JoinColumn(name = "ID_CONSULTA") }, inverseJoinColumns = { @JoinColumn(name = "ID_TIPO_DESTINO") })
 	private Set<TipoDestino> tipoDestinos = new HashSet<TipoDestino>();
 
 	// bi-directional many-to-one association to InformeConsulta
-	@OneToMany(mappedBy = "consulta", fetch = FetchType.EAGER)
+	@OneToMany(cascade = { CascadeType.MERGE }, mappedBy = "consulta", fetch = FetchType.EAGER)
 	private Set<InformeConsulta> informeConsultas = new HashSet<InformeConsulta>();
 
 	// bi-directional many-to-one association to Tcon1

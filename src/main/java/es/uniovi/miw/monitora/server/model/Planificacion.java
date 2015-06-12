@@ -35,11 +35,11 @@ public class Planificacion implements Serializable {
 	private Date fUltimaModificacion;
 
 	// bi-directional many-to-one association to InfPlanDest
-	@OneToMany(mappedBy = "planificacion", orphanRemoval = true, fetch = FetchType.EAGER)
+	@OneToMany(cascade={CascadeType.MERGE}, mappedBy = "planificacion", orphanRemoval = true, fetch = FetchType.EAGER)
 	private Set<InfPlanDest> infPlanDests = new HashSet<InfPlanDest>();
 
 	// bi-directional many-to-one association to LineaCron
-	@OneToMany(mappedBy = "planificacion", orphanRemoval = true, fetch = FetchType.EAGER)
+	@OneToMany(cascade={CascadeType.MERGE}, mappedBy = "planificacion", orphanRemoval = true, fetch = FetchType.EAGER)
 	private Set<LineaCron> lineaCrons = new HashSet<LineaCron>();
 
 	public Planificacion() {

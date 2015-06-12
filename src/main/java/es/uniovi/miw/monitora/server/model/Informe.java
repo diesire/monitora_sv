@@ -37,28 +37,28 @@ public class Informe implements Serializable {
 	private String nombre;
 
 	// bi-directional many-to-one association to InformeConsulta
-	@OneToMany(mappedBy = "informe", fetch = FetchType.EAGER)
+	@OneToMany(cascade={CascadeType.MERGE}, mappedBy = "informe", fetch = FetchType.EAGER)
 	private Set<InformeConsulta> informeConsultas = new HashSet<InformeConsulta>();
 
 	// bi-directional many-to-many association to Informe
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(cascade={CascadeType.MERGE}, fetch = FetchType.EAGER)
 	@JoinTable(name = "INFORME_INFORME", joinColumns = { @JoinColumn(name = "ID_INFORME_CONTENIDO") }, inverseJoinColumns = { @JoinColumn(name = "ID_INFORME_CONTIENE") })
 	private Set<Informe> contenidos = new HashSet<Informe>();
 
 	// bi-directional many-to-many association to Informe
-	@ManyToMany(mappedBy = "contenidos", fetch = FetchType.EAGER)
+	@ManyToMany(cascade={CascadeType.MERGE}, mappedBy = "contenidos", fetch = FetchType.EAGER)
 	private Set<Informe> contenedores = new HashSet<Informe>();
 
 	// bi-directional many-to-one association to InformeTipoDestino
-	@OneToMany(mappedBy = "informe", fetch = FetchType.EAGER)
+	@OneToMany(cascade={CascadeType.MERGE}, mappedBy = "informe", fetch = FetchType.EAGER)
 	private Set<InformeTipoDestino> informeTipoDestinos = new HashSet<InformeTipoDestino>();
 
 	// bi-directional many-to-one association to InfPlanDest
-	@OneToMany(mappedBy = "informe", orphanRemoval = true, fetch = FetchType.EAGER)
+	@OneToMany(cascade={CascadeType.MERGE}, mappedBy = "informe", orphanRemoval = true, fetch = FetchType.EAGER)
 	private Set<InfPlanDest> infPlanDests = new HashSet<InfPlanDest>();
 
 	// bi-directional many-to-one association to Snapshot
-	@OneToMany(mappedBy = "informe", orphanRemoval = true, fetch = FetchType.EAGER)
+	@OneToMany(cascade={CascadeType.MERGE}, mappedBy = "informe", orphanRemoval = true, fetch = FetchType.EAGER)
 	private Set<Snapshot> snapshots = new HashSet<Snapshot>();
 
 	public Integer getInfoId() {

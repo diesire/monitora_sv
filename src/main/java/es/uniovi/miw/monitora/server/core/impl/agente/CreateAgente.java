@@ -18,8 +18,8 @@ public class CreateAgente implements Command {
 	@Override
 	public Object execute() throws BusinessException {
 		Agente ag = new Agente();
-		ag.addDestino(destino);
 		destino.getCliente().addAgente(ag);
+		ag.addDestino(destino);		
 		return ag;
 	}
 

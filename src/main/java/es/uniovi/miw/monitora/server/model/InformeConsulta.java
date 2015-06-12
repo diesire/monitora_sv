@@ -3,6 +3,7 @@ package es.uniovi.miw.monitora.server.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -38,12 +39,12 @@ public class InformeConsulta implements Serializable {
 	private Date fUltimaModificacion;
 
 	// bi-directional many-to-one association to Consulta
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(cascade={CascadeType.MERGE}, fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_CONSULTA", insertable = false, updatable = false)
 	private Consulta consulta;
 
 	// bi-directional many-to-one association to Informe
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(cascade={CascadeType.MERGE}, fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_INFORME", insertable = false, updatable = false)
 	private Informe informe;
 

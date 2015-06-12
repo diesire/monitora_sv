@@ -207,7 +207,7 @@ public class TestUtils {
 		con.setSqlCreate("Create");
 		con.setSqlSelect("Select");
 		con.setTabla("Tabla");
-		
+
 		conSrv.addConsulta(con);
 
 		tDes.addConsulta(con);
@@ -336,8 +336,7 @@ public class TestUtils {
 		assertTrue(new HashSet<Destino>(cli.getDestinos()).contains(des));
 	}
 
-	public Agente createAgente(Destino des)
-			throws BusinessException {
+	public Agente createAgente(Destino des) throws BusinessException {
 		AgenteService agSrv = ServicesFactory.getAgenteService();
 
 		Agente ag = agSrv.createAgente(des);
@@ -363,6 +362,74 @@ public class TestUtils {
 	public void testLink(Cliente cli, Agente ag) {
 		assertEquals(cli, ag.getCliente());
 		assertTrue(new HashSet<Agente>(cli.getAgentes()).contains(ag));
+	}
+
+	public Agente createHierarchyCascade() throws BusinessException {
+		Cliente cli = ServicesFactory.getClienteService().createCliente(
+				CLIENTE1);
+		cli.setNombre(NOMBRE);
+
+		Destino des = ServicesFactory.getDestinoService().createDestino(cli);
+		des.setIdTipoDestino(TIPO_DESTINO_0); // FIXME TipoDestino
+
+		Agente ag = ServicesFactory.getAgenteService().createAgente(des);
+		testLink(des.getCliente(), ag);
+		ag.setComentarios(COMENTARIOS);
+		ag.setIpAgente(IP_LOCAL);
+		testLink(des, ag);
+		testLink(des.getCliente(), ag);
+
+		TipoDestino tDes = ServicesFactory.getTipoDestinoService()
+				.createTipoDestino(NOMBRE);
+		tDes.setDescripcion(DESC_C);
+
+		Informe info = ServicesFactory.getInformeService().createInforme(
+				NOMBRE, DESC_C, NOW);
+		// info.setContenedores(contenedores);
+		// info.setContenidos(contenidos);
+		info.setDescLarga(DESC_L);
+		// info.addContenido(informe)
+		// info.addInformeTipoDestino(informeTipoDestino);
+
+		Planificacion plan = ServicesFactory.getPlanificacionService()
+				.createPlanificacion(NOW);
+		plan.setDescripcion(DESC_C);
+		// plan.setLineaCrons(lineaCrons);
+		// plan.addLineaCron(lineaCron)
+
+		InfPlanDest infoPlanDes = ServicesFactory.getInfPlanDestService()
+				.createInfPlanDest(info, plan, des, NOW, NOW);
+		testLink(infoPlanDes, des, info, plan);
+
+		Snapshot snap = ServicesFactory.getSnapshotService().createSnapshot(
+				des, info, NOW);
+		// snap.addTcon1(tcon1) //FIXME Delete entity
+		testLink(snap, des, info);
+
+		Consulta con = ServicesFactory.getConsultaService().createConsulta(
+				TIPO_B, DESC_L, DESC_L, NOW);
+		con.setComandoSo("ComandoSo");
+		con.setSqlCreate("Create");
+		con.setSqlSelect("Select");
+		con.setTabla("Tabla");
+
+		tDes.addConsulta(con);
+		testLink(con, tDes);
+
+		InformeConsulta infoCon = ServicesFactory.getInformeConsultaService()
+				.createInformeConsulta(info, con, NOW);
+		testLink(info, con, infoCon);
+
+		InformeTipoDestino infoTDes = ServicesFactory
+				.getInformeTipoDestinoService().createInformeTipoDestino(info,
+						tDes);
+		infoTDes.setPorDefecto("S"); // FIXME set by default or by constructor
+		testLink(info, tDes, infoTDes);
+
+		// createLineaCon(); //TODO
+
+		ServicesFactory.getAgenteService().updateAgente(ag);
+		return ag;
 	}
 
 }

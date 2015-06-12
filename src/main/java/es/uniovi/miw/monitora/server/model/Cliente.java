@@ -34,11 +34,11 @@ public class Cliente implements Serializable {
 	private String nombre;
 
 	// bi-directional many-to-one association to Agente
-	@OneToMany(mappedBy = "cliente", orphanRemoval = true, fetch = FetchType.EAGER)
+	@OneToMany(cascade = { CascadeType.MERGE }, mappedBy = "cliente", orphanRemoval = true, fetch = FetchType.EAGER)
 	private Set<Agente> agentes = new HashSet<Agente>();
 
 	// bi-directional many-to-one association to Destino
-	@OneToMany(mappedBy = "cliente", orphanRemoval = true, fetch = FetchType.EAGER)
+	@OneToMany(cascade = { CascadeType.MERGE }, mappedBy = "cliente", orphanRemoval = true, fetch = FetchType.EAGER)
 	private Set<Destino> destinos = new HashSet<Destino>();
 
 	public Cliente() {

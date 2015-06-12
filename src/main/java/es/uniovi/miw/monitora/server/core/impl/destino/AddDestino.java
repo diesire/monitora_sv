@@ -18,14 +18,15 @@ public class AddDestino implements Command {
 	@Override
 	public Object execute() throws BusinessException {
 		try {
-			
-			//Autogenerate idDestino
-			//TODO delete sequence generator in SQL script
-			Integer idDestino = (Integer) Jpa.getManager().createNamedQuery("Destino.getNextDestinoId").getSingleResult();
-			idDestino = idDestino != null ? idDestino : 1;
-			assert idDestino != null;
-			
-			dest.getId().setIdDestino(idDestino);
+			// Autogenerate idDestino
+			// TODO delete sequence generator in SQL script
+			if (dest.getId().getIdDestino() == null) {
+				Integer idDestino = (Integer) Jpa.getManager()
+						.createNamedQuery("Destino.getNextDestinoId")
+						.getSingleResult();
+				idDestino = idDestino != null ? idDestino : 1;
+				dest.getId().setIdDestino(idDestino);
+			}
 			Jpa.getManager().persist(dest);
 		} catch (Exception e) {
 			throw new BusinessException(e);

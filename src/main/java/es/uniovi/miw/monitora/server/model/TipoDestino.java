@@ -34,11 +34,11 @@ public class TipoDestino implements Serializable {
 	private String nombreCorto;
 
 	// bi-directional many-to-many association to Consulta
-	@ManyToMany(mappedBy = "tipoDestinos", fetch = FetchType.EAGER)
+	@ManyToMany(cascade = { CascadeType.MERGE }, mappedBy = "tipoDestinos", fetch = FetchType.EAGER)
 	private Set<Consulta> consultas = new HashSet<Consulta>();
 
 	// bi-directional many-to-one association to InformeTipoDestino
-	@OneToMany(mappedBy = "tipoDestino", fetch = FetchType.EAGER)
+	@OneToMany(cascade = { CascadeType.MERGE }, mappedBy = "tipoDestino", fetch = FetchType.EAGER)
 	private Set<InformeTipoDestino> informeTipoDestinos = new HashSet<InformeTipoDestino>();
 
 	public TipoDestino() {

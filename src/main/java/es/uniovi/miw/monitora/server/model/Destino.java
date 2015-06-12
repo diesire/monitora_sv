@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -36,20 +37,20 @@ public class Destino implements Serializable {
 	private Integer idTipoDestino;
 
 	// bi-directional many-to-many association to Agente
-	@ManyToMany(mappedBy = "destinos", fetch = FetchType.EAGER)
+	@ManyToMany(cascade = { CascadeType.MERGE }, mappedBy = "destinos", fetch = FetchType.EAGER)
 	private Set<Agente> agentes = new HashSet<Agente>();
 
 	// bi-directional many-to-one association to Cliente
-	@ManyToOne
+	@ManyToOne(cascade = { CascadeType.MERGE })
 	@JoinColumn(name = "ID_CLIENTE", insertable = false, updatable = false)
 	private Cliente cliente;
 
 	// bi-directional many-to-one association to InfPlanDest
-	@OneToMany(mappedBy = "destino", orphanRemoval = true, fetch = FetchType.EAGER)
+	@OneToMany(cascade = { CascadeType.MERGE }, mappedBy = "destino", orphanRemoval = true, fetch = FetchType.EAGER)
 	private Set<InfPlanDest> infPlanDests = new HashSet<InfPlanDest>();
 
 	// bi-directional many-to-one association to Snapshot
-	@OneToMany(mappedBy = "destino", orphanRemoval = true, fetch = FetchType.EAGER)
+	@OneToMany(cascade = { CascadeType.MERGE }, mappedBy = "destino", orphanRemoval = true, fetch = FetchType.EAGER)
 	private Set<Snapshot> snapshots = new HashSet<Snapshot>();
 
 	public Destino() {
