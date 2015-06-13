@@ -22,6 +22,9 @@ import java.util.Set;
 public class Consulta implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	public static final String TIPO_BASE_DATOS = "B";
+	public static final String TIPO_SISTEMA_OPERATIVO = "S";
+
 	@Id
 	@SequenceGenerator(name = "CONS_CONS_ID_SEQ", sequenceName = "CONS_CONS_ID_SEQ")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CONS_CONS_ID_SEQ")
@@ -138,7 +141,12 @@ public class Consulta implements Serializable {
 	}
 
 	public void setTipo(String tipo) {
-		this.tipo = tipo;
+		if (tipo.compareToIgnoreCase(TIPO_BASE_DATOS) != 0
+				&& tipo.compareToIgnoreCase(TIPO_SISTEMA_OPERATIVO) != 0) {
+			throw new IllegalArgumentException(
+					"Valid tipo: Data [B]ase or Operative [S]ystem");
+		}
+		this.tipo = tipo.toUpperCase();
 	}
 
 	public Set<TipoDestino> getTipoDestinos() {
