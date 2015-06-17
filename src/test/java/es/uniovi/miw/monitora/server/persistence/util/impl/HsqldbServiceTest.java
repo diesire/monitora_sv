@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import es.uniovi.miw.monitora.server.model.exceptions.BusinessException;
+import es.uniovi.miw.monitora.server.persistence.util.PersistenceService;
 
 public class HsqldbServiceTest {
 
@@ -20,7 +21,7 @@ public class HsqldbServiceTest {
 
 	@Test
 	public void run() throws BusinessException {
-		HsqldbService db = new HsqldbService();
+		PersistenceService db = HsqldbService.getInstance();
 		db.start();
 		db.stop();
 	}

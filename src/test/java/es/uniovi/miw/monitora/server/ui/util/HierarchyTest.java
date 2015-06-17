@@ -8,15 +8,16 @@ import org.junit.Test;
 
 import es.uniovi.miw.monitora.server.model.Agente;
 import es.uniovi.miw.monitora.server.model.exceptions.BusinessException;
+import es.uniovi.miw.monitora.server.persistence.util.PersistenceService;
 import es.uniovi.miw.monitora.server.persistence.util.impl.HsqldbService;
 
 public class HierarchyTest {
 
-	private static HsqldbService db;
+	private static PersistenceService db;
 
 	@BeforeClass
 	static public void setUp() throws Exception {
-		db = new HsqldbService();
+		db = HsqldbService.getInstance();
 		db.start();
 	}
 

@@ -2,6 +2,7 @@ package es.uniovi.miw.monitora.server.ui.util;
 
 import es.uniovi.miw.monitora.server.model.Agente;
 import es.uniovi.miw.monitora.server.model.exceptions.BusinessException;
+import es.uniovi.miw.monitora.server.persistence.util.PersistenceService;
 import es.uniovi.miw.monitora.server.persistence.util.impl.HsqldbService;
 
 public class FillDB {
@@ -12,7 +13,7 @@ public class FillDB {
 	}
 
 	private void run() throws BusinessException {
-		HsqldbService db = new HsqldbService();
+		PersistenceService db = HsqldbService.getInstance();
 		TestUtils tUtils = new TestUtils();
 		db.start();
 		Agente ag = tUtils.createHierarchy();
