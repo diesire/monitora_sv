@@ -17,24 +17,26 @@ import java.util.Date;
 @Entity
 @Table(name = "LINEA_CRON")
 @XmlRootElement
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idLineaCron", scope=LineaCron.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idLineaCron", scope = LineaCron.class)
 public class LineaCron implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name = "LINEA_CRON_ID_LINEA_CRON_SEQ",sequenceName = "LINEA_CRON_ID_LINEA_CRON_SEQ")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="LINEA_CRON_ID_LINEA_CRON_SEQ")
+	@SequenceGenerator(name = "LINEA_CRON_ID_LINEA_CRON_SEQ", sequenceName = "LINEA_CRON_ID_LINEA_CRON_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "LINEA_CRON_ID_LINEA_CRON_SEQ")
 	@Column(name = "ID_LINEA_CRON")
 	private Integer idLineaCron;
 
 	private String descripcion;
+
+	private String expresion;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "F_ULTIMA_MODIFICACION")
 	private Date fUltimaModificacion;
 
 	// bi-directional many-to-one association to Planificacion
-	@ManyToOne(cascade={CascadeType.MERGE}, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = { CascadeType.MERGE }, fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_PLAN")
 	private Planificacion planificacion;
 
@@ -55,6 +57,14 @@ public class LineaCron implements Serializable {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+	public String getExpresion() {
+		return this.expresion;
+	}
+
+	public void setExpresion(String expresion) {
+		this.expresion = expresion;
 	}
 
 	public Date getFUltimaModificacion() {
@@ -78,6 +88,7 @@ public class LineaCron implements Serializable {
 		StringBuilder builder = new StringBuilder();
 		builder.append("LineaCron [idLineaCron=").append(idLineaCron)
 				.append(", descripcion=").append(descripcion)
+				.append(", expresion=").append(expresion)
 				.append(", fUltimaModificacion=").append(fUltimaModificacion)
 				.append("]");
 		return builder.toString();
