@@ -50,6 +50,12 @@ public class Consulta implements Serializable {
 	@Column(name = "SQL_SELECT")
 	private String sqlSelect;
 
+	@Column(name = "SQL_INSERT")
+	private String sqlInsert;
+
+	@Column(name = "SQL_DELETE")
+	private String sqlDelete;
+
 	@Column(name = "TABLA")
 	private String tabla;
 
@@ -126,6 +132,22 @@ public class Consulta implements Serializable {
 
 	public void setSqlSelect(String sqlSelect) {
 		this.sqlSelect = sqlSelect;
+	}
+
+	public String getSqlInsert() {
+		return sqlInsert;
+	}
+
+	public void setSqlInsert(String sqlInsert) {
+		this.sqlInsert = sqlInsert;
+	}
+
+	public String getSqlDelete() {
+		return sqlDelete;
+	}
+
+	public void setSqlDelete(String sqlDelete) {
+		this.sqlDelete = sqlDelete;
 	}
 
 	public String getTabla() {
@@ -217,7 +239,9 @@ public class Consulta implements Serializable {
 				.append(", descLarga=").append(descLarga)
 				.append(", fUltimaModificacion=").append(fUltimaModificacion)
 				.append(", sqlCreate=").append(sqlCreate)
-				.append(", sqlSelect=").append(sqlSelect).append(", tabla=")
+				.append(", sqlSelect=").append(sqlSelect)
+				.append(", sqlDelete=").append(sqlDelete)
+				.append(", sqlInsert=").append(sqlInsert).append(", tabla=")
 				.append(tabla).append(", tipo=").append(tipo).append("]");
 		return builder.toString();
 	}
