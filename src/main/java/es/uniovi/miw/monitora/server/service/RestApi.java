@@ -79,7 +79,6 @@ public class RestApi {
 
 	@GET
 	@Path("/agente/{agenteId}")
-	// @Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response agente(@Context UriInfo header,
 			@PathParam("agenteId") final int agenteId) {

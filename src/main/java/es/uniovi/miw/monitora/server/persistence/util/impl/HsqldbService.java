@@ -30,9 +30,9 @@ public class HsqldbService implements PersistenceService {
 		HsqlProperties p = new HsqlProperties();
 		server = new Server();
 
-		p.setProperty("server.database.0", Conf.get("database"));
-		p.setProperty("server.dbname.0", Conf.get("dbname"));
-		p.setProperty("server.port", Conf.get("port"));
+		p.setProperty("server.database.0", Conf.get("db.database"));
+		p.setProperty("server.dbname.0", Conf.get("db.dbname"));
+		p.setProperty("server.port", Conf.get("db.port"));
 		p.setProperty("readonly", "true");
 
 		try {
@@ -53,8 +53,8 @@ public class HsqldbService implements PersistenceService {
 					.getConnection(
 							MessageFormat
 									.format("jdbc:hsqldb:hsql://localhost:{0}/{1};shutdown=true;ifexists=true",
-											Conf.get("port"),
-											Conf.get("dbname")), "sa", "");
+											Conf.get("db.port"),
+											Conf.get("db.dbname")), "sa", "");
 		} catch (SQLException e) {
 			throw new BusinessException(e);
 		}
