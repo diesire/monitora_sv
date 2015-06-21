@@ -1,5 +1,6 @@
 package es.uniovi.miw.monitora.server.ui.util;
 
+import static es.uniovi.miw.monitora.server.ui.util.TestUtils.DESC_L;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -16,6 +17,7 @@ import es.uniovi.miw.monitora.server.core.InformeConsultaService;
 import es.uniovi.miw.monitora.server.core.InformePlanDestinoService;
 import es.uniovi.miw.monitora.server.core.InformeService;
 import es.uniovi.miw.monitora.server.core.InformeTipoDestinoService;
+import es.uniovi.miw.monitora.server.core.LineaCronService;
 import es.uniovi.miw.monitora.server.core.PlanificacionService;
 import es.uniovi.miw.monitora.server.core.SnapshotService;
 import es.uniovi.miw.monitora.server.core.TipoDestinoService;
@@ -27,6 +29,7 @@ import es.uniovi.miw.monitora.server.model.InfPlanDest;
 import es.uniovi.miw.monitora.server.model.Informe;
 import es.uniovi.miw.monitora.server.model.InformeConsulta;
 import es.uniovi.miw.monitora.server.model.InformeTipoDestino;
+import es.uniovi.miw.monitora.server.model.LineaCron;
 import es.uniovi.miw.monitora.server.model.Planificacion;
 import es.uniovi.miw.monitora.server.model.Snapshot;
 import es.uniovi.miw.monitora.server.model.TipoDestino;
@@ -52,6 +55,8 @@ public class TestUtils {
 
 	public static final String DESC_C = "Descripción corta";
 	public static final String DESC_L = "Descripción larga";
+
+	public static final String EXPRESION = "0 0/1 * * * ?";
 
 	// XXX Check entities relactions
 	public static final Integer TIPO_DESTINO_0 = 0;
@@ -133,6 +138,11 @@ public class TestUtils {
 		// TODO snap
 		// TODO con
 
+		// lineaCron
+		LineaCron lCron = plan.getLineaCrons().iterator().next();
+		assertNotNull(lCron);
+		testLink(lCron, plan);
+
 	}
 
 	public Agente createHierarchy() throws BusinessException {
@@ -147,8 +157,25 @@ public class TestUtils {
 		Consulta con = createConsulta(tDes);
 		createInformeConsulta(info, con);
 		createInformeTipoDestino(info, tDes);
-		// createLineaCon(); //TODO
+		createLineaCron(plan);
 		return agente;
+	}
+
+	public void createLineaCron(Planificacion plan) throws BusinessException {
+		LineaCronService lCronSrv = ServicesFactory.getLineaCronService();
+
+		LineaCron lCron = lCronSrv.createLineaCron(plan);
+		lCron.setDescripcion(DESC_C);
+		lCron.setFUltimaModificacion(NOW);
+		lCron.setExpresion(EXPRESION);
+		lCronSrv.addLineaCron(lCron);
+
+		testLink(lCron, plan);
+	}
+
+	public void testLink(LineaCron lCron, Planificacion plan) {
+		assertEquals(plan, lCron.getPlanificacion());
+		assertTrue(new HashSet<LineaCron>(plan.getLineaCrons()).contains(lCron));
 	}
 
 	public InformeTipoDestino createInformeTipoDestino(Informe info,
@@ -431,6 +458,14 @@ public class TestUtils {
 		testLink(info, tDes, infoTDes);
 
 		// createLineaCon(); //TODO
+
+		LineaCron lCron = ServicesFactory.getLineaCronService()
+				.createLineaCron(plan);
+		lCron.setDescripcion(DESC_C);
+		lCron.setFUltimaModificacion(NOW);
+		lCron.setExpresion(EXPRESION);
+
+		testLink(lCron, plan);
 
 		ServicesFactory.getAgenteService().updateAgente(ag);
 		return ag;

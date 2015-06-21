@@ -8,6 +8,7 @@ import es.uniovi.miw.monitora.server.core.InformeConsultaService;
 import es.uniovi.miw.monitora.server.core.InformePlanDestinoService;
 import es.uniovi.miw.monitora.server.core.InformeService;
 import es.uniovi.miw.monitora.server.core.InformeTipoDestinoService;
+import es.uniovi.miw.monitora.server.core.LineaCronService;
 import es.uniovi.miw.monitora.server.core.MonitoraServerService;
 import es.uniovi.miw.monitora.server.core.PlanificacionService;
 import es.uniovi.miw.monitora.server.core.SnapshotService;
@@ -20,6 +21,7 @@ import es.uniovi.miw.monitora.server.core.impl.InformeConsultaServiceImpl;
 import es.uniovi.miw.monitora.server.core.impl.InformePlanDestinoServiceImpl;
 import es.uniovi.miw.monitora.server.core.impl.InformeServiceImpl;
 import es.uniovi.miw.monitora.server.core.impl.InformeTipoDestinoServiceImpl;
+import es.uniovi.miw.monitora.server.core.impl.LineaCronServiceImpl;
 import es.uniovi.miw.monitora.server.core.impl.MonitoraServer;
 import es.uniovi.miw.monitora.server.core.impl.PlanificacionServiceImpl;
 import es.uniovi.miw.monitora.server.core.impl.SnapshotServiceImpl;
@@ -74,5 +76,10 @@ public class ServicesFactory {
 
 	public static InformePlanDestinoService getInfPlanDestService() {
 		return new InformePlanDestinoServiceImpl();
+	}
+
+	public static LineaCronService getLineaCronService() {
+		return new LineaCronServiceImpl();
+		
 	}
 }
