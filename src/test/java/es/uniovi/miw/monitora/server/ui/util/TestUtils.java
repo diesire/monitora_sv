@@ -47,6 +47,8 @@ public class TestUtils {
 	public static final Date NOW = new Date(System.currentTimeMillis());
 
 	public static final String TIPO_B = "B"; // TODO solo B o S
+	public static final String TIPO_S = "S";
+	public static final String COMANDO_LS = "ls -la";
 
 	public static final String DESC_C = "Descripción corta";
 	public static final String DESC_L = "Descripción larga";
@@ -202,11 +204,13 @@ public class TestUtils {
 	public Consulta createConsulta(TipoDestino tDes) throws BusinessException {
 		ConsultaService conSrv = ServicesFactory.getConsultaService();
 
-		Consulta con = conSrv.createConsulta(TIPO_B, DESC_L, DESC_L, NOW);
-		con.setComandoSo("ComandoSo");
-		con.setSqlCreate("Create");
-		con.setSqlSelect("Select");
-		con.setTabla("Tabla");
+		Consulta con = conSrv.createConsulta(TIPO_S, DESC_L, DESC_L, NOW);
+		con.setComandoSo(COMANDO_LS);
+		con.setSqlCreate("CREATE TABLE COMANDO_LS (ID INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT, COMANDO VARCHAR(4000))");
+		con.setSqlInsert("INSERT INTO COMANDO_LS VALUES (?)");
+		con.setSqlSelect("");
+		con.setSqlDelete("DROP TABLE COMANDO_LS");
+		con.setTabla("COMANDO_LS");
 
 		conSrv.addConsulta(con);
 
