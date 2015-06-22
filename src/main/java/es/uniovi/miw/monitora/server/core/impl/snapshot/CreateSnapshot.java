@@ -30,5 +30,4 @@ public class CreateSnapshot implements Command {
 		snap.setFecha(fecha);
 		return snap;
 	}
-
 }

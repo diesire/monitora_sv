@@ -9,6 +9,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import javax.ws.rs.ProcessingException;
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
@@ -23,6 +24,7 @@ import org.slf4j.LoggerFactory;
 
 import es.uniovi.miw.monitora.core.api.Ack;
 import es.uniovi.miw.monitora.server.model.Agente;
+import es.uniovi.miw.monitora.server.model.Snapshot;
 import es.uniovi.miw.monitora.server.model.exceptions.BusinessException;
 import es.uniovi.miw.monitora.server.ui.util.TestUtils;
 
@@ -127,17 +129,16 @@ public class RestApiTest extends JerseyTest {
 		String pathToCall = "c2/snapshot/" + agente.getAgenteId();
 
 		logger.trace("Snapshot from {}", agente.getAgenteId());
-		// Snapshot snapshot = new Snapshot();
-		// snapshot.creationDate = Calendar.getInstance();
-		// snapshot.tasks = getAgente();
+		Snapshot snapshot = agente.getDestinos().iterator().next()
+				.getSnapshots().iterator().next();
 
-		// Entity<Snapshot> entity = Entity.entity(snapshot,
-		// MediaType.APPLICATION_JSON_TYPE);
-		// Response response = target(serviceUri).path(pathToCall)
-		// .request(MediaType.APPLICATION_JSON_TYPE).post(entity);
-		//
-		// assertEquals("Response details: " + response,
-		// Response.Status.OK.getStatusCode(), response.getStatus());
+		Entity<Snapshot> entity = Entity.entity(snapshot,
+				MediaType.APPLICATION_JSON_TYPE);
+		Response response = target(serviceUri).path(pathToCall)
+				.request(MediaType.APPLICATION_JSON_TYPE).post(entity);
+
+		assertEquals("Response details: " + response,
+				Response.Status.OK.getStatusCode(), response.getStatus());
 	}
 
 	@Before

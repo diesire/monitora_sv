@@ -22,9 +22,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import es.uniovi.miw.monitora.core.api.Ack;
-import es.uniovi.miw.monitora.core.snapshot.Snapshot;
 import es.uniovi.miw.monitora.server.core.impl.MonitoraServer;
 import es.uniovi.miw.monitora.server.model.Agente;
+import es.uniovi.miw.monitora.server.model.Snapshot;
 import es.uniovi.miw.monitora.server.model.exceptions.BusinessException;
 
 /**
@@ -126,13 +126,13 @@ public class RestApi {
 	@POST
 	@Path("/snapshot/{agenteId}")
 	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
 	public Response snapshot(@Context UriInfo header,
 			@PathParam("agenteId") final int agenteId, final Snapshot snapshot) {
 
 		logger.debug("POST {}", header.getPath());
 
 		try {
-
 			monitora.setSnapshot(agenteId, snapshot);
 			return Response.status(Response.Status.OK).build();
 		} catch (BusinessException e) {
