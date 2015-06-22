@@ -17,7 +17,7 @@ import java.util.Date;
 @Entity
 @Table(name = "LINEA_CRON")
 @XmlRootElement
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idLineaCron", scope = LineaCron.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator.class, property = "@UUID")
 public class LineaCron implements Serializable {
 	private static final long serialVersionUID = 1L;
 

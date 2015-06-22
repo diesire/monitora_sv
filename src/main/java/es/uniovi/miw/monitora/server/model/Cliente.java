@@ -17,7 +17,7 @@ import java.util.Set;
  */
 @Entity
 @XmlRootElement
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idCliente", scope = Cliente.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator.class, property = "@UUID")
 public class Cliente implements Serializable {
 	private static final long serialVersionUID = 1L;
 

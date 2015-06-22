@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @Entity
 @Table(name = "TCON_1")
 @XmlRootElement
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "dato1", scope=Tcon1.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator.class, property = "@UUID")
 public class Tcon1 implements Serializable {
 	private static final long serialVersionUID = 1L;
 
