@@ -1,6 +1,7 @@
 package es.uniovi.miw.monitora.server.model;
 
 import java.io.Serializable;
+import java.text.MessageFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -17,8 +18,12 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.junit.Ignore;
+
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.databind.annotation.JacksonStdImpl;
 
 import es.uniovi.miw.monitora.server.model.keys.SnapshotPK;
 
@@ -140,6 +145,13 @@ public class Snapshot implements Serializable {
 		builder.append("Snapshot [id=").append(id).append(", fecha=")
 				.append(fecha).append("]");
 		return builder.toString();
+	}
+
+	@JsonIgnore
+	public String getSnapshotDirName() {
+		return MessageFormat.format("snapshot-{0}-{1}-{2}", getId()
+				.getIdCliente(), getId().getIdDestino(), getId()
+				.getIdSnapshot());
 	}
 
 }
