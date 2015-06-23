@@ -1,6 +1,12 @@
 package es.uniovi.miw.monitora.server.core.impl;
 
+import java.io.IOException;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -8,6 +14,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import es.uniovi.miw.monitora.core.api.Ack;
+import es.uniovi.miw.monitora.core.utils.ZipUtils;
+import es.uniovi.miw.monitora.server.conf.Conf;
 import es.uniovi.miw.monitora.server.conf.PersistenceFactory;
 import es.uniovi.miw.monitora.server.conf.ServicesFactory;
 import es.uniovi.miw.monitora.server.core.ClienteService;
@@ -50,7 +58,29 @@ public class MonitoraServer implements MonitoraServerService {
 	@Override
 	public void setSnapshot(int agenteId, Snapshot snapshot)
 			throws BusinessException {
-		// FIXME Auto-generated method stub
+		// Check Scp inbox
+		Path zFile = Paths.get(Conf.get("server.snapshot.path")).resolve(
+				snapshot.getSnapshotDirName() + ".zip");
+		Path outFolder;
+		try {
+			outFolder = Files
+					.createTempDirectory(snapshot.getSnapshotDirName());
+			ZipUtils.unZipIt(zFile.toString(), outFolder.toString());
+			DirectoryStream<Path> stream = Files.newDirectoryStream(outFolder);
+			Iterator<Path> iter = stream.iterator();
+			while (iter.hasNext()) {
+				Path outFile = iter.next();
+				try {
+					persistence.fromXML(outFile);
+				} catch (Exception e) {
+					// try next
+				}
+			}
+		} catch (IOException e) {
+			throw new BusinessException(e);
+		}
+
+		// Update snapshot
 
 		System.err.println("--------------- TODO ----------------");
 	}
