@@ -16,7 +16,6 @@ import es.uniovi.miw.monitora.server.model.Destino;
 import es.uniovi.miw.monitora.server.model.Informe;
 import es.uniovi.miw.monitora.server.model.InfPlanDest;
 import es.uniovi.miw.monitora.server.model.Cliente;
-import es.uniovi.miw.monitora.server.model.InformeTipoDestino;
 import es.uniovi.miw.monitora.server.model.Planificacion;
 import es.uniovi.miw.monitora.server.model.exceptions.BusinessException;
 import es.uniovi.miw.monitora.server.persistence.util.PersistenceService;

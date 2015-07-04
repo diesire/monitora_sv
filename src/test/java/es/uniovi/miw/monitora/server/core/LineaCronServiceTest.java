@@ -18,7 +18,6 @@ import es.uniovi.miw.monitora.server.conf.ServicesFactory;
 import es.uniovi.miw.monitora.server.model.LineaCron;
 import es.uniovi.miw.monitora.server.model.Cliente;
 import es.uniovi.miw.monitora.server.model.Destino;
-import es.uniovi.miw.monitora.server.model.LineaCron;
 import es.uniovi.miw.monitora.server.model.Planificacion;
 import es.uniovi.miw.monitora.server.model.exceptions.BusinessException;
 import es.uniovi.miw.monitora.server.persistence.util.PersistenceService;

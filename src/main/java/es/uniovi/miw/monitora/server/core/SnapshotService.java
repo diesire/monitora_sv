@@ -2,7 +2,6 @@ package es.uniovi.miw.monitora.server.core;
 
 import java.util.Date;
 
-import es.uniovi.miw.monitora.server.model.Cliente;
 import es.uniovi.miw.monitora.server.model.Destino;
 import es.uniovi.miw.monitora.server.model.Informe;
 import es.uniovi.miw.monitora.server.model.Snapshot;

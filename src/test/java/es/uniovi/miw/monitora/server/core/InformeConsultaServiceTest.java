@@ -1,15 +1,13 @@
 package es.uniovi.miw.monitora.server.core;
 
-import static org.junit.Assert.*;
-import static es.uniovi.miw.monitora.server.ui.util.TestUtils.*;
+import static es.uniovi.miw.monitora.server.ui.util.TestUtils.DESC_C;
+import static es.uniovi.miw.monitora.server.ui.util.TestUtils.DESC_L;
+import static es.uniovi.miw.monitora.server.ui.util.TestUtils.INFORME1;
+import static es.uniovi.miw.monitora.server.ui.util.TestUtils.NOW;
+import static es.uniovi.miw.monitora.server.ui.util.TestUtils.TIPO_B;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import org.apache.catalina.tribes.util.Arrays;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -20,8 +18,6 @@ import es.uniovi.miw.monitora.server.conf.ServicesFactory;
 import es.uniovi.miw.monitora.server.model.Consulta;
 import es.uniovi.miw.monitora.server.model.Informe;
 import es.uniovi.miw.monitora.server.model.InformeConsulta;
-import es.uniovi.miw.monitora.server.model.InformeConsulta;
-import es.uniovi.miw.monitora.server.model.Destino;
 import es.uniovi.miw.monitora.server.model.exceptions.BusinessException;
 import es.uniovi.miw.monitora.server.persistence.util.PersistenceService;
 
