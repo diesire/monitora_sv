@@ -6,7 +6,6 @@ import java.util.List;
 import es.uniovi.miw.monitora.server.model.Consulta;
 import es.uniovi.miw.monitora.server.model.Informe;
 import es.uniovi.miw.monitora.server.model.InformeConsulta;
-import es.uniovi.miw.monitora.server.model.Cliente;
 import es.uniovi.miw.monitora.server.model.exceptions.BusinessException;
 
 public interface InformeConsultaService {

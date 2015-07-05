@@ -126,7 +126,6 @@ public class RestApi {
 	@POST
 	@Path("/snapshot/{agenteId}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
 	public Response snapshot(@Context UriInfo header,
 			@PathParam("agenteId") final int agenteId, final Snapshot snapshot) {
 

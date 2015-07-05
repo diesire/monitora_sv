@@ -1,6 +1,5 @@
 package es.uniovi.miw.monitora.server.ui.util;
 
-import static es.uniovi.miw.monitora.server.ui.util.TestUtils.DESC_L;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
